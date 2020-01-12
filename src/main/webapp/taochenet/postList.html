@@ -18,54 +18,9 @@
 		<link rel="stylesheet" type="text/css" href="css/search.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="icon" href="">
-		<script type="text/javascript">
-			function autoLoad() {
-				var url = "/showPosts";
-				$.get(
-					url,
-					function(data) {
-						var list = data;
-						for (i in list) {
-							var old = $("#resultList").html();
-							var item = list[i];
-							if (item.name.length > 19) {
-								var title = item.name.substr(0, 19) + "&nbsp;...";
-							}
-							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
-							$("#resultList").html(
-								old +
-								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"#.\"><img src=" +
-								item.src +
-								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"#.\">" +
-								title +
-								"</a></h3><p><span style=\"font-size:15px\">" +
-								subtitle +
-								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
-								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>");
-						}
-					});
 
-				url = "/showBrand";
-				$.get(
-						url,
-						function(data) {
-							var list = data;
-							var old = $("#selectBox").html();
-							$("#selectBox").html(
-								old +
-								"<option selected="
-								" value=\"*\">品牌-不限</option>";
-								for (i in list) {
-									var item = list[i];
-									$("#selectBox").html(
-										old +
-										"<option>" + item.pname + "</option>";
-									}
-								});
-						}
-		</script>
 	</head>
-	<body onload="autoLoad()">
+	<body>
 
 		<!--Header-->
 		<header class="layout_default">
@@ -123,7 +78,7 @@
 						</div>
 						<div class="padding_bottom text-center">
 							<ul class="pager">
-								<li><a href="#">1</a></li>
+								<li><a href="showPosts?">1</a></li>
 								<li class="active"><a href="#">2</a></li>
 								<li><a href="#">3</a></li>
 							</ul>
@@ -138,37 +93,22 @@
 							</div>
 							<form class="callus">
 								<div class="single-query form-group col-sm-12">
-									<input type="text" class="keyword-input" placeholder="请输入关键词，例如：君越 2.4L">
+									<input type="text" class="keyword-input" placeholder="请输入关键词，例如：君越 2.4L" id="keyword">
 								</div>
 								<div class="single-query form-group col-sm-12">
-									<div class="intro">
-										<select id="selectBox">
-										</select>
+									<div class="intro" id="selectBrandBox">
+
 									</div>
 								</div>
 								<div class="single-query form-group col-sm-12">
-									<div class="intro">
-										<select>
-											<option class="active">车系-不限</option>
-											<option>All areas</option>
-											<option>Bayonne </option>
-											<option>Greenville</option>
-											<option>Manhattan</option>
-											<option>Queens</option>
-											<option>The Heights</option>
-										</select>
+									<div class="intro" id="selectSeriesBox">
+
 									</div>
 								</div>
 								<div class="single-query form-group col-sm-12">
-									<div class="intro">
+									<div class="intro" id="selectClassifyBox">
 										<select>
-											<option class="active">类型-不限</option>
-											<option>All areas</option>
-											<option>Bayonne </option>
-											<option>Greenville</option>
-											<option>Manhattan</option>
-											<option>Queens</option>
-											<option>The Heights</option>
+											<option>item.cname</option>
 										</select>
 									</div>
 								</div>
@@ -259,7 +199,7 @@
 								</div>
 								<div class="col-sm-12 form-group">
 									<center>
-										<button type="submit" class="btn-blue border_radius">查 找</button>
+										<button type="button" class="btn-blue border_radius" id="sender">查 找</button>
 									</center>
 								</div>
 							</form>
@@ -365,6 +305,143 @@
 		<script src="js/revolution.extension.video.min.js"></script>
 		<script src="js/custom.js"></script>
 		<script src="js/functions.js"></script>
-
+		<script src="layui/layui.js"></script>
+		<script>
+			document.getElementById("sender").onclick = function() {
+				var keyword = document.getElementById('keyword').value;
+				var selectBrandBox = document.getElementById('selectBrandBox').value;
+				var selectSeriesBox = document.getElementById('selectSeriesBox').value;
+				var selectClassifyBox = document.getElementById('selectClassifyBox').value;
+				var json = {
+					"keyword": keyword,
+					"selectBrandBox": selectBrandBox,
+					"selectSeriesBox": selectSeriesBox,
+					"selectClassifyBox": selectClassifyBox
+				};
+				var jsonData = JSON.stringify(json);
+				var action = "/searchPost
+				$.ajax({
+					type: "post",
+					url: action,
+					data: jsonData,
+					dataType: "json",
+					contentType: "application/json;charset=UTF-8",
+					success: function(result) {
+						var old = $("#resultList").html();
+						var list = result;
+						for (i in list) {
+							var item = list[i];
+							if (item.name.length > 19) {
+								var title = item.name.substr(0, 19) + "&nbsp;...";
+							}
+							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
+							old =
+								old +
+								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"#.\"><img src=" +
+								item.src +
+								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"#.\">" +
+								title +
+								"</a></h3><p><span style=\"font-size:15px\">" +
+								subtitle +
+								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
+								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
+						}
+						$("#resultList").html(old);
+					},
+					error: function(result) {
+						alert("err back");
+					}
+				});
+			};
+		</script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var action = "/showPosts";
+				var json = {};
+				var jsonData = JSON.stringify(json);
+				$.ajax({
+					type: "get",
+					url: action,
+					data: jsonData,
+					dataType: "json",
+					contentType: "application/json;charset=UTF-8",
+					success: function(result) {
+						var old = $("#resultList").html();
+						var list = result;
+						for (i in list) {
+							var item = list[i];
+							if (item.name.length > 19) {
+								var title = item.name.substr(0, 19) + "&nbsp;...";
+							}
+							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
+							old =
+								old +
+								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"#.\"><img src=" +
+								item.src +
+								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"#.\">" +
+								title +
+								"</a></h3><p><span style=\"font-size:15px\">" +
+								subtitle +
+								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
+								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
+						}
+						$("#resultList").html(old);
+					},
+					error: function(result) {
+						alert("err back");
+					}
+				});
+				action = "/getBrandSelectBox";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#selectBrandBox").html();
+						old += "<select id=\"selectedBrand\"><option value=\"-1\" class=\"active\">品牌-不限</option>";
+						for (i in list) {
+							var item = list[i];
+							old +=
+								"<option value=" + item.pid + ">" + item.pname + "</option>";
+						}
+						old += "</select>";
+						$("#selectBrandBox").append(old);
+						$("#selectSeriesBox").html(old);
+					}
+				);
+				action = "/getSeriesSelectBox";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#selectSeriesBox").html();
+						old += "<select id=\"selectedSeries\"><option value=\"-1\" class=\"active\">车系-不限</option>";
+						for (i in list) {
+							var item = list[i];
+							old +=
+								"<option value=" + item.cxid + ">" + item.cxname + "</option>";
+						}
+						$("#selectSeriesBox").html(
+							old + "</select>");
+					}
+				);
+				// action = "/getClassifySelectBox";
+				// $.get(
+				// 	action,
+				// 	function(data) {
+				// 		var list = data;
+				// 		var old = $("#selectClassifyBox").html();
+				// 		old += "<select><option value=\"-1\" class=\"active\">类型-不限</option>";
+				// 		for (i in list) {
+				// 			var item = list[i];
+				// 			old +=
+				// 				"<option value=" + item.cid + ">" + item.cname + "</option>";
+				// 		}
+				// 		$("#selectClassifyBox").html(
+				// 			old + "</select>");
+				// 	}
+				// );
+				this.$forceUpdate();
+			};
+		</script>
 	</body>
 </html>

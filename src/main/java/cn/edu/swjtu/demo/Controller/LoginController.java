@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
 
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
@@ -42,7 +45,10 @@ public class LoginController {
 
 	@GetMapping(value = "/showPosts")
 	@ResponseBody
-	public List<CarInfoWithBLOBs> showPosts() {
+	public List<CarInfoWithBLOBs> showPosts(
+			@RequestParam(required = true, value = "pageNum", defaultValue = "1") Integer pageNum,
+			@RequestParam(required = true, value = "pageSize", defaultValue = "10") Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
 		return userService.showPosts();
 	}
 
