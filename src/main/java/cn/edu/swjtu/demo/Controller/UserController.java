@@ -73,13 +73,14 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedClassify") Integer selectedClassify,
 			@RequestParam(required = false, value = "selectedPaifang") String selectedPaifang,
 			@RequestParam(required = false, value = "selectedColor") Integer selectedColor,
-			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng, HttpSession session) {
+			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng,
+			@RequestParam(required = false, value = "selectedPrice") Double selectedPrice, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		// userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries,
 		// selectedClassify, selectedPaifang,
 		// selectedColor, selectedLicheng);
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
-				selectedColor, selectedLicheng);
+				selectedColor, selectedLicheng, selectedPrice);
 	}
 
 	// 选择品牌数据

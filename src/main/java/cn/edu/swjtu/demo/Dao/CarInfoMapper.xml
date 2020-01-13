@@ -651,13 +651,15 @@
 			</if>
 			<if test="paifang != null and paifang != ''">
 				<bind name="paifang" value="'%' + paifang + '%' " />
-				and paifang = #{paifang}
+				and paifang like #{paifang}
 			</if>
 			<if test="licheng != null and licheng != ''">
 				<bind name="licheng" value="'%' + licheng + '%' " />
-				and licheng = #{licheng}
+				and licheng like #{licheng}
 			</if>
-
+			<if test="price != null and price != ''">
+				and price &lt; #{price}
+			</if>
 		</where>
 	</select>
 </mapper>

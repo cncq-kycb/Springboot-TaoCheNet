@@ -199,9 +199,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries,
-			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLicheng) {
+			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLicheng,
+			Double selectedPrice) {
 		List<CarInfoWithBLOBs> result = carInfoMapper.searchByCondition(selectedBrand, selectedSeries, selectedClassify,
-				selectedPaifang, selectedColor, selectedLicheng);
+				selectedPaifang, selectedColor, selectedLicheng, selectedPrice);
 		try {
 			if (result.size() != 0) {
 				return result;

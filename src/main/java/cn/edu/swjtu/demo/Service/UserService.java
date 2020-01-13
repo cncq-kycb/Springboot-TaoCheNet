@@ -44,7 +44,7 @@ public interface UserService {
 
 	// 搜索帖子
 	List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
-			String selectedPaifang, Integer selectedColor, Integer selectedLicheng);
+			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPrice);
 
 	// 获取推荐
 	List<CarInfoWithBLOBs> getRecommend();
