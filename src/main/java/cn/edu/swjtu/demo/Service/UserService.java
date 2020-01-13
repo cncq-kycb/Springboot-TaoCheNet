@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
+import cn.edu.swjtu.demo.Pojo.CarColor;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.CarPicture;
@@ -42,6 +43,9 @@ public interface UserService {
 	// 可选类型
 	List<CarClassify> getAllCarClassifies();
 
+	// 可选颜色
+	List<CarColor> getAllCarColor();
+
 	// 搜索帖子
 	List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
 			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPrice);
@@ -51,8 +55,5 @@ public interface UserService {
 
 	// 获取帖子图片
 	List<CarPicture> getCarPicture(Long pid);
-
-	// 记录用户搜索日志
-	// void searchLog(String cookieid, Long pid);
 
 }

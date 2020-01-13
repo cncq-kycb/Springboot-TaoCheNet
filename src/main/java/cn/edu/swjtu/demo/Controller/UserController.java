@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
+import cn.edu.swjtu.demo.Pojo.CarColor;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.CarPicture;
@@ -104,4 +105,10 @@ public class UserController {
 		return userService.getAllCarClassifies();
 	}
 
+	// 选择颜色数据
+	@GetMapping(value = "/getColorSelectBox")
+	@ResponseBody
+	public List<CarColor> getCarColor() {
+		return userService.getAllCarColor();
+	}
 }

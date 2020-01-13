@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.CarBrandMapper;
 import cn.edu.swjtu.demo.Dao.CarClassifyMapper;
+import cn.edu.swjtu.demo.Dao.CarColorMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
@@ -19,6 +20,8 @@ import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarBrandExample;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarClassifyExample;
+import cn.edu.swjtu.demo.Pojo.CarColor;
+import cn.edu.swjtu.demo.Pojo.CarColorExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample.Criteria;
@@ -54,6 +57,8 @@ public class UserServiceImpl implements UserService {
 	CarSeriesMapper carSeriesMapper;
 	@Autowired
 	CarClassifyMapper carClassifyMapper;
+	@Autowired
+	CarColorMapper carColorMapper;
 	@Autowired
 	CarPictureMapper carPictureMapper;
 
@@ -169,6 +174,22 @@ public class UserServiceImpl implements UserService {
 			CarClassifyExample example = new CarClassifyExample();
 			example.createCriteria();
 			List<CarClassify> result = carClassifyMapper.selectByExample(example);
+			if (result.size() != 0) {
+				return result;
+			}
+			return null;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<CarColor> getAllCarColor() {
+		try {
+			CarColorExample example = new CarColorExample();
+			example.createCriteria();
+			List<CarColor> result = carColorMapper.selectByExample(example);
 			if (result.size() != 0) {
 				return result;
 			}
