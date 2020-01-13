@@ -35,7 +35,7 @@ public class UserController {
 	public CarInfoWithBLOBs getDetails(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		// 浏览帖子埋点
-		// userService.viewLog(userInfo.getCookieid(), pid);
+		userService.viewLog(userInfo.getCookieid(), pid);
 		CarInfoWithBLOBs carInfoWithBLOBs = postService.getPostDetails(pid);
 		return carInfoWithBLOBs;
 	}
@@ -46,7 +46,7 @@ public class UserController {
 	public String inquirePost(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		// 联系商家埋点
-		// userService.inquireLog(userInfo.getCookieid(), pid);
+		userService.inquireLog(userInfo.getCookieid(), pid);
 		return userService.getBusinessTelFromPost(pid);
 	}
 
@@ -65,35 +65,34 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedPrice") Double selectedPrice, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		// 搜索帖子埋点
-		// userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries,
-		// selectedClassify, selectedPaifang,
-		// selectedColor, selectedLicheng);
+		userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
+				selectedColor, selectedLicheng);
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
 				selectedColor, selectedLicheng, selectedPrice);
 	}
 
-	// 选择品牌数据
+	// 获取可选品牌数据
 	@GetMapping(value = "/getBrandSelectBox")
 	@ResponseBody
 	public List<CarBrand> getCarBrands() {
 		return userService.getAllCarBrands();
 	}
 
-	// 选择车系数据
+	// 获取可选车系数据
 	@GetMapping(value = "/getSeriesSelectBox")
 	@ResponseBody
 	public List<CarSeries> getCarSeries() {
 		return userService.getAllCarSeries();
 	}
 
-	// 选择类型数据
+	// 获取可选类型数据
 	@GetMapping(value = "/getClassifySelectBox")
 	@ResponseBody
 	public List<CarClassify> getCarClassifies() {
 		return userService.getAllCarClassifies();
 	}
 
-	// 选择颜色数据
+	// 获取可选颜色数据
 	@GetMapping(value = "/getColorSelectBox")
 	@ResponseBody
 	public List<CarColor> getCarColor() {
