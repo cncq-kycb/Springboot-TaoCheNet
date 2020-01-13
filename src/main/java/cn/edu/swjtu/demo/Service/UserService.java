@@ -27,8 +27,8 @@ public interface UserService {
 	void inquireLog(String cookieid, Long pid);
 
 	// 记录用户搜索日志
-	void searchLog(String cookieid, String selectedBrand, String selectedSeries, String selectedClassify,
-			String selectedPaifang, String selectedColor, Integer selectedLicheng);
+	void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
+			String selectedPaifang, Integer selectedColor, Integer selectedLicheng);
 
 	// 展示全部帖子
 	List<CarInfoWithBLOBs> showPosts();
@@ -43,8 +43,8 @@ public interface UserService {
 	List<CarClassify> getAllCarClassifies();
 
 	// 搜索帖子
-	List<CarInfo> getPostByCondition(String selectedBrand, String selectedSeries, String selectedClassify,
-			String selectedPaifang, String selectedColor, Integer selectedLicheng);
+	List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
+			String selectedPaifang, Integer selectedColor, Integer selectedLicheng);
 
 	// 获取推荐
 	List<CarInfoWithBLOBs> getRecommend();

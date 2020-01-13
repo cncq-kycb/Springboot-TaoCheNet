@@ -34,20 +34,20 @@ public class UserController {
 	PostService postService;
 
 	// 浏览帖子详情
-	@GetMapping(value = "/showDetails")
+	@PostMapping(value = "/getDetails")
 	@ResponseBody
-	public CarInfoWithBLOBs showDetails(@RequestParam(required = true,value = "pid")Long pid) {
+	public CarInfoWithBLOBs getDetails(@RequestParam(required = true, value = "pid") Long pid) {
 //		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 //		// 浏览帖子埋点
 //		userService.viewLog(userInfo.getCookieid(), pid);
 		CarInfoWithBLOBs carInfoWithBLOBs = postService.getPostDetails(pid);
 		return carInfoWithBLOBs;
 	}
-	
-	//帖子详情图片
+
+	// 帖子详情图片
 	@GetMapping(value = "/getDetailsPic")
 	@ResponseBody
-	public List<CarPicture> getDetailsPic(@RequestParam(required = true, value = "pid")Long pid){
+	public List<CarPicture> getDetailsPic(@RequestParam(required = true, value = "pid") Long pid) {
 		return userService.getCarPicture(pid);
 	}
 
@@ -65,19 +65,19 @@ public class UserController {
 	// 搜索帖子
 	@GetMapping(value = "/searchPost")
 	@ResponseBody
-	public List<CarInfo> searchPost(
+	public List<CarInfoWithBLOBs> searchPost(
 			@RequestParam(required = true, value = "pageNum", defaultValue = "1") Integer pageNum,
 			@RequestParam(required = true, value = "pageSize", defaultValue = "10") Integer pageSize,
-			@RequestBody Map<String, Object> json, HttpSession session) {
-		String selectedBrand = (String) json.get("selectedBrand");
-		String selectedSeries = (String) json.get("selectedSeries");
-		String selectedClassify = (String) json.get("selectedClassify");
-		String selectedPaifang = (String) json.get("selectedPaifang");
-		String selectedColor = (String) json.get("selectedColor");
-		Integer selectedLicheng = (Integer) json.get("selectedLicheng");
+			@RequestParam(required = false, value = "selectedBrand") Integer selectedBrand,
+			@RequestParam(required = false, value = "selectedSeries") Integer selectedSeries,
+			@RequestParam(required = false, value = "selectedClassify") Integer selectedClassify,
+			@RequestParam(required = false, value = "selectedPaifang") String selectedPaifang,
+			@RequestParam(required = false, value = "selectedColor") Integer selectedColor,
+			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
-				selectedColor, selectedLicheng);
+		// userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries,
+		// selectedClassify, selectedPaifang,
+		// selectedColor, selectedLicheng);
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
 				selectedColor, selectedLicheng);
 	}

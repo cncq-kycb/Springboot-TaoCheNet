@@ -13,6 +13,7 @@ import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
+import cn.edu.swjtu.demo.Dao.UserSearchPostMapper;
 import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
 import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarBrandExample;
@@ -20,6 +21,7 @@ import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarClassifyExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
+import cn.edu.swjtu.demo.Pojo.CarInfoExample.Criteria;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarPictureExample;
@@ -28,6 +30,8 @@ import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Pojo.UserInquirePost;
+import cn.edu.swjtu.demo.Pojo.UserSearchPost;
+import cn.edu.swjtu.demo.Pojo.UserSearchPostExample;
 import cn.edu.swjtu.demo.Pojo.UserViewPost;
 import cn.edu.swjtu.demo.Service.UserService;
 
@@ -36,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserInfoMapper userInfoMapper;
+	@Autowired
+	UserSearchPostMapper userSearchPostMapper;
 	@Autowired
 	UserViewPostMapper userViewPostMapper;
 	@Autowired
@@ -174,10 +180,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void searchLog(String cookieid, String selectedBrand, String selectedSeries, String selectedClassify,
-			String selectedPaifang, String selectedColor, Integer selectedLicheng) {
+	public void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
+			String selectedPaifang, Integer selectedColor, Integer selectedLicheng) {
 		try {
-
+			UserSearchPost record = new UserSearchPost();
+			record.setCookieid(cookieid);
+			record.setPid(selectedBrand);
+			record.setCxid(selectedSeries);
+			record.setPaifang(selectedPaifang);
+			record.setColorId(selectedColor);
+			record.setLicheng(selectedLicheng);
+			userSearchPostMapper.insert(record);
 		} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -185,10 +198,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<CarInfo> getPostByCondition(String selectedBrand, String selectedSeries, String selectedClassify,
-			String selectedPaifang, String selectedColor, Integer selectedLicheng) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries,
+			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLicheng) {
+		List<CarInfoWithBLOBs> result = carInfoMapper.searchByCondition(selectedBrand, selectedSeries, selectedClassify,
+				selectedPaifang, selectedColor, selectedLicheng);
+		try {
+			if (result.size() != 0) {
+				return result;
+			}
+			return null;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 
 	@Override

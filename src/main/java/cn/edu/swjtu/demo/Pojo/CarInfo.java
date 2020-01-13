@@ -51,6 +51,14 @@ public class CarInfo {
 
     private Long sid;
 
+    private Integer brandId;
+
+    private Integer classifyId;
+
+    private Integer seriesId;
+
+    private Integer cid;
+
     public Long getPid() {
         return pid;
     }
@@ -241,5 +249,37 @@ public class CarInfo {
 
     public void setSid(Long sid) {
         this.sid = sid;
+    }
+
+    public Integer getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
+    }
+
+    public Integer getClassifyId() {
+        return classifyId;
+    }
+
+    public void setClassifyId(Integer classifyId) {
+        this.classifyId = classifyId;
+    }
+
+    public Integer getSeriesId() {
+        return seriesId;
+    }
+
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
+    }
+
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 }
