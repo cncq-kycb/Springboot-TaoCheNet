@@ -3,10 +3,11 @@ package cn.edu.swjtu.demo.Service;
 import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.CarInfo;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 
 @Service
 public interface PostService {
 
-	CarInfo getPostDetails(Long pid);
+	CarInfoWithBLOBs getPostDetails(Long pid);
 
 }

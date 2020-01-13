@@ -27,4 +27,6 @@ public interface CarInfoMapper {
     int updateByExampleWithBLOBs(@Param("record") CarInfoWithBLOBs record, @Param("example") CarInfoExample example);
 
     int updateByExample(@Param("record") CarInfo record, @Param("example") CarInfoExample example);
+
+	List<CarInfoWithBLOBs> selectRandom();
 }

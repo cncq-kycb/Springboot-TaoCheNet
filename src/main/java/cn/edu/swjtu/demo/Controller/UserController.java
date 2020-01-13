@@ -5,22 +5,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageHelper;
-
 import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.PostService;
@@ -34,15 +32,19 @@ public class UserController {
 	@Autowired
 	PostService postService;
 
-	// 浏览帖子
-	@PostMapping(value = "/viewPost")
+	// 浏览帖子详情
+	@PostMapping(value = "/showDetails")
 	@ResponseBody
-	public CarInfo viewPost(@RequestBody Map<String, Object> json, HttpSession session) {
+	public ModelAndView showDetails(@RequestBody Map<String, Object> json, HttpSession session) {
+		Integer i_pid = (Integer) json.get("pid");
+		Long pid = (long) i_pid.intValue();
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		Long pid = (Long) json.get("pid");
 		// 浏览帖子埋点
 		userService.viewLog(userInfo.getCookieid(), pid);
-		return postService.getPostDetails(pid);
+		CarInfoWithBLOBs carInfoWithBLOBs = postService.getPostDetails(pid);
+		ModelAndView modelAndView = new ModelAndView("detail.html");
+		modelAndView.addObject("details", carInfoWithBLOBs);
+		return modelAndView;
 	}
 
 	// 联系商家

@@ -41,8 +41,12 @@ public interface UserService {
 	// 可选类型
 	List<CarClassify> getAllCarClassifies();
 
+	// 搜索帖子
 	List<CarInfo> getPostByCondition(String selectedBrand, String selectedSeries, String selectedClassify,
 			String selectedPaifang, String selectedColor, Integer selectedLicheng);
+
+	// 获取推荐
+	List<CarInfoWithBLOBs> getRecommend();
 
 	// 记录用户搜索日志
 	// void searchLog(String cookieid, Long pid);

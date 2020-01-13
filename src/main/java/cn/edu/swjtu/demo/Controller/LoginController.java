@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
+import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.UserService;
@@ -43,13 +44,21 @@ public class LoginController {
 		return new UserInfo();
 	}
 
-	@GetMapping(value = "/showPosts")
+	@PostMapping(value = "/showPosts")
 	@ResponseBody
 	public List<CarInfoWithBLOBs> showPosts(
 			@RequestParam(required = true, value = "pageNum", defaultValue = "1") Integer pageNum,
 			@RequestParam(required = true, value = "pageSize", defaultValue = "10") Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		return userService.showPosts();
+	}
+
+	// 推荐结果
+	@GetMapping(value = "/getRecommend")
+	@ResponseBody
+	public List<CarInfoWithBLOBs> getRecommend(HttpSession session) {
+		//UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		return userService.getRecommend();
 	}
 
 	// 用户退出

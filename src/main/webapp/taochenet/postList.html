@@ -18,7 +18,111 @@
 		<link rel="stylesheet" type="text/css" href="css/search.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="icon" href="">
-
+		<script type="text/javascript">
+			window.onload = function() {
+				var action = "/showPosts";
+				var json = {};
+				var jsonData = JSON.stringify(json);
+				$.ajax({
+					type: "post",
+					url: action,
+					data: jsonData,
+					dataType: "json",
+					contentType: "application/json;charset=UTF-8",
+					success: function(result) {
+						var old = $("#resultList").html();
+						var list = result;
+						for (i in list) {
+							var item = list[i];
+							if (item.name.length > 19) {
+								var title = item.name.substr(0, 19) + "&nbsp;...";
+							}
+							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
+							old =
+								old +
+								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"javascript:void(0)\" onclick=\"details(" +
+								item.pid + ")\"\"><img src=" +
+								item.src +
+								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"javascript:void(0)\" onclick=\"details(" +
+								item.pid + ")\"\">" +
+								title +
+								"</a></h3><p><span style=\"font-size:15px\">" +
+								subtitle +
+								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
+								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
+						}
+						$("#resultList").html(old);
+					},
+					error: function(result) {
+						alert("err back");
+					}
+				});
+				action = "/getBrandSelectBox";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#selectBrandBox").html();
+						old += "<select id=\"selectedBrand\"><option value=\"-1\" class=\"active\">品牌-不限</option>";
+						for (i in list) {
+							var item = list[i];
+							old +=
+								"<option value=" + item.pid + ">" + item.pname + "</option>";
+						}
+						old += "</select>";
+						$("#selectBrandBox").append(old);
+					}
+				);
+				action = "/getSeriesSelectBox";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#selectSeriesBox").html();
+						old += "<select id=\"selectedSeries\"><option value=\"-1\" class=\"active\">车系-不限</option>";
+						for (i in list) {
+							var item = list[i];
+							old +=
+								"<option value=" + item.cxid + ">" + item.cxname + "</option>";
+						}
+						$("#selectSeriesBox").html(
+							old + "</select>");
+					}
+				);
+				action = "/getClassifySelectBox";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#selectClassifyBox").html();
+						old += "<select><option value=\"-1\" class=\"active\">类型-不限</option>";
+						for (i in list) {
+							var item = list[i];
+							old +=
+								"<option value=" + item.cid + ">" + item.cname + "</option>";
+						}
+						$("#selectClassifyBox").html(
+							old + "</select>");
+					}
+				);
+				action = "/getRecommend";
+				$.get(
+					action,
+					function(data) {
+						var list = data;
+						var old = $("#recommend").html();
+						for (i in list) {
+							var item = list[i];
+							old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><img src=" + item.src +
+								"height=\"82 \" width=\"79 \" alt=\"image \" /> </div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h4>" +
+								item.name + "</h4> <p class = \"bottom15\" >" + item.licheng +
+								"公里 </p> <a href = \"#.\" >" + item.price + "万 </a> </div > </div > </div > ";
+						}
+						$("#recommend").html(old);
+					}
+				);
+			};
+		</script>
 	</head>
 	<body>
 
@@ -78,7 +182,7 @@
 						</div>
 						<div class="padding_bottom text-center">
 							<ul class="pager">
-								<li><a href="showPosts?">1</a></li>
+								<li><a href="#">1</a></li>
 								<li class="active"><a href="#">2</a></li>
 								<li><a href="#">3</a></li>
 							</ul>
@@ -107,9 +211,7 @@
 								</div>
 								<div class="single-query form-group col-sm-12">
 									<div class="intro" id="selectClassifyBox">
-										<select>
-											<option>item.cname</option>
-										</select>
+
 									</div>
 								</div>
 								<div class="search-2 col-sm-12">
@@ -207,48 +309,10 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h3 class="bottom40 margin40">猜您喜欢</h3>
-							</div>
-						</div>
-						<div class="row bottom20">
-							<div class="col-md-4 col-sm-4 col-xs-6 p-image">
-								<img src="https://pic4.58cdn.com.cn/p1/big/n_v2efaccb4243024429b94b84ba6dbc97f0.jpg?w=425&h=320&crop=1" height="82"
-								 width="79" alt="image" />
-							</div>
-							<div class="col-md-8 col-sm-8 col-xs-6">
-								<div class="feature-p-text">
-									<h4>卡宴</h4>
-									<p class="bottom15">2019年上牌·200公里</p>
-									<a href="#.">88.88万</a>
+								<div id="recommend">
 								</div>
 							</div>
 						</div>
-						<div class="row bottom20">
-							<div class="col-md-4 col-sm-4 col-xs-6 p-image">
-								<img src="https://pic4.58cdn.com.cn/p1/big/n_v2efaccb4243024429b94b84ba6dbc97f0.jpg?w=425&h=320&crop=1" height="82"
-								 width="79" alt="image" />
-							</div>
-							<div class="col-md-8 col-sm-8 col-xs-6">
-								<div class="feature-p-text">
-									<h4>卡宴</h4>
-									<p class="bottom15">2019年上牌·200公里</p>
-									<a href="#.">88.88万</a>
-								</div>
-							</div>
-						</div>
-						<div class="row bottom20">
-							<div class="col-md-4 col-sm-4 col-xs-6 p-image">
-								<img src="https://pic4.58cdn.com.cn/p1/big/n_v2efaccb4243024429b94b84ba6dbc97f0.jpg?w=425&h=320&crop=1" height="82"
-								 width="79" alt="image" />
-							</div>
-							<div class="col-md-8 col-sm-8 col-xs-6">
-								<div class="feature-p-text">
-									<h4>卡宴</h4>
-									<p class="bottom15">2019年上牌·200公里</p>
-									<a href="#.">88.88万</a>
-								</div>
-							</div>
-						</div>
-
 					</aside>
 				</div>
 			</div>
@@ -312,13 +376,13 @@
 				var selectBrandBox = document.getElementById('selectBrandBox').value;
 				var selectSeriesBox = document.getElementById('selectSeriesBox').value;
 				var selectClassifyBox = document.getElementById('selectClassifyBox').value;
-				var json = {
+				var login = {
 					"keyword": keyword,
 					"selectBrandBox": selectBrandBox,
 					"selectSeriesBox": selectSeriesBox,
 					"selectClassifyBox": selectClassifyBox
 				};
-				var jsonData = JSON.stringify(json);
+				var jsonData = JSON.stringify(login);
 				var action = "/searchPost
 				$.ajax({
 					type: "post",
@@ -327,26 +391,15 @@
 					dataType: "json",
 					contentType: "application/json;charset=UTF-8",
 					success: function(result) {
-						var old = $("#resultList").html();
-						var list = result;
-						for (i in list) {
-							var item = list[i];
-							if (item.name.length > 19) {
-								var title = item.name.substr(0, 19) + "&nbsp;...";
-							}
-							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
-							old =
-								old +
-								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"#.\"><img src=" +
-								item.src +
-								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"#.\">" +
-								title +
-								"</a></h3><p><span style=\"font-size:15px\">" +
-								subtitle +
-								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
-								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
+						if (result.userTypeId == '3') {
+							window.location.href = 'postList.html';
+						} else if (result.userTypeId == '2') {
+							window.location.href = 'user_business_main.html';
+						} else if (result.userTypeId == '1') {
+							window.location.href = 'user_admin_main.html';
+						} else {
+							alert("账号不存在/密码错误");
 						}
-						$("#resultList").html(old);
 					},
 					error: function(result) {
 						alert("err back");
@@ -354,94 +407,26 @@
 				});
 			};
 		</script>
-		<script type="text/javascript">
-			window.onload = function() {
-				var action = "/showPosts";
-				var json = {};
-				var jsonData = JSON.stringify(json);
+		<script>
+			function details(pid) {
+				var data = {
+					"pid": pid
+				};
+				var jsonData = JSON.stringify(data);
 				$.ajax({
-					type: "get",
-					url: action,
+					type: "post",
+					url: "/showDetails",
 					data: jsonData,
 					dataType: "json",
 					contentType: "application/json;charset=UTF-8",
-					success: function(result) {
-						var old = $("#resultList").html();
-						var list = result;
-						for (i in list) {
-							var item = list[i];
-							if (item.name.length > 19) {
-								var title = item.name.substr(0, 19) + "&nbsp;...";
-							}
-							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
-							old =
-								old +
-								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"#.\"><img src=" +
-								item.src +
-								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"#.\">" +
-								title +
-								"</a></h3><p><span style=\"font-size:15px\">" +
-								subtitle +
-								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
-								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
-						}
-						$("#resultList").html(old);
+					success: function(data) {
+						alert(data.pid);
 					},
-					error: function(result) {
-						alert("err back");
+					error: function() {
+						alert(pid);
 					}
 				});
-				action = "/getBrandSelectBox";
-				$.get(
-					action,
-					function(data) {
-						var list = data;
-						var old = $("#selectBrandBox").html();
-						old += "<select id=\"selectedBrand\"><option value=\"-1\" class=\"active\">品牌-不限</option>";
-						for (i in list) {
-							var item = list[i];
-							old +=
-								"<option value=" + item.pid + ">" + item.pname + "</option>";
-						}
-						old += "</select>";
-						$("#selectBrandBox").append(old);
-						$("#selectSeriesBox").html(old);
-					}
-				);
-				action = "/getSeriesSelectBox";
-				$.get(
-					action,
-					function(data) {
-						var list = data;
-						var old = $("#selectSeriesBox").html();
-						old += "<select id=\"selectedSeries\"><option value=\"-1\" class=\"active\">车系-不限</option>";
-						for (i in list) {
-							var item = list[i];
-							old +=
-								"<option value=" + item.cxid + ">" + item.cxname + "</option>";
-						}
-						$("#selectSeriesBox").html(
-							old + "</select>");
-					}
-				);
-				// action = "/getClassifySelectBox";
-				// $.get(
-				// 	action,
-				// 	function(data) {
-				// 		var list = data;
-				// 		var old = $("#selectClassifyBox").html();
-				// 		old += "<select><option value=\"-1\" class=\"active\">类型-不限</option>";
-				// 		for (i in list) {
-				// 			var item = list[i];
-				// 			old +=
-				// 				"<option value=" + item.cid + ">" + item.cname + "</option>";
-				// 		}
-				// 		$("#selectClassifyBox").html(
-				// 			old + "</select>");
-				// 	}
-				// );
-				this.$forceUpdate();
-			};
+			}
 		</script>
 	</body>
 </html>

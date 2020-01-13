@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
-import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Service.PostService;
 
 @Component
@@ -17,14 +17,14 @@ public class PostServiceImpl implements PostService {
 	CarInfoMapper carInfoMapper;
 
 	@Override
-	public CarInfo getPostDetails(Long pid) {
+	public CarInfoWithBLOBs getPostDetails(Long pid) {
 		CarInfoExample example = new CarInfoExample();
 		example.or().andPidEqualTo(pid);
-		List<CarInfo> result = carInfoMapper.selectByExample(example);
+		List<CarInfoWithBLOBs> result = carInfoMapper.selectByExampleWithBLOBs(example);
 		if (result.size() != 0) {
 			return result.get(0);
 		}
-		return new CarInfo();
+		return new CarInfoWithBLOBs();
 	}
 
 }

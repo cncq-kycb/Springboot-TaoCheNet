@@ -1,7 +1,9 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -172,7 +174,7 @@ public class UserServiceImpl implements UserService {
 	public void searchLog(String cookieid, String selectedBrand, String selectedSeries, String selectedClassify,
 			String selectedPaifang, String selectedColor, Integer selectedLicheng) {
 		try {
-			
+
 		} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -184,6 +186,20 @@ public class UserServiceImpl implements UserService {
 			String selectedPaifang, String selectedColor, Integer selectedLicheng) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CarInfoWithBLOBs> getRecommend() {
+		try {
+			List<CarInfoWithBLOBs> result = carInfoMapper.selectRandom();
+			if (result.size() != 0) {
+				return result;
+			}
+			return null;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 
 }
