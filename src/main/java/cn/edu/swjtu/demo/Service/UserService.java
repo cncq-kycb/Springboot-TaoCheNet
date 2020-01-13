@@ -56,4 +56,7 @@ public interface UserService {
 	// 获取帖子图片
 	List<CarPicture> getCarPicture(Long pid);
 
+	// 按帖子获取商家电话
+	String getBusinessTelFromPost(Long pid);
+
 }
