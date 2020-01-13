@@ -5,6 +5,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<title>淘车网-优质二手车交易平台</title>
+
+	    <!-- css -->
+		 
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" href=" fenye/css/vendor/normalize.css" />
+		<link rel="stylesheet" href=" fenye/css/styles.min.css" />
+        <link href=" fenye/img/common/favicon.png" rel="shortcut icon" />
+		<link href="fenye/css/jplist.min.css" rel="stylesheet" type="text/css" />
+		
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/reality-icon.css">
@@ -17,12 +26,14 @@
 		<link rel="stylesheet" type="text/css" href="css/range-Slider.min.css">
 		<link rel="stylesheet" type="text/css" href="css/search.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="icon" href="">
+<!-- js -->		
+        <script src="js/jquery-2.1.4.js"></script>
+
 		<script type="text/javascript">
-			window.onload = function() {
-				var action = "/showPosts";
+			window.onload = function() {		
 				var json = {};
 				var jsonData = JSON.stringify(json);
+				var action = "/showPosts";
 				$.ajax({
 					type: "post",
 					url: action,
@@ -32,15 +43,20 @@
 					success: function(result) {
 						var old = $("#resultList").html();
 						var list = result;
+						
 						for (i in list) {
 							var item = list[i];
-							if (item.name.length > 19) {
-								var title = item.name.substr(0, 19) + "&nbsp;...";
+							if(list.length<1){
+								$("#noResult").html('<p>没有找到您要查询的结果</p>');
 							}
+							if (item.name.length > 14) {
+								var title = item.name.substr(0, 14) + "&nbsp;...";
+							
+}
 							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
 							old =
 								old +
-								" <div class=\"col-sm-6\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"javascript:void(0)\" onclick=\"details(" +
+								" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 								item.pid + ")\"\"><img src=" +
 								item.src +
 								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"javascript:void(0)\" onclick=\"details(" +
@@ -48,10 +64,20 @@
 								title +
 								"</a></h3><p><span style=\"font-size:15px\">" +
 								subtitle +
-								"</span></p><span style=\"font-size:30px;color:#F00\">" + item.price +
+								"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
 								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
 						}
 						$("#resultList").html(old);
+						$('#demo').jplist({
+							
+							itemsBox: '.list' 
+							,itemPath: '.list-item' 
+							,panelPath: '.jplist-panel'
+							
+							//save plugin state
+							,storage: 'localstorage' //'', 'cookies', 'localstorage'			
+							,storageName: 'jplist-div-layout'
+						});
 					},
 					error: function(result) {
 						alert("err back");
@@ -71,6 +97,7 @@
 						}
 						old += "</select>";
 						$("#selectBrandBox").append(old);
+						$('#selectedBrand').zelect();
 					}
 				);
 				action = "/getSeriesSelectBox";
@@ -87,6 +114,7 @@
 						}
 						$("#selectSeriesBox").html(
 							old + "</select>");
+						$('#selectedSeries').zelect();
 					}
 				);
 				action = "/getClassifySelectBox";
@@ -95,7 +123,7 @@
 					function(data) {
 						var list = data;
 						var old = $("#selectClassifyBox").html();
-						old += "<select><option value=\"-1\" class=\"active\">类型-不限</option>";
+						old += "<select id=\"selectClassify\"><option value=\"-1\" class=\"active\">类型-不限</option>";
 						for (i in list) {
 							var item = list[i];
 							old +=
@@ -103,6 +131,7 @@
 						}
 						$("#selectClassifyBox").html(
 							old + "</select>");
+						$('#selectClassify').zelect();
 					}
 				);
 				action = "/getRecommend";
@@ -123,10 +152,12 @@
 				);
 			};
 		</script>
-	</head>
-	<body>
-
-		<!--Header-->
+		<script src=" fenye/js/vendor/modernizr.min.js"></script>
+		<script src="fenye/js/jplist.min.js"></script>
+    </head>
+    <body>
+	
+<!--Header-->
 		<header class="layout_default">
 
 			<nav class="navbar navbar-default navbar-sticky bootsnav">
@@ -173,21 +204,115 @@
 		<!-- Listing Start -->
 
 		<section id="listing1" class="listing1 padding_top">
-			<div class="container">
+			<div class="container" id="show-panel">
 				<div class="row">
 					<div class="col-md-8 col-sm-12 col-xs-12">
+					
+					<!-- demo -->
+					<div id="demo" class="box jplist">
+					
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-top">						
 
+							
+							<!-- items per page dropdown -->
+							<div 
+								
+								data-control-type="drop-down" 
+								data-control-name="paging" 
+								data-control-action="paging">
+								<ul>
+									<li><span data-number="8" data-default="true"> &ensp;</span></li>
+								</ul>
+							</div>
+							
+							<!-- sort dropdown -->
+							<div 
+								class="jplist-drop-down" 
+								data-control-type="drop-down" 
+								data-control-name="sort" 
+								data-control-action="sort"
+								data-datetime-format="{month}/{day}/{year}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+
+								<ul>
+									<li><span data-path="default" data-default="true">排序方式</span></li>
+									<li><span data-path=".like" data-order="asc" data-type="number">价格升序</span></li>
+									<li><span data-path=".like" data-order="desc" data-type="number">价格降序</span></li>
+								</ul>
+							</div>
+							
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="第{current}页 ，总 {pages}页" 
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+								
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+							
+						</div>
+						
+						
+						<!-- data -->   
+						<div class="list box text-shadow">
 						<div class="row" id="resultList">
 
 						</div>
-						<div class="padding_bottom text-center">
-							<ul class="pager">
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-							</ul>
+							
+						</div>	
+						
+						<div class="box jplist-no-results text-shadow align-center" id="noResult">
+							<p>正在努力为您搜寻车车...</p>
+						</div>
+						
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-bottom">
+
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="{start} - {end} ,总{all}条结果"
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+
+								
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-animate-to-top="true"
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+							
 						</div>
 					</div>
+					<!-- end of demo -->
+</div>							
 					<aside class="col-md-4 col-xs-12">
 						<div class="property-query-area clearfix">
 							<div class="col-md-12">
@@ -292,7 +417,7 @@
 											<span>~ ￥</span>
 											<div class="rightLabel"></div>
 										</div>
-										<div data-range_min="0" data-range_max="1500000" data-cur_min="0" data-cur_max="1500000" class="nstSlider">
+										<div data-range_min="0" data-range_max="2000000" data-cur_min="0" data-cur_max="2000000" class="nstSlider">
 											<div class="bar"></div>
 											<div class="leftGrip"></div>
 											<div class="rightGrip"></div>
@@ -317,36 +442,19 @@
 				</div>
 			</div>
 		</section>
-		<!-- Listing end -->
-
-
-		<!--Footer-->
-		<footer class="footer_third">
-
-			<div class="container padding_top">
-
-				<!--CopyRight-->
-				<div class="copyright_simple">
-					<div class="row">
-						<div class="col-md-6 col-sm-5 top20 bottom20">
-							<p>Copyright &copy; 2020 <span>TaoCheNet</span>. All rights reserved.</p>
-						</div>
-						<div class="col-md-6 col-sm-7 text-right top15 bottom10">
-							<ul class="social_share">
-								<li><a href="#." class="facebook"><i class="icon-facebook-1"></i></a></li>
-								<li><a href="#." class="twitter"><i class="icon-twitter-1"></i></a></li>
-								<li><a href="#." class="google"><i class="icon-google4"></i></a></li>
-								<li><a href="#." class="linkden"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#." class="vimo"><i class="icon-vimeo3"></i></a></li>
-							</ul>
-						</div>
-					</div>
+		<h2>&ensp;</h2>
+		<!-- footer -->
+		<footer class="box" id="footer">
+			<div class="center">			
+                <div class="box">
+				
+					<p class="align-center" id="footer-content">
+						Copyright &copy;  2020 <a href="index.html" title="">TaoCheNet</a>
+					</p>
+					
 				</div>
 			</div>
-		</footer>
-
-
-		<script src="js/jquery-2.1.4.js"></script>
+		</footer>	
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.appear.js"></script>
 		<script src="js/jquery-countTo.js"></script>
@@ -406,27 +514,6 @@
 					}
 				});
 			};
-		</script>
-		<script>
-			function details(pid) {
-				var data = {
-					"pid": pid
-				};
-				var jsonData = JSON.stringify(data);
-				$.ajax({
-					type: "post",
-					url: "/showDetails",
-					data: jsonData,
-					dataType: "json",
-					contentType: "application/json;charset=UTF-8",
-					success: function(data) {
-						alert(data.pid);
-					},
-					error: function() {
-						alert(pid);
-					}
-				});
-			}
 		</script>
 	</body>
 </html>

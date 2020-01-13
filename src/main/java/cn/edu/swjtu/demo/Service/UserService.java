@@ -8,6 +8,7 @@ import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 
@@ -47,6 +48,9 @@ public interface UserService {
 
 	// 获取推荐
 	List<CarInfoWithBLOBs> getRecommend();
+
+	// 获取帖子图片
+	List<CarPicture> getCarPicture(Long pid);
 
 	// 记录用户搜索日志
 	// void searchLog(String cookieid, Long pid);

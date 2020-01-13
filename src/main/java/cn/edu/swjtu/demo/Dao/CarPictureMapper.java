@@ -6,24 +6,21 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.type.MappedJdbcTypes;
 
 @Mapper
 public interface CarPictureMapper {
-    long countByExample(CarPictureExample example);
+	long countByExample(CarPictureExample example);
 
-    int deleteByExample(CarPictureExample example);
+	int deleteByExample(CarPictureExample example);
 
-    int insert(CarPicture record);
+	int insert(CarPicture record);
 
-    int insertSelective(CarPicture record);
+	int insertSelective(CarPicture record);
 
-    List<CarPicture> selectByExampleWithBLOBs(CarPictureExample example);
+	List<CarPicture> selectByExample(CarPictureExample example);
 
-    List<CarPicture> selectByExample(CarPictureExample example);
+	int updateByExampleSelective(@Param("record") CarPicture record, @Param("example") CarPictureExample example);
 
-    int updateByExampleSelective(@Param("record") CarPicture record, @Param("example") CarPictureExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") CarPicture record, @Param("example") CarPictureExample example);
-
-    int updateByExample(@Param("record") CarPicture record, @Param("example") CarPictureExample example);
+	int updateByExample(@Param("record") CarPicture record, @Param("example") CarPictureExample example);
 }

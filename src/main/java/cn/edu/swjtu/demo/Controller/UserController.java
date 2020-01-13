@@ -19,6 +19,7 @@ import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.PostService;
@@ -33,18 +34,21 @@ public class UserController {
 	PostService postService;
 
 	// 浏览帖子详情
-	@PostMapping(value = "/showDetails")
+	@GetMapping(value = "/showDetails")
 	@ResponseBody
-	public ModelAndView showDetails(@RequestBody Map<String, Object> json, HttpSession session) {
-		Integer i_pid = (Integer) json.get("pid");
-		Long pid = (long) i_pid.intValue();
-		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		// 浏览帖子埋点
-		userService.viewLog(userInfo.getCookieid(), pid);
+	public CarInfoWithBLOBs showDetails(@RequestParam(required = true,value = "pid")Long pid) {
+//		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+//		// 浏览帖子埋点
+//		userService.viewLog(userInfo.getCookieid(), pid);
 		CarInfoWithBLOBs carInfoWithBLOBs = postService.getPostDetails(pid);
-		ModelAndView modelAndView = new ModelAndView("detail.html");
-		modelAndView.addObject("details", carInfoWithBLOBs);
-		return modelAndView;
+		return carInfoWithBLOBs;
+	}
+	
+	//帖子详情图片
+	@GetMapping(value = "/getDetailsPic")
+	@ResponseBody
+	public List<CarPicture> getDetailsPic(@RequestParam(required = true, value = "pid")Long pid){
+		return userService.getCarPicture(pid);
 	}
 
 	// 联系商家

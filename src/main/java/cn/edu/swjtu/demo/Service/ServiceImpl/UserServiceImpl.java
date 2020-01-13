@@ -1,9 +1,7 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cn.edu.swjtu.demo.Dao.CarBrandMapper;
 import cn.edu.swjtu.demo.Dao.CarClassifyMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
+import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
@@ -22,6 +21,8 @@ import cn.edu.swjtu.demo.Pojo.CarClassifyExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.CarPicture;
+import cn.edu.swjtu.demo.Pojo.CarPictureExample;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
@@ -47,6 +48,8 @@ public class UserServiceImpl implements UserService {
 	CarSeriesMapper carSeriesMapper;
 	@Autowired
 	CarClassifyMapper carClassifyMapper;
+	@Autowired
+	CarPictureMapper carPictureMapper;
 
 	@Override
 	public boolean login(String username, String password) {
@@ -192,6 +195,22 @@ public class UserServiceImpl implements UserService {
 	public List<CarInfoWithBLOBs> getRecommend() {
 		try {
 			List<CarInfoWithBLOBs> result = carInfoMapper.selectRandom();
+			if (result.size() != 0) {
+				return result;
+			}
+			return null;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<CarPicture> getCarPicture(Long pid) {
+		try {
+			CarPictureExample example = new CarPictureExample();
+			example.or().andPidEqualTo(pid.intValue());
+			List<CarPicture> result = carPictureMapper.selectByExample(example);
 			if (result.size() != 0) {
 				return result;
 			}

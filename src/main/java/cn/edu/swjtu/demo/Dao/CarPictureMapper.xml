@@ -4,10 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.CarPicture">
     <result column="picid" jdbcType="INTEGER" property="picid" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="src" jdbcType="VARCHAR" property="src" />
     <result column="type" jdbcType="CHAR" property="type" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.swjtu.demo.Pojo.CarPicture">
-    <result column="src" jdbcType="LONGVARCHAR" property="src" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,27 +66,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    picid, pid, type
+    picid, pid, src, type
   </sql>
-  <sql id="Blob_Column_List">
-    src
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.swjtu.demo.Pojo.CarPictureExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from car_picture
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.CarPictureExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -110,10 +89,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.CarPicture">
-    insert into car_picture (picid, pid, type, 
-      src)
-    values (#{picid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, 
-      #{src,jdbcType=LONGVARCHAR})
+    insert into car_picture (picid, pid, src, 
+      type)
+    values (#{picid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{src,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.CarPicture">
     insert into car_picture
@@ -124,11 +103,11 @@
       <if test="pid != null">
         pid,
       </if>
-      <if test="type != null">
-        type,
-      </if>
       <if test="src != null">
         src,
+      </if>
+      <if test="type != null">
+        type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -138,11 +117,11 @@
       <if test="pid != null">
         #{pid,jdbcType=INTEGER},
       </if>
+      <if test="src != null">
+        #{src,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         #{type,jdbcType=CHAR},
-      </if>
-      <if test="src != null">
-        #{src,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -161,23 +140,13 @@
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=INTEGER},
       </if>
+      <if test="record.src != null">
+        src = #{record.src,jdbcType=VARCHAR},
+      </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=CHAR},
       </if>
-      <if test="record.src != null">
-        src = #{record.src,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update car_picture
-    set picid = #{record.picid,jdbcType=INTEGER},
-      pid = #{record.pid,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=CHAR},
-      src = #{record.src,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -186,6 +155,7 @@
     update car_picture
     set picid = #{record.picid,jdbcType=INTEGER},
       pid = #{record.pid,jdbcType=INTEGER},
+      src = #{record.src,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
