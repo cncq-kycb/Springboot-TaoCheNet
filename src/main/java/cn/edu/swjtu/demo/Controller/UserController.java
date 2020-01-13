@@ -34,10 +34,10 @@ public class UserController {
 	@ResponseBody
 	public CarInfoWithBLOBs getDetails(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		// 浏览帖子埋点
-		userService.viewLog(userInfo.getCookieid(), pid);
-		CarInfoWithBLOBs carInfoWithBLOBs = postService.getPostDetails(pid);
-		return carInfoWithBLOBs;
+		if (userInfo != null) {// 浏览帖子埋点
+			userService.viewLog(userInfo.getCookieid(), pid);
+		}
+		return postService.getPostDetails(pid);
 	}
 
 	// 联系商家
@@ -45,8 +45,10 @@ public class UserController {
 	@ResponseBody
 	public String inquirePost(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		// 联系商家埋点
-		userService.inquireLog(userInfo.getCookieid(), pid);
+		if (userInfo != null) {
+			// 联系商家埋点
+			userService.inquireLog(userInfo.getCookieid(), pid);
+		}
 		return userService.getBusinessTelFromPost(pid);
 	}
 
@@ -64,9 +66,11 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng,
 			@RequestParam(required = false, value = "selectedPrice") Double selectedPrice, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		// 搜索帖子埋点
-		userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
-				selectedColor, selectedLicheng);
+		if (userInfo != null) {
+			// 搜索帖子埋点
+			userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify,
+					selectedPaifang, selectedColor, selectedLicheng);
+		}
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
 				selectedColor, selectedLicheng, selectedPrice);
 	}
