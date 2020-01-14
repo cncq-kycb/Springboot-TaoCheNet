@@ -63,7 +63,38 @@ function changePsw(){
 					window.location.href = 'index.html';
 				}
 			});
-}
+};
+
+function changeUserInfo(){
+	var newName =  $("#newName").val();
+	var newTel =  $("#newTel").val();
+	var newAge =  $("#newAge").val();
+	var newLocation =  $("#newLocation").val();
+
+	if(newName==null||newName==''||newTel==null||newTel==''||newAge==null||newAge==''||newLocation==null||newLocation==""){
+		alert('信息不能为空！');
+		return false;
+	}
+	if(!(/^1[3456789]\d{9}$/.test(newTel))){ 
+        alert("手机号码格式有误，请重新填写！"); 
+		return false;
+	}
+	var url = "/changeUserInfo?newName=" + newName +"&newTel="+ newTel+"&newLocation="+ newLocation +"&newAge="+ newAge;
+	alert(url);
+	$.get(
+			url,
+			function(data) {
+				if(data==0){
+					alert('信息修改有误，请重试！');
+				}
+				if(data==1){
+					alert('信息修改成功！');	
+				}
+				else{
+					alert(data);
+				}
+			});
+};
 </script>
 </head>
 <body>
@@ -179,7 +210,7 @@ function changePsw(){
 <p>修改地区</p><input type="text" id="newLocation" required=""/>
 <p>修改年龄</p><input type="text" id="newAge" required=""/>	
 				<center>
-				<button type="button" class="btn-blue border_radius" onclick="changeInfo()">确认修改</button>
+				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">确认修改</button>
 				</center></form>
 	</div>
 </div>	
