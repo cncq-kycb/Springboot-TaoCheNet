@@ -215,6 +215,7 @@ public class UserServiceImpl implements UserService {
 			record.setPaifang(selectedPaifang);
 			record.setColorId(selectedColor);
 			record.setLicheng(selectedLicheng);
+			record.setTime(new Date());
 			userSearchPostMapper.insert(record);
 		} catch (Exception e) {
 			System.err.println(e);
