@@ -57,15 +57,20 @@ public class LoginController {
 	@GetMapping(value = "/getRecommend")
 	@ResponseBody
 	public List<CarInfoWithBLOBs> getRecommend(HttpSession session) {
-		//UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		// UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		return userService.getRecommend();
 	}
 
 	// 用户退出
 	@GetMapping(value = "/logout")
 	@ResponseBody
-	public boolean logout(HttpSession session) {
-		session.invalidate();
-		return true;
+	public int logout(HttpSession session) {
+		try {
+			session.invalidate();
+			return 1;
+		} catch (Exception e) {
+			System.err.println(e);
+			return 0;
+		}
 	}
 }
