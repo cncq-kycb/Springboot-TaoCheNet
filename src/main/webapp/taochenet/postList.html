@@ -511,28 +511,29 @@
 				$.get(
 						url,
 						function(data) {
-							alert(data);
 							var old = "";
 							var list = data;
+							
 							for (i in list) {
 								var item = list[i];
 								if(list.length<1){
 									$("#noResult").html('<p>没有找到您要查询的结果</p>');
 								}
-								if (item.name.length > 14) {
-									var title = item.name.substr(0, 14) + "&nbsp;...";
-									}
+								if (item.name.length > 26) {
+									var title = item.name.substr(0, 23) + "...";
+								
+	}
 								var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
 								old =
 									old +
 									" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
-									item.pid + ")\"><img src=" +
+									item.pid + ")\"\"><img src=" +
 									item.src +
-									" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"javascript:void(0)\" onclick=\"details(" +
+									" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 									item.pid + ")\">" +
 									title +
-									"</a></h3><p><span style=\"font-size:15px\">" +
-									subtitle +  
+									"</a></h4><p><span style=\"font-size:15px\">" +
+									subtitle +
 									"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
 									"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
 							}
