@@ -25,8 +25,15 @@ $.get(
 	action,
 	function(data) {
 		var user_info = data;
-		var old = "";
-		old += '<h3 id="name">&ensp;'
+		var old = '';
+		if(user_info.name==null){
+			window.location.href='login.html';
+		}
+		else{
+			old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+		$("#navbar-menu").html(old);
+		var old2 = "";
+		old2 += '<h3 id="name">&ensp;'
 		+ user_info.name
 		+'</h3><p class="bottom30">&ensp;&ensp;'
 		+ user_info.username
@@ -35,7 +42,7 @@ $.get(
 		+ user_info.location +'</td></tr><tr class="bottom10"><td><strong>年龄</strong></td><td class="text-left">'
 		+ user_info.age
 		+'</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>'
-		$("#userInfo").html(old);
+		$("#userInfo").html(old2);		}
 	}
 );
 
@@ -110,12 +117,6 @@ function changeUserInfo(){
             </button>
           </div> <!-- End Header Navigation -->
           <div class="collapse navbar-collapse" id="navbar-menu">
-            <ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut">
-			  <li><a href="index.html">首页</a></li>
-			  <li><a href="postList.html">发现</a></li>
-              <li class="dropdown megamenu-fw active"><a href="userInfo.html">个人中心</a></li>
-              <li><a href="index.html">退出登录</a></li>
-            </ul>
           </div>
         </div>
       </div>
@@ -285,6 +286,20 @@ function changeUserInfo(){
 							mainClass: 'my-mfp-zoom-in'
 						});
 						        });  
+						function logout(){
+							var url = '/logout';
+							$.get(
+									url,
+									function(data) {
+									if(data==1){
+										window.location.reload();
+									}
+									if(data==0){
+										alert('退出有误！');
+									}
+									}
+									);
+						};
 </script>
 </body>
 </html>

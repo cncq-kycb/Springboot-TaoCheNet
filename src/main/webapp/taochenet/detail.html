@@ -339,7 +339,22 @@
 								+ car_business.yishou
 								+"</span></div></div>");
 						});
-	
+		action = "/getUserInfo";
+		$.get(
+			action,
+			function(data) {
+				var item = data;
+				var old = '';
+				if(item.name==null){
+					old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href=#>宝贝详情</a></li><li><a href="login.html">登录/注册</a></li></ul>';
+				}
+				else{
+					old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href=#>宝贝详情</a></li><li><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+				}
+				$("#navbar-menu").html(old);
+				}
+		);
+		
 	function showOw(){
 		var url = "/inquirePost?pid=" + pid;
 		$.get(
@@ -348,6 +363,20 @@
 					alert('电话号码：'+data);
 				});
 	}
+	function logout(){
+		var url = '/logout';
+		$.get(
+				url,
+				function(data) {
+				if(data==1){
+					window.location.reload();
+				}
+				if(data==0){
+					alert('退出有误！');
+				}
+				}
+				);
+	};
 </script>
 </body>
 </html>
