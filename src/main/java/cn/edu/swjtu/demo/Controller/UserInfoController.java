@@ -17,6 +17,7 @@ public class UserInfoController {
 	@Autowired
 	UserInfoService userInfoService;
 
+	// 修改密码
 	@GetMapping(value = "/changePsw")
 	@ResponseBody
 	public int changePsw(@RequestParam(required = true, value = "oldPsw") String oldPsw,
@@ -27,5 +28,18 @@ public class UserInfoController {
 			return 1;
 		}
 		return 0;
+	}
+
+	// 获取登录信息
+	@GetMapping(value = "getUserInfo")
+	@ResponseBody
+	public UserInfo getUserInfo(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo == null) {
+			UserInfo result = new UserInfo();
+			result.setUserId((long) -1);
+			return result;
+		}
+		return userInfo;
 	}
 }
