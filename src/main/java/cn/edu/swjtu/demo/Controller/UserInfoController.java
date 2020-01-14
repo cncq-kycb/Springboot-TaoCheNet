@@ -34,7 +34,7 @@ public class UserInfoController {
 	@GetMapping(value = "/changeUserInfo")
 	@ResponseBody
 	public int changeUserInfo(@RequestParam(required = false, value = "newName") String newName,
-			@RequestParam(required = false, value = "newTel") Integer newTel,
+			@RequestParam(required = false, value = "newTel") String newTel,
 			@RequestParam(required = false, value = "newLocation") String newLocation,
 			@RequestParam(required = false, value = "NewAge") Integer NewAge, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
