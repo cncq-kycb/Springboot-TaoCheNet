@@ -512,7 +512,7 @@
 						url,
 						function(data) {
 							var old = "";
-							$("#demo").html(old);
+							$("#demo").html('<div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div><div class="jplist-panel box panel-top"><div data-control-type="drop-down" data-control-name="paging" data-control-action="paging"><ul><li><span data-number="8" data-default="true"> &ensp;</span></li></ul></div><div class="jplist-drop-down" data-control-type="drop-down" data-control-name="sort" data-control-action="sort" data-datetime-format="{month}/{day}/{year}"><ul><li><span data-path="default" data-default="true">排序方式</span></li><li><span data-path=".like" data-order="asc" data-type="number">价格升序</span></li><li><span data-path=".like" data-order="desc" data-type="number">价格降序</span></li></ul></div><div class="jplist-label" data-type="第{current}页 ，总 {pages}页" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging"></div><div class="jplist-pagination" data-control-type="pagination" data-control-name="paging" data-control-action="paging"></div></div><div class="list box text-shadow"><div class="row" id="resultList"></div></div><div class="box jplist-no-results text-shadow align-center" id="noResult"><p>正在努力为您搜寻车车...</p></div><div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions </div><div class="jplist-panel box panel-bottom"><div class="jplist-label" data-type="{start} - {end} ,总{all}条结果" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging"></div><div class="jplist-pagination" data-control-animate-to-top="true" data-control-type="pagination" data-control-name="paging" data-control-action="paging"></div></div>');
 							var list = data;
 							
 							if(list[0].name=='-1'){
@@ -520,18 +520,13 @@
 								
 							}
 							if(list[0].name!='-1'){
-								
 							for (i in list) {
 								var item = list[i];
-
 								if (item.name.length > 26) {
 									var title = item.name.substr(0, 23) + "...";
-								
-	}
+								}
 								var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
-								old =
-									old +
-									" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+								old +=" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 									item.pid + ")\"\"><img src=" +
 									item.src +
 									" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
@@ -542,14 +537,11 @@
 									"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
 									"</span><span style=\"font-size:20px;color:#F00\">万</span></div></div></div></div>";
 							}}
-						
 							$("#resultList").html(old);
 							$('#demo').jplist({
-								
 								itemsBox: '.list' 
 								,itemPath: '.list-item' 
 								,panelPath: '.jplist-panel'
-								
 								//save plugin state
 								,storage: 'localstorage' //'', 'cookies', 'localstorage'			
 								,storageName: 'jplist-div-layout'
