@@ -317,13 +317,14 @@
 					$("#Pic").html(str3);
 
 						});
-		var url = "/getSalerInfo?pid=" + pid;
+		
+		var action = "/getSalerInfo?pid=" + pid;
 		$.get(
-				url,
+				action,
 				function(data) {
 					var car_business = data;
-						var old = $("#saler_info").html();
-						$("#saler_info").html(
+						var old = $("#salerInfo").html();
+						$("#salerInfo").html(
 								old +  "<span style=\"font-size:15px;\">"
 								+ car_business.huiyuan
 								+"&nbsp;</span><a href=\"#.\"><h3>"
