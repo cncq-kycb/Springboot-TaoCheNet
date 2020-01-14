@@ -80,7 +80,6 @@ function changeUserInfo(){
 		return false;
 	}
 	var url = "/changeUserInfo?newName=" + newName +"&newTel="+ newTel+"&newLocation="+ newLocation +"&newAge="+ newAge;
-	alert(url);
 	$.get(
 			url,
 			function(data) {
@@ -89,9 +88,7 @@ function changeUserInfo(){
 				}
 				if(data==1){
 					alert('信息修改成功！');	
-				}
-				else{
-					alert(data);
+					window.location.reload;
 				}
 			});
 };
