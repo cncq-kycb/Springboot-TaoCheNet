@@ -49,8 +49,8 @@
 							if(list.length<1){
 								$("#noResult").html('<p>没有找到您要查询的结果</p>');
 							}
-							if (item.name.length > 14) {
-								var title = item.name.substr(0, 14) + "&nbsp;...";
+							if (item.name.length > 26) {
+								var title = item.name.substr(0, 23) + "...";
 							
 }
 							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
@@ -59,10 +59,10 @@
 								" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 								item.pid + ")\"\"><img src=" +
 								item.src +
-								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h3 class=\"captlize\"><a href=\"javascript:void(0)\" onclick=\"details(" +
-								item.pid + ")\"\">" +
+								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+								item.pid + ")\">" +
 								title +
-								"</a></h3><p><span style=\"font-size:15px\">" +
+								"</a></h4><p><span style=\"font-size:15px\">" +
 								subtitle +
 								"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
 								"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
@@ -161,10 +161,12 @@
 							var item = list[i];
 							old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 							item.pid + ")\"><img src=" + item.src +
-							" alt=\"image \" width=\"96px\" height=\"72px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h4>" +
-							item.name + "</h4> <p class = \"bottom15\" >" + item.licheng +
-							"公里 </p> </span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
-							"</span><span style=\"font-size:25px;color:#F00\">万</span>  </div > </div > </div > ";
+							" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+							item.pid + ")\">" +
+							item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
+							"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+							item.pid + ")\"><span style=\"font-size:20px;color:#F00\">" + item.price +
+							"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 						}
 						$("#recommend").html(old);
 					}

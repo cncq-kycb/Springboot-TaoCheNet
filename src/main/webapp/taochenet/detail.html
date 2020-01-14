@@ -340,8 +340,12 @@
 						});
 	
 	function showOw(){
-
-		alert('1');
+		var url = "/inquirePost?pid=" + pid;
+		$.get(
+				url,
+				function(data) {
+					alert('电话号码：'+data);
+				});
 	}
 </script>
 </body>
