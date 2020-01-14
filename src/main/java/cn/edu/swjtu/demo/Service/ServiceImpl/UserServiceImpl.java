@@ -206,31 +206,29 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
-			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPriceLeft,
-			Double selectedPriceRight) {
+			String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft, Integer selectedLichengRight,
+			Double selectedPriceLeft, Double selectedPriceRight) {
 		try {
 			UserSearchPost record = new UserSearchPost();
 			record.setCookieid(cookieid);
 			if (selectedBrand != null) {
 				record.setPid(selectedBrand);
 			}
-
 			if (selectedSeries != null) {
 				record.setCxid(selectedSeries);
 			}
-
 			if (selectedPaifang != null) {
 				record.setPaifang(selectedPaifang);
 			}
-
 			if (selectedColor != null) {
 				record.setColorId(selectedColor);
 			}
-
-			if (selectedLicheng != null) {
-				record.setLicheng(selectedLicheng);
+			if (selectedLichengLeft != null) {
+				record.setLichengLeft(selectedLichengLeft);
 			}
-
+			if (selectedLichengRight != null) {
+				record.setLichengRight(selectedLichengRight);
+			}
 			record.setTime(new Date());
 			userSearchPostMapper.insert(record);
 		} catch (Exception e) {
@@ -241,10 +239,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries,
-			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLicheng,
-			Double selectedPriceLeft, Double selectedPriceRight) {
+			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft,
+			Integer selectedLichengRight, Double selectedPriceLeft, Double selectedPriceRight) {
 		List<CarInfoWithBLOBs> result = carInfoMapper.searchByCondition(selectedBrand, selectedSeries, selectedClassify,
-				selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
+				selectedPaifang, selectedColor, selectedLichengLeft, selectedLichengRight, selectedPriceLeft,
+				selectedPriceRight);
 		try {
 			if (result.size() != 0) {
 				return result;

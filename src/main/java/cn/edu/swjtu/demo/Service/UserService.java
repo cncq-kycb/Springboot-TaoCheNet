@@ -28,8 +28,8 @@ public interface UserService {
 
 	// 记录用户搜索日志
 	void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
-			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPriceLeft,
-			Double selectedPriceRight);
+			String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft, Integer selectedLichengRight,
+			Double selectedPriceLeft, Double selectedPriceRight);
 
 	// 展示全部帖子
 	List<CarInfoWithBLOBs> showPosts();
@@ -48,8 +48,8 @@ public interface UserService {
 
 	// 搜索帖子
 	List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
-			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPriceLeft,
-			Double selectedPriceRight);
+			String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft, Integer selectedLichengRight,
+			Double selectedPriceLeft, Double selectedPriceRight);
 
 	// 获取推荐
 	List<CarInfoWithBLOBs> getRecommend();

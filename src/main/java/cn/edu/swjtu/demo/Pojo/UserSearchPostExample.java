@@ -545,63 +545,63 @@ public class UserSearchPostExample {
             return (Criteria) this;
         }
 
-        public Criteria andLichengIsNull() {
-            addCriterion("licheng is null");
+        public Criteria andLichengRightIsNull() {
+            addCriterion("licheng_right is null");
             return (Criteria) this;
         }
 
-        public Criteria andLichengIsNotNull() {
-            addCriterion("licheng is not null");
+        public Criteria andLichengRightIsNotNull() {
+            addCriterion("licheng_right is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLichengEqualTo(Integer value) {
-            addCriterion("licheng =", value, "licheng");
+        public Criteria andLichengRightEqualTo(Integer value) {
+            addCriterion("licheng_right =", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengNotEqualTo(Integer value) {
-            addCriterion("licheng <>", value, "licheng");
+        public Criteria andLichengRightNotEqualTo(Integer value) {
+            addCriterion("licheng_right <>", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengGreaterThan(Integer value) {
-            addCriterion("licheng >", value, "licheng");
+        public Criteria andLichengRightGreaterThan(Integer value) {
+            addCriterion("licheng_right >", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengGreaterThanOrEqualTo(Integer value) {
-            addCriterion("licheng >=", value, "licheng");
+        public Criteria andLichengRightGreaterThanOrEqualTo(Integer value) {
+            addCriterion("licheng_right >=", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengLessThan(Integer value) {
-            addCriterion("licheng <", value, "licheng");
+        public Criteria andLichengRightLessThan(Integer value) {
+            addCriterion("licheng_right <", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengLessThanOrEqualTo(Integer value) {
-            addCriterion("licheng <=", value, "licheng");
+        public Criteria andLichengRightLessThanOrEqualTo(Integer value) {
+            addCriterion("licheng_right <=", value, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengIn(List<Integer> values) {
-            addCriterion("licheng in", values, "licheng");
+        public Criteria andLichengRightIn(List<Integer> values) {
+            addCriterion("licheng_right in", values, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengNotIn(List<Integer> values) {
-            addCriterion("licheng not in", values, "licheng");
+        public Criteria andLichengRightNotIn(List<Integer> values) {
+            addCriterion("licheng_right not in", values, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengBetween(Integer value1, Integer value2) {
-            addCriterion("licheng between", value1, value2, "licheng");
+        public Criteria andLichengRightBetween(Integer value1, Integer value2) {
+            addCriterion("licheng_right between", value1, value2, "lichengRight");
             return (Criteria) this;
         }
 
-        public Criteria andLichengNotBetween(Integer value1, Integer value2) {
-            addCriterion("licheng not between", value1, value2, "licheng");
+        public Criteria andLichengRightNotBetween(Integer value1, Integer value2) {
+            addCriterion("licheng_right not between", value1, value2, "lichengRight");
             return (Criteria) this;
         }
 
@@ -662,6 +662,66 @@ public class UserSearchPostExample {
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
             addCriterion("time not between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftIsNull() {
+            addCriterion("licheng_left is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftIsNotNull() {
+            addCriterion("licheng_left is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftEqualTo(Integer value) {
+            addCriterion("licheng_left =", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftNotEqualTo(Integer value) {
+            addCriterion("licheng_left <>", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftGreaterThan(Integer value) {
+            addCriterion("licheng_left >", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftGreaterThanOrEqualTo(Integer value) {
+            addCriterion("licheng_left >=", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftLessThan(Integer value) {
+            addCriterion("licheng_left <", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftLessThanOrEqualTo(Integer value) {
+            addCriterion("licheng_left <=", value, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftIn(List<Integer> values) {
+            addCriterion("licheng_left in", values, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftNotIn(List<Integer> values) {
+            addCriterion("licheng_left not in", values, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftBetween(Integer value1, Integer value2) {
+            addCriterion("licheng_left between", value1, value2, "lichengLeft");
+            return (Criteria) this;
+        }
+
+        public Criteria andLichengLeftNotBetween(Integer value1, Integer value2) {
+            addCriterion("licheng_left not between", value1, value2, "lichengLeft");
             return (Criteria) this;
         }
     }

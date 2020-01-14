@@ -653,9 +653,11 @@
 				<bind name="paifang" value="'%' + paifang + '%' " />
 				and paifang like #{paifang}
 			</if>
-			<if test="licheng != null and licheng != ''">
-				<bind name="licheng" value="'%' + licheng + '%' " />
-				and licheng like #{licheng}
+			<if test="licheng_right != null and licheng_right != ''">
+				and licheng &lt;= #{licheng_right}
+			</if>
+			<if test="licheng_left != null and licheng_left != ''">
+				and licheng &gt;= #{licheng_left}
 			</if>
 			<if test="selectedPriceRight != null and selectedPriceRight != ''">
 				and price &lt;= #{selectedPriceRight}

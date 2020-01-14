@@ -17,9 +17,11 @@ public class UserSearchPost {
 
     private String paifang;
 
-    private Integer licheng;
+    private Integer lichengRight;
 
     private Date time;
+
+    private Integer lichengLeft;
 
     public Long getRecordId() {
         return recordId;
@@ -77,12 +79,12 @@ public class UserSearchPost {
         this.paifang = paifang == null ? null : paifang.trim();
     }
 
-    public Integer getLicheng() {
-        return licheng;
+    public Integer getLichengRight() {
+        return lichengRight;
     }
 
-    public void setLicheng(Integer licheng) {
-        this.licheng = licheng;
+    public void setLichengRight(Integer lichengRight) {
+        this.lichengRight = lichengRight;
     }
 
     public Date getTime() {
@@ -91,5 +93,13 @@ public class UserSearchPost {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getLichengLeft() {
+        return lichengLeft;
+    }
+
+    public void setLichengLeft(Integer lichengLeft) {
+        this.lichengLeft = lichengLeft;
     }
 }

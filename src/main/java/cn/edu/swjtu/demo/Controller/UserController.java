@@ -69,7 +69,8 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedClassify") Integer selectedClassify,
 			@RequestParam(required = false, value = "selectedPaifang") String selectedPaifang,
 			@RequestParam(required = false, value = "selectedColor") Integer selectedColor,
-			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng,
+			@RequestParam(required = false, value = "selectedLichengLeft") Integer selectedLichengLeft,
+			@RequestParam(required = false, value = "selectedLichengRight") Integer selectedLichengRight,
 			@RequestParam(required = false, value = "selectedPriceLeft") Double selectedPriceLeft,
 			@RequestParam(required = false, value = "selectedPriceRight") Double selectedPriceRight,
 			HttpSession session) {
@@ -77,10 +78,11 @@ public class UserController {
 		if (userInfo != null) {
 			// 搜索帖子埋点
 			userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify,
-					selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
+					selectedPaifang, selectedColor, selectedLichengLeft, selectedLichengRight, selectedPriceLeft,
+					selectedPriceRight);
 		}
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
-				selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
+				selectedColor, selectedLichengLeft, selectedLichengRight, selectedPriceLeft, selectedPriceRight);
 	}
 
 	// 获取可选品牌数据
