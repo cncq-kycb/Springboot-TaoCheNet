@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
 			List<CarBusiness> carBusinesses = carBusinessMapper.selectByExample(carBusinessExample);
 			if (carBusinesses.size() != 0) {
 				CarBusiness result = carBusinesses.get(0);
-				if (result.getDescribe() == null) {
+				if (result.getDescribe() == null || result.getDescribe().equals("")) {
 					result.setDescribe("无");
 				}
 				return result;
