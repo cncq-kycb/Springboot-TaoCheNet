@@ -9,13 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.PageHelper;
-
-import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.UserService;
@@ -44,12 +40,10 @@ public class LoginController {
 		return new UserInfo();
 	}
 
+	// 展示全部帖子
 	@PostMapping(value = "/showPosts")
 	@ResponseBody
-	public List<CarInfoWithBLOBs> showPosts(
-			@RequestParam(required = true, value = "pageNum", defaultValue = "1") Integer pageNum,
-			@RequestParam(required = true, value = "pageSize", defaultValue = "10") Integer pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
+	public List<CarInfoWithBLOBs> showPosts() {
 		return userService.showPosts();
 	}
 

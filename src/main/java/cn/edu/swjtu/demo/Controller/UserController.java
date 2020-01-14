@@ -64,8 +64,6 @@ public class UserController {
 	@GetMapping(value = "/searchPost")
 	@ResponseBody
 	public List<CarInfoWithBLOBs> searchPost(
-			@RequestParam(required = true, value = "pageNum", defaultValue = "1") Integer pageNum,
-			@RequestParam(required = true, value = "pageSize", defaultValue = "10") Integer pageSize,
 			@RequestParam(required = false, value = "selectedBrand") Integer selectedBrand,
 			@RequestParam(required = false, value = "selectedSeries") Integer selectedSeries,
 			@RequestParam(required = false, value = "selectedClassify") Integer selectedClassify,
