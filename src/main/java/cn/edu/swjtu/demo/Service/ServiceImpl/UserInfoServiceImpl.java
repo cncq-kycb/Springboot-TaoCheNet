@@ -41,4 +41,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 	}
 
+	@Override
+	public void changeUserInfo(String cookieid, UserInfo userInfo) {
+		try {
+			UserInfoExample example = new UserInfoExample();
+			example.or().andCookieidEqualTo(cookieid);
+			userInfoMapper.updateByExample(userInfo, example);
+		} catch (Exception e) {
+			System.err.println(e);
+			;
+		}
+	}
+
 }
