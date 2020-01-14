@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.CarBrand;
+import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarColor;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
@@ -40,6 +41,13 @@ public class UserController {
 		return postService.getPostDetails(pid);
 	}
 
+	// 帖子商家详情
+	@GetMapping(value = "/getSalerInfo")
+	@ResponseBody
+	public CarBusiness getCarBusiness(@RequestParam(required = true, value = "pid") Long pid) {
+		return postService.getSalerInfo(pid);
+	}
+
 	// 联系商家
 	@GetMapping(value = "/inquirePost")
 	@ResponseBody
@@ -64,15 +72,17 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedPaifang") String selectedPaifang,
 			@RequestParam(required = false, value = "selectedColor") Integer selectedColor,
 			@RequestParam(required = false, value = "selectedLicheng") Integer selectedLicheng,
-			@RequestParam(required = false, value = "selectedPrice") Double selectedPrice, HttpSession session) {
+			@RequestParam(required = false, value = "selectedPriceLeft") Double selectedPriceLeft,
+			@RequestParam(required = false, value = "selectedPriceRight") Double selectedPriceRight,
+			HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		if (userInfo != null) {
 			// 搜索帖子埋点
 			userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify,
-					selectedPaifang, selectedColor, selectedLicheng);
+					selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
 		}
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
-				selectedColor, selectedLicheng, selectedPrice);
+				selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
 	}
 
 	// 获取可选品牌数据
