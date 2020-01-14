@@ -210,11 +210,26 @@ public class UserServiceImpl implements UserService {
 		try {
 			UserSearchPost record = new UserSearchPost();
 			record.setCookieid(cookieid);
-			record.setPid(selectedBrand);
-			record.setCxid(selectedSeries);
-			record.setPaifang(selectedPaifang);
-			record.setColorId(selectedColor);
-			record.setLicheng(selectedLicheng);
+			if (selectedBrand != null) {
+				record.setPid(selectedBrand);
+			}
+
+			if (selectedSeries != null) {
+				record.setCxid(selectedSeries);
+			}
+
+			if (selectedPaifang != null) {
+				record.setPaifang(selectedPaifang);
+			}
+
+			if (selectedColor != null) {
+				record.setColorId(selectedColor);
+			}
+
+			if (selectedLicheng != null) {
+				record.setLicheng(selectedLicheng);
+			}
+
 			record.setTime(new Date());
 			userSearchPostMapper.insert(record);
 		} catch (Exception e) {
