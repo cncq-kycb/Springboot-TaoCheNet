@@ -249,7 +249,11 @@ public class UserServiceImpl implements UserService {
 			if (result.size() != 0) {
 				return result;
 			}
-			return new ArrayList<CarInfoWithBLOBs>();
+			result = new ArrayList<CarInfoWithBLOBs>();
+			CarInfoWithBLOBs item = new CarInfoWithBLOBs();
+			item.setName("-1");
+			result.add(item);
+			return result;
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
