@@ -13,4 +13,7 @@ public interface UserInfoService {
 	// 修改个人信息
 	void changeUserInfo(String cookieid, UserInfo userInfo);
 
+	// 注册新用户
+	int signup(String username, String password, String name, String tel, String location, Integer age);
+
 }

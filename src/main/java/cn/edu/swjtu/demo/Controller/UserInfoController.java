@@ -17,6 +17,18 @@ public class UserInfoController {
 	@Autowired
 	UserInfoService userInfoService;
 
+	// 注册用户
+	@GetMapping(value = "signup")
+	@ResponseBody
+	public int signup(@RequestParam(required = true, value = "username") String username,
+			@RequestParam(required = true, value = "password") String password,
+			@RequestParam(required = true, value = "name") String name,
+			@RequestParam(required = true, value = "tel") String tel,
+			@RequestParam(required = true, value = "location") String location,
+			@RequestParam(required = true, value = "age") Integer age) {
+		return userInfoService.signup(username, password, name, tel, location, age);
+	}
+
 	// 修改密码
 	@GetMapping(value = "/changePsw")
 	@ResponseBody

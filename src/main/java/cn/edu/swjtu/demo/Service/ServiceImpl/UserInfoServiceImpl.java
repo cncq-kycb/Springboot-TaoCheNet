@@ -9,6 +9,7 @@ import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Service.UserInfoService;
+import cn.edu.swjtu.demo.Utils.Utils;
 
 @Component
 public class UserInfoServiceImpl implements UserInfoService {
@@ -49,6 +50,39 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userInfoMapper.updateByExample(userInfo, example);
 		} catch (Exception e) {
 			System.err.println(e);
+		}
+	}
+
+	@Override
+	public int signup(String username, String password, String name, String tel, String location, Integer age) {
+		try {
+			UserInfoExample example = new UserInfoExample();
+			example.or().andUsernameEqualTo(username);
+			List<UserInfo> result = userInfoMapper.selectByExample(example);
+			if (result.size() != 0) {
+				return 2;
+			}
+			UserInfo record = new UserInfo();
+			record.setUsername(username);
+			record.setPassword(password);
+			record.setName(name);
+			record.setTel(tel);
+			record.setLocation(location);
+			record.setAge(age);
+			String cookieid = Utils.getRandomCookieid();
+			example.or().andCookieidEqualTo(cookieid);
+			result = userInfoMapper.selectByExample(example);
+			while (result.size() != 0) {
+				cookieid = Utils.getRandomCookieid();
+				example.or().andCookieidEqualTo(cookieid);
+				result = userInfoMapper.selectByExample(example);
+			}
+			record.setCookieid(cookieid);
+			userInfoMapper.insert(record);
+			return 1;
+		} catch (Exception e) {
+			System.err.println(e);
+			return 3;
 		}
 	}
 
