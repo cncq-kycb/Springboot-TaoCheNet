@@ -49,7 +49,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userInfoMapper.updateByExample(userInfo, example);
 		} catch (Exception e) {
 			System.err.println(e);
-			;
 		}
 	}
 
