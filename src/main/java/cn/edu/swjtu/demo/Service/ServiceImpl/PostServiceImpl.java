@@ -36,14 +36,18 @@ public class PostServiceImpl implements PostService {
 	public CarBusiness getSalerInfo(Long pid) {
 		CarInfoExample carInfoExample = new CarInfoExample();
 		carInfoExample.or().andPidEqualTo(pid);
-		List<CarInfoWithBLOBs> result = carInfoMapper.selectByExampleWithBLOBs(carInfoExample);
-		if (result.size() != 0) {
-			Long l_sid = result.get(0).getSid();
+		List<CarInfoWithBLOBs> carInfoWithBLOBs = carInfoMapper.selectByExampleWithBLOBs(carInfoExample);
+		if (carInfoWithBLOBs.size() != 0) {
+			Long l_sid = carInfoWithBLOBs.get(0).getSid();
 			CarBusinessExample carBusinessExample = new CarBusinessExample();
 			carBusinessExample.or().andSidEqualTo(l_sid.intValue());
 			List<CarBusiness> carBusinesses = carBusinessMapper.selectByExample(carBusinessExample);
 			if (carBusinesses.size() != 0) {
-				return carBusinesses.get(0);
+				CarBusiness result = carBusinesses.get(0);
+				if (result.getDescribe() == null) {
+					result.setDescribe("无");
+				}
+				return result;
 			}
 			return null;
 		}
