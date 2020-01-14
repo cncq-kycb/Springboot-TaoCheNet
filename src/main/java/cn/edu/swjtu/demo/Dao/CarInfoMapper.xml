@@ -630,7 +630,7 @@
 		</if>
 	</update>
 	<select id="selectRandom"
-		resultType="cn.edu.swjtu.demo.Pojo.CarInfo">
+		resultType="cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs">
 		select * from car_info ORDER BY RAND() limit 5
 	</select>
 	<select id="searchByCondition"
