@@ -355,11 +355,6 @@
 
 									</div>
 								</div>
-								<div class="single-query form-group col-sm-12">
-									<div class="intro" id="selectClassifyBox">
-
-									</div>
-								</div>
 								<div class="search-2 col-sm-12">
 									<div class="row">
 										<div class="col-sm-6">
@@ -402,24 +397,32 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-6">
+											<div class="col-sm-6">
 											<div class="single-query form-group">
-												<div class="intro">
-													<select>
-														<option class="active">里程-不限</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
+												<div class="intro" id="selectClassifyBox">
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
+								
+								<div class="col-sm-12 bottom10">
+									<div class="single-query-slider">
+										<label><strong>里程:</strong></label>
+										<div class="price text-right">
+											
+											<div class="leftLabel" id="leftLicheng"></div><span>公里</span>
+											<span>~ </span>
+											<div class="rightLabel" id="rightLicheng"></div><span>公里</span>
+										</div>
+										<div data-range_min="0" data-range_max="300000" data-cur_min="0" data-cur_max="300000" class="nstSlider">
+											<div class="bar"></div>
+											<div class="leftGrip"></div>
+											<div class="rightGrip"></div>
+										</div>
+									</div>
+								</div>
+								<h4>&ensp;</h4>
 								<div class="col-sm-12 bottom10">
 									<div class="single-query-slider">
 										<label><strong>价格区间:</strong></label>
@@ -500,14 +503,14 @@
 				var selectedClassify = $("#selectClassifyBox option:selected").val();
 				var selectedPaifang = "";
 				var selectedColor = $("#selectColorBox option:selected").val();
-				var selectedLicheng = "";
+				var selectedLichengLeft = document.getElementById("leftLicheng").innerText;
+				var selectedLichengRight = document.getElementById("rightLicheng").innerText;
 				if(selectedBrand == -1){selectedBrand = ""};
 				if(selectedSeries == -1){selectedSeries = ""};
 				if(selectedClassify == -1){selectedClassify = ""};
 				if(selectedPaifang == -1){selectedPaifang = ""};
 				if(selectedColor == -1){selectedColor = ""};
-				if(selectedLicheng == -1){selectedLicheng = ""};
-				var url = "/searchPost?selectedBrand="+selectedBrand+"&selectedSeries="+selectedSeries+"&selectedClassify="+selectedClassify+"&selectedPaifang="+selectedPaifang+"&selectedColor="+selectedColor+"&selectedLicheng="+selectedLicheng+"&selectedPriceRight="+selectedPriceRight+"&selectedPriceLeft="+selectedPriceLeft;
+				var url = "/searchPost?selectedBrand="+selectedBrand+"&selectedSeries="+selectedSeries+"&selectedClassify="+selectedClassify+"&selectedPaifang="+selectedPaifang+"&selectedColor="+selectedColor+"&selectedLichengLeft="+selectedLichengLeft+"&selectedLichengRight="+selectedLichengRight+"&selectedPriceRight="+selectedPriceRight+"&selectedPriceLeft="+selectedPriceLeft;
 				$.get(
 						url,
 						function(data) {

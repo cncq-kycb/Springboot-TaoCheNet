@@ -38,6 +38,32 @@ $.get(
 		$("#userInfo").html(old);
 	}
 );
+
+function changePsw(){
+	var oldPsw =  $("#oldPsw").val();
+	var newPsw =  $("#newPsw").val();
+	var checkedPsw =  $("#checkedPsw").val();
+	if(oldPsw==null||oldPsw==''||newPsw==null||newPsw==''||checkedPsw==null||checkedPsw==''){
+		alert('密码不能为空！');
+		return false;
+	}
+	if(newPsw!=checkedPsw){
+		alert('两次输入密码不一致');
+		return false;
+	}
+	var url = "/changePsw?oldPsw=" + oldPsw +"&newPsw="+ newPsw;
+	$.get(
+			url,
+			function(data) {
+				if(data==0){
+					alert('密码修改有误，请重试！');
+				}
+				if(data==1){
+					alert('密码修改成功，请重新登录！');
+					window.location.href = 'index.html';
+				}
+			});
+}
 </script>
 </head>
 <body>
@@ -141,7 +167,7 @@ $.get(
 				<p>请重复新密码：</p>
 				<input type="password" id="checkedPsw" class="password" placeholder="" required=""/>					
 				<center>
-				<button type="button" class="btn-blue border_radius" onclick="changePsw()">确认修改</button>
+				<button type="button" class="btn-blue border_radius" onclick="return changePsw()">确认修改</button>
 				</center>
 			</form>
 	</div>
