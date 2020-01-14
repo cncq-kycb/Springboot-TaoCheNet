@@ -512,13 +512,18 @@
 						url,
 						function(data) {
 							var old = "";
+							$("#demo").html(old);
 							var list = data;
 							
+							if(list[0].name=='-1'){
+								$("#demo").html('<h1>&ensp;</h1><h1>&ensp;</h1><h1>&ensp;</h1><h1>&ensp;</h1><h1>&ensp;</h1><center><p><b>没有找到您要查询的结果</b></p></center>'); ;
+								
+							}
+							if(list[0].name!='-1'){
+								
 							for (i in list) {
 								var item = list[i];
-								if(list.length<1){
-									$("#noResult").html('<p>没有找到您要查询的结果</p>');
-								}
+
 								if (item.name.length > 26) {
 									var title = item.name.substr(0, 23) + "...";
 								
@@ -536,7 +541,8 @@
 									subtitle +
 									"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
 									"</span><span style=\"font-size:25px;color:#F00\">万</span></div></div></div></div>";
-							}
+							}}
+						
 							$("#resultList").html(old);
 							$('#demo').jplist({
 								
