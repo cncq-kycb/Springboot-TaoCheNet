@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -248,7 +249,7 @@ public class UserServiceImpl implements UserService {
 			if (result.size() != 0) {
 				return result;
 			}
-			return null;
+			return new ArrayList<CarInfoWithBLOBs>();
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
