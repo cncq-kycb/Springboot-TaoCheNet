@@ -76,8 +76,8 @@ public class UserController {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		if (userInfo != null) {
 			// 搜索帖子埋点
-			userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify,
-					selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
+//			userService.searchLog(userInfo.getCookieid(), selectedBrand, selectedSeries, selectedClassify,
+//					selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
 		}
 		return userService.getPostByCondition(selectedBrand, selectedSeries, selectedClassify, selectedPaifang,
 				selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
