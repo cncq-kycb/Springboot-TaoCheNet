@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import cn.edu.swjtu.demo.Pojo.CarBrand;
 import cn.edu.swjtu.demo.Pojo.CarClassify;
 import cn.edu.swjtu.demo.Pojo.CarColor;
-import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
