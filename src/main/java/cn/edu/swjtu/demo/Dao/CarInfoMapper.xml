@@ -657,8 +657,11 @@
 				<bind name="licheng" value="'%' + licheng + '%' " />
 				and licheng like #{licheng}
 			</if>
-			<if test="price != null and price != ''">
-				and price &lt; #{price}
+			<if test="selectedPriceRight != null and selectedPriceRight != ''">
+				and price &lt;= #{selectedPriceRight}
+			</if>
+			<if test="selectedPriceLeft != null and selectedPriceLeft != ''">
+				and price &gt;= #{selectedPriceLeft}
 			</if>
 		</where>
 	</select>

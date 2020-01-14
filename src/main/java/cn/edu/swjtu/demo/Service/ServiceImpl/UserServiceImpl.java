@@ -205,7 +205,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
-			String selectedPaifang, Integer selectedColor, Integer selectedLicheng) {
+			String selectedPaifang, Integer selectedColor, Integer selectedLicheng, Double selectedPriceLeft,
+			Double selectedPriceRight) {
 		try {
 			UserSearchPost record = new UserSearchPost();
 			record.setCookieid(cookieid);
@@ -224,9 +225,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries,
 			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLicheng,
-			Double selectedPrice) {
+			Double selectedPriceLeft, Double selectedPriceRight) {
 		List<CarInfoWithBLOBs> result = carInfoMapper.searchByCondition(selectedBrand, selectedSeries, selectedClassify,
-				selectedPaifang, selectedColor, selectedLicheng, selectedPrice);
+				selectedPaifang, selectedColor, selectedLicheng, selectedPriceLeft, selectedPriceRight);
 		try {
 			if (result.size() != 0) {
 				return result;
