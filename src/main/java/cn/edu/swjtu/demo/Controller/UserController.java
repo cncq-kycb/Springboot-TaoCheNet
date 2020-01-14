@@ -30,10 +30,11 @@ public class UserController {
 	PostService postService;
 
 	// 浏览帖子详情
-	@PostMapping(value = "/getDetails")
+	@GetMapping(value = "/getDetails")
 	@ResponseBody
 	public CarInfoWithBLOBs getDetails(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		System.out.print(pid);
 		if (userInfo != null) {// 浏览帖子埋点
 			userService.viewLog(userInfo.getCookieid(), pid);
 		}
