@@ -6,111 +6,338 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <title>淘车网-优质二手车交易平台</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/reality-icon.css">
-<link rel="stylesheet" type="text/css" href="css/bootsnav.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
-<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="css/owl.transitions.css">
-<link rel="stylesheet" type="text/css" href="css/cubeportfolio.min.css">
-<link rel="stylesheet" type="text/css" href="css/settings.css">
-<link rel="stylesheet" type="text/css" href="css/range-Slider.min.css">
-<link rel="stylesheet" type="text/css" href="css/search.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="icon" href="images/icon.png">
-<style>
-.forminfo {
-	padding-left: 41%;
+<style type="text/css">
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.button_wrap {
-	padding-left: 47%;
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    background: #ededed;
 }
+
+input, button {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.tip {
+    font-size: 20px;
+    margin: 40px auto 50px;
+    text-align: center;
+}
+
+.content {
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 900px;
+    height: 550px;
+    margin: -300px 0 0 -450px;
+    background: #fff;
+}
+
+.form {
+    position: relative;
+    width: 640px;
+    height: 100%;
+    transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+    padding: 50px 30px 0;
+}
+
+.sub-cont {
+    overflow: hidden;
+    position: absolute;
+    left: 640px;
+    top: 0;
+    width: 900px;
+    height: 100%;
+    padding-left: 260px;
+    background: #fff;
+    transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+}
+
+.content.s--signup .sub-cont {
+    -webkit-transform: translate3d(-640px, 0, 0);
+    transform: translate3d(-640px, 0, 0);
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 36px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.img {
+    overflow: hidden;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    padding-top: 360px;
+}
+
+.img:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 900px;
+    height: 100%;
+    background-image: url(images/bg.jpg);
+    background-size: cover;
+    transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+}
+
+.img:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.content.s--signup .img:before {
+    -webkit-transform: translate3d(640px, 0, 0);
+    transform: translate3d(640px, 0, 0);
+}
+
+.img__text {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    color: #fff;
+    transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+}
+
+.img__text h2 {
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.img__text p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.content.s--signup .img__text.m--up {
+    -webkit-transform: translateX(520px);
+    transform: translateX(520px);
+}
+.img__text.m--in {
+    -webkit-transform: translateX(-520px);
+    transform: translateX(-520px);
+}
+
+.content.s--signup .img__text.m--in {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.img__btn {
+    overflow: hidden;
+    z-index: 2;
+    position: relative;
+    width: 100px;
+    height: 36px;
+    margin: 0 auto;
+    background: transparent;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+    cursor: pointer;
+}
+.img__btn:after {
+    content: '';
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    border-radius: 30px;
+}
+
+.img__btn span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: -webkit-transform 0.6s;
+    transition: transform 0.6s;
+    transition: transform 0.6s, -webkit-transform 0.6s;
+}
+
+.img__btn span.m--in {
+    -webkit-transform: translateY(-72px);
+    transform: translateY(-72px);
+}
+
+.content.s--signup .img__btn span.m--in {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.content.s--signup .img__btn span.m--up {
+    -webkit-transform: translateY(72px);
+    transform: translateY(72px);
+}
+
+h2 {
+    width: 100%;
+    font-size: 26px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    width: 260px;
+    margin: 25px auto 0;
+    text-align: center;
+}
+
+label span {
+    font-size: 12px;
+    color: #909399;
+    text-transform: uppercase;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.forgot-pass {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+.forgot-pass a {
+    color: #cfcfcf;
+}
+
+.submit {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    background: #d4af7a;
+    text-transform: uppercase;
+}
+
+.fb-btn {
+    border: 2px solid #d3dae9;
+    color: #8fa1c7;
+}
+.fb-btn span {
+    font-weight: bold;
+    color: #455a81;
+}
+
+.sign-in {
+    transition-timing-function: ease-out;
+}
+.content.s--signup .sign-in {
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.6s;
+    -webkit-transform: translate3d(640px, 0, 0);
+    transform: translate3d(640px, 0, 0);
+}
+
+.sign-up {
+    -webkit-transform: translate3d(-900px, 0, 0);
+    transform: translate3d(-900px, 0, 0);
+}
+.content.s--signup .sign-up {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
 </style>
 </head>
 <body>
 
-
-
-	<!--Loader-->
-	<!-- <div class="loader">
-		<div class="span">
-			<div class="location_indicator"></div>
-		</div>
-	</div> -->
-	<!--Loader-->
-
-
-	<!--Slider-->
-	<div class="rev_slider_wrapper">
-		<div id="rev_overlaped" class="rev_slider" data-version="5.0">
-			<ul>
-				<!-- SLIDE -->
-				<li data-transition="fade"><img src="images/home_banner/1.jpg"
-					alt="" data-bgposition="center center" data-bgfit="cover"
-					class="rev-slidebg"></li>
-				<li data-transition="fade"><img src="images/home_banner/2.jpg"
-					alt="" data-bgposition="center center" data-bgfit="cover"
-					class="rev-slidebg"></li>
-				<li data-transition="fade"><img src="images/home_banner/3.jpg"
-					alt="" data-bgposition="center center" data-bgfit="cover"
-					class="rev-slidebg"></li>
-				<div class="tp-static-layers">
-					<div class="tp-caption tp-static-layer" id="slide-37-layer-2"
-						data-x="['left','left','left','left']"
-						data-hoffset="['50','50','50','50']"
-						data-y="['bottom','bottom','bottom','bottom']"
-						data-voffset="['610','180','150','100']" data-whitespace="nowrap"
-						data-visibility="['on','on','on','on']"
-						data-fontsize="['48','48','28','28']" data-start="500"
-						data-responsive_offset="on" data-basealign="slide"
-						data-startslide="0" data-endslide="5" style="z-index: 5;">
-						<h1>
-							<span class="t_white">买二手车 上淘车网</span>
-						</h1>
-					</div>
-					<div class="tp-caption tp-static-layer" id="slide-37-layer-2"
-						data-x="['left','left','left','left']"
-						data-hoffset="['50','50','50','50']"
-						data-y="['bottom','bottom','bottom','bottom']"
-						data-voffset="['580','100','120','120']" data-whitespace="nowrap"
-						data-visibility="['on','on','on','on']" data-start="500"
-						data-basealign="slide" data-startslide="0" data-endslide="5"
-						style="z-index: 5;">
-						<p class="t_white">上 万 款 优 质 二 手 车 恭 候 您 的 挑 选</p>
-					</div>
-				</div>
-			</ul>
-		</div>
-	</div>
-	<!--Slider ends-->
-	<div>
-		<form class="callus top30 clearfix centered">
-			<h2 class="text-uppercase t_white bottom20 text-center">即刻开启您与爱车的邂逅之旅</h2>
-			<div class="row forminfo">
-				<div class="col-sm-4">
-					<div class="single-query bottom15">
-						<input type="text" placeholder="请输入您的用户名" id="username">
-					</div>
-				</div>
-			</div>
-			<div class="row forminfo">
-				<div class="col-sm-4">
-					<div class="single-query bottom15">
-						<input type="password" placeholder="请输入您的密码" id="password">
-					</div>
-				</div>
-			</div>
-
-			<div class="button_wrap">
-				<button type="button"
-					class="border_radius btn-yellow text-uppercase" id="sender">登
-					录</button>
-			</div>
-		</form>
-
-	</div>
+ <div class="content">
+        <div class="form sign-in">
+            <h2>欢迎回来</h2>
+            <label>
+                <span>用户名</span>
+                <input type="username" id="username" />
+            </label>
+            <label>
+                <span>密码</span>
+                <input type="password" id="password"/>
+            </label>
+            <button type="button" class="submit" id="sender">登 录</button>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                    <h2>还未注册？</h2>
+                    <p>立即注册，发现大量机会！</p>
+                </div>
+                <div class="img__text m--in">
+                    <h2>已有帐号？</h2>
+                    <p>有帐号就登录吧，好久不见了！</p>
+                </div>
+                <div class="img__btn">
+                    <span class="m--up">注 册</span>
+                    <span class="m--in">登 录</span>
+                </div>
+            </div>
+            <div class="form sign-up">
+                <h2>立即注册</h2>
+                <label>
+                    <span>用户名</span>
+                    <input type="username" id="usernames"/><span>密码</span>
+                    <input type="password" id="passwords" /><span>重复密码</span>
+                    <input type="text" id ="passwordsi"/><span>昵称</span>
+                    <input type="text" id="name" /><span>电话</span>
+                    <input type="text" id="tel" /><span>所在地</span>
+                    <input type="text" id="location" /> <span>年龄</span>
+                    <input type="text" id="age"/>
+                </label>
+       
+                <button type="button" class="submit"  onclick="return sign()">注 册</button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -138,6 +365,45 @@
 	<script src="js/revolution.extension.video.min.js"></script>
 	<script src="js/custom.js"></script>
 	<script src="js/functions.js"></script>
+	<script>
+function sign(){
+var username =   document.getElementById('usernames').value;
+	var password =   document.getElementById('passwords').value;
+var checkedPsw =  document.getElementById('passwordsi').value;
+	var name = document.getElementById('name').value;
+var tel =  document.getElementById('tel').value;
+var age =  document.getElementById('age').value;
+var location = document.getElementById('location').value;
+
+if(username==null||username==''||name==null||name==''||password==null||password==''||checkedPsw==null||checkedPsw==''||tel==null||tel==''||age==null||age==''||location==null||location==""){
+	alert("信息不能为空！"); 
+	return false;
+}
+if(!(/^1[3456789]\d{9}$/.test(tel))){ 
+    alert("手机号码格式有误，请重新填写！"); 
+	return false;
+}
+if(password!=checkedPsw){ 
+    alert("两次输入的密码不一致！"); 
+	return false;
+}
+var url = "/signup?username=" + username +"&password="+ password+"&name="+ name +"&tel="+ tel+"&location="+ location+"&age="+ age;
+$.get(
+		url,
+		function(data) {
+			if(data==1){
+				alert('注册成功，请登录！');
+				window.location.reload();
+			}
+			if(data==2){
+				alert('该账号已存在！');	
+			}
+							if(data==3){
+				alert('注册失败，请重试！');	
+			}
+		});
+};
+	</script>
 	<script>
 		document.getElementById("sender").onclick = function() {
 			var username = document.getElementById('username').value;
@@ -171,6 +437,10 @@
 			});
 		};
 	</script>
+	<script>
+	document.querySelector('.img__btn').addEventListener('click', function() {
+	    document.querySelector('.content').classList.toggle('s--signup')
+	})</script>
 
 </body>
 </html>
