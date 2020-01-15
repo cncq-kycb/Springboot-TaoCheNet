@@ -69,6 +69,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			record.setTel(tel);
 			record.setLocation(location);
 			record.setAge(age);
+			record.setUserTypeId((long) 3);
 			String cookieid = Utils.getRandomCookieid();
 			example.or().andCookieidEqualTo(cookieid);
 			result = userInfoMapper.selectByExample(example);
