@@ -67,7 +67,18 @@ function changePsw(){
 				}
 				if(data==1){
 					alert('密码修改成功，请重新登录！');
-					window.location.href = 'index.html';
+					var url = '/logout';
+					$.get(
+							url,
+							function(data) {
+							if(data==1){
+								window.location.href = 'login.html';							}
+							if(data==0){
+								alert('退出有误！');
+							}
+							}
+							);
+					
 				}
 			});
 };
