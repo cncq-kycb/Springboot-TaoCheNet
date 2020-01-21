@@ -101,6 +101,7 @@ public class AdminServiceImpl implements AdminService {
 				UserInfo userInfo = users.get(0);
 				userInfo.setUserTypeId(userTypeId);
 				userInfoMapper.updateByExample(userInfo, example);
+				return 1;
 			}
 			return 0;
 		} catch (Exception e) {
@@ -119,6 +120,7 @@ public class AdminServiceImpl implements AdminService {
 				UserInfo userInfo = users.get(0);
 				userInfo.setUserPermissionId(userPermissionId);
 				userInfoMapper.updateByExample(userInfo, example);
+				return 1;
 			}
 			return 0;
 		} catch (Exception e) {
