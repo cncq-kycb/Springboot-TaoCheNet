@@ -32,7 +32,6 @@ public class LoginController {
 //		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 //		mav.addObject("loginUrl", "www.baidu.com");
 		if (userService.login(username, password)) {
-			System.out.println("password match");
 			UserInfo userInfo = userService.getUserInfo(username);
 			if (userInfo.getUserPermissionId().intValue() == 2) {
 				return -1;
