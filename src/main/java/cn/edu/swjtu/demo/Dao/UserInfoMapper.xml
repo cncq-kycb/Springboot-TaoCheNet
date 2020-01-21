@@ -8,9 +8,10 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="user_type_id" jdbcType="BIGINT" property="userTypeId" />
+    <result column="user_permission_id" jdbcType="BIGINT" property="userPermissionId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, cookieid, username, password, name, age, tel, location, user_type_id
+    user_id, cookieid, username, password, name, age, tel, location, user_type_id, user_permission_id
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.UserInfoExample" resultMap="BaseResultMap">
     select
@@ -96,12 +97,12 @@
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.UserInfo">
     insert into user_info (user_id, cookieid, username, 
       password, name, age, 
-      tel, location, user_type_id
-      )
+      tel, location, user_type_id, 
+      user_permission_id)
     values (#{userId,jdbcType=BIGINT}, #{cookieid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{tel,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{userTypeId,jdbcType=BIGINT}
-      )
+      #{tel,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{userTypeId,jdbcType=BIGINT}, 
+      #{userPermissionId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.UserInfo">
     insert into user_info
@@ -133,6 +134,9 @@
       <if test="userTypeId != null">
         user_type_id,
       </if>
+      <if test="userPermissionId != null">
+        user_permission_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -154,13 +158,16 @@
         #{age,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
-        #{tel,jdbcType=INTEGER},
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
       </if>
       <if test="userTypeId != null">
         #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="userPermissionId != null">
+        #{userPermissionId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -192,13 +199,16 @@
         age = #{record.age,jdbcType=INTEGER},
       </if>
       <if test="record.tel != null">
-        tel = #{record.tel,jdbcType=INTEGER},
+        tel = #{record.tel,jdbcType=VARCHAR},
       </if>
       <if test="record.location != null">
         location = #{record.location,jdbcType=VARCHAR},
       </if>
       <if test="record.userTypeId != null">
         user_type_id = #{record.userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userPermissionId != null">
+        user_permission_id = #{record.userPermissionId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -213,9 +223,10 @@
       password = #{record.password,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
-      tel = #{record.tel,jdbcType=INTEGER},
+      tel = #{record.tel,jdbcType=VARCHAR},
       location = #{record.location,jdbcType=VARCHAR},
-      user_type_id = #{record.userTypeId,jdbcType=BIGINT}
+      user_type_id = #{record.userTypeId,jdbcType=BIGINT},
+      user_permission_id = #{record.userPermissionId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

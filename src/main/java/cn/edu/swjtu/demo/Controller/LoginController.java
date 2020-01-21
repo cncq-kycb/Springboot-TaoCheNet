@@ -24,7 +24,7 @@ public class LoginController {
 	// 用户登录
 	@PostMapping(value = "/login")
 	@ResponseBody
-	public UserInfo login(@RequestBody Map<String, Object> login, HttpSession session) {
+	public int login(@RequestBody Map<String, Object> login, HttpSession session) {
 		String username = (String) login.get("username");
 		String password = (String) login.get("password");
 //		return new Login(counter.incrementAndGet(), String.format(template, id));
@@ -34,10 +34,13 @@ public class LoginController {
 		if (userService.login(username, password)) {
 			System.out.println("password match");
 			UserInfo userInfo = userService.getUserInfo(username);
+			if (userInfo.getUserPermissionId().intValue() == 2) {
+				return -1;
+			}
 			session.setAttribute("user", userInfo);
-			return userInfo;
+			return userInfo.getUserTypeId().intValue();
 		}
-		return new UserInfo();
+		return 0;
 	}
 
 	// 展示全部帖子
