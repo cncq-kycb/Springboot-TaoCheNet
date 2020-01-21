@@ -421,12 +421,14 @@ $.get(
 				dataType : "json",
 				contentType : "application/json;charset=UTF-8",
 				success : function(result) {
-					if (result.userTypeId == '3') {
+					if (result == '3') {
 							window.location.href = 'index.html';
-					} else if (result.userTypeId == '2') {
-						window.location.href = 'user_business_main.html';
-					} else if (result.userTypeId == '1') {
-						window.location.href = 'user_admin_main.html';
+					} else if (result == '2') {
+						window.location.href = 'business_main.html';
+					} else if (result == '1') {
+						window.location.href = 'admin_main.html';
+					} else if (result == '-1') {
+						alert("账号存在违规行为，已被封禁处理");
 					} else {
 						alert("账号不存在/密码错误");
 					}

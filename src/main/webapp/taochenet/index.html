@@ -177,7 +177,7 @@
 					function(data) {
 						var item = data;
 						var old = '';
-						if(item.name==null){
+						if(item.name==null||item.userTypeId != '3'){
 							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li class="dropdown megamenu-fw active"><a href="index.html">首页</a></li><li><a href="login.html">登录/注册</a></li></ul>';
 						}
 						else{

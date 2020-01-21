@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
+<title>淘车网-优质二手车交易平台</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/reality-icon.css">
+<link rel="stylesheet" type="text/css" href="css/bootsnav.css">
+<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="css/owl.transitions.css">
+<link rel="stylesheet" type="text/css" href="css/settings.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/range-Slider.min.css">
+<link rel="stylesheet" type="text/css" href="css/search.css">
+<link rel="stylesheet" href=" fenye/css/vendor/normalize.css" />
+<link rel="stylesheet" href=" fenye/css/styles.min.css" />
+<link href=" fenye/img/common/favicon.png" rel="shortcut icon" />
+<link href="fenye/css/jplist.min.css" rel="stylesheet" type="text/css" />
+<link rel="icon" href="images/icon.png">
+<script src="js/jquery-2.1.4.js"></script>
+		<script src=" fenye/js/vendor/modernizr.min.js"></script>
+		<script src="fenye/js/jplist.min.js"></script>
+<script type="text/javascript">
+	var action = "/getUserInfo";
+	$.get(
+					action,
+					function(data) {
+						var user_info = data;
+						var old = '';
+						if (user_info.name == null
+								|| user_info.userTypeId != '1') {
+							window.location.href = 'login.html';
+						} else {
+							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="admin_main.html">管理员首页</a></li>'
+							+'<li class="dropdown megamenu-fw active"><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+							$("#navbar-menu").html(old);
+						}
+					});
+	action = "/getAllUsers";
+	$.get(
+			action,
+			function(data){
+				var list = data;
+				var old ='<table class="demo-tbl"><thead><tr><th>cookieID</th><th>用户名</th><th>昵称</th><th>年龄</th><th>手机号码</th><th>所在地</th><th>所属类别</th><th>操作</th></tr></thead><tbody>';
+				for(i in list){
+					var item = list[i];
+					var type;
+					if(item.userTypeId=='1'){type='管理员用户组';}
+					if(item.userTypeId=='2'){type='商家用户组';}
+					if(item.userTypeId=='3'){type='买家用户组';}
+					old += '<tr class="tbl-item"><td class="td-block"><p class="title">'
+					+ item.cookieid
+					+'</p></td><td class="td-block"><p class="desc">'
+					+ item.username
+					+'</p></td><td class="td-block"><p>'
+					+ item.name
+					+'</p></td><td class="td-block"><p class="like">'
+					+ item.age
+					+'</p></td><td class="td-block"><p>'
+					+ item.tel
+					+'</p></td><td class="td-block"><p>'
+					+ item.location
+					+'</p></td><td class="td-block"><p>'
+					+ type
+					+'</p></td><td class="td-block"><button class="btn btn-warning" data-toggle="modal" onclick="updateModal(this)" >更改用户类别</button></td></tr>';
+				}
+				old += '</tbody></table>';
+				$("#table").html(old);
+				$("#table").html(old);
+				$('#demo').jplist({
+					
+					itemsBox: '.demo-tbl tbody' 
+					,itemPath: '.tbl-item' 
+					,panelPath: '.jplist-panel'
+					
+					//save plugin state
+					,storage: 'localstorage' //'', 'cookies', 'localstorage'			
+					,storageName: 'jplist-table-2'
+					
+					,redrawCallback: function(){
+						$('.tbl-item').each(function(index, el){							
+							if(index%2 === 0){
+								$(el).addClass('even');
+							}
+							else{
+								$(el).addClass('odd');
+							}
+						});
+					}
+				});
+			});
+</script>
+		<script>
+			$('document').ready(function(){
+				$('#demo').jplist({
+				
+					itemsBox: '.demo-tbl tbody' 
+					,itemPath: '.tbl-item' 
+					,panelPath: '.jplist-panel'
+					
+					//save plugin state
+					,storage: 'localstorage' //'', 'cookies', 'localstorage'			
+					,storageName: 'jplist-table-2'
+					
+					,redrawCallback: function(){
+						$('.tbl-item').each(function(index, el){							
+							if(index%2 === 0){
+								$(el).addClass('even');
+							}
+							else{
+								$(el).addClass('odd');
+							}
+						});
+					}
+				});
+			});
+		</script>
+
+</head>
+<body>
+
+	<!--Header-->
+	<header class="layout_default">
+
+		<nav class="navbar navbar-default navbar-sticky bootsnav">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<!-- Start Header Navigation -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-menu">
+								<i class="fa fa-bars"></i>
+							</button>
+						</div>
+						<!-- End Header Navigation -->
+						<div class="collapse navbar-collapse" id="navbar-menu"></div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!--Header Ends-->
+
+	<!-- Page Banner Start-->
+	<section class="page-banner padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 class="text-uppercase">买二手车 上淘车网</h1>
+					<p>上 万 款 优 质 二 手 车 恭 候 您 的 挑 选</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page Banner End -->
+
+
+	<!-- News Start -->
+	<section id="news-section-1" class="property-details padding_top">
+			<div class="container" id="show-panel">
+
+							<!-- demo -->
+					<div id="demo" class="box jplist table-layout-2">
+					
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-top">					
+							
+					
+							
+							<!-- filter by title -->
+							<div class="text-filter-box">
+							
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Title:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".title" 
+									type="text" 
+									value="" 
+									placeholder="按cookieID查找" 
+									data-control-type="textbox" 
+									data-control-name="title-filter" 
+									data-control-action="filter"
+								/>
+							</div>
+							
+							<!-- filter by description -->
+							<div class="text-filter-box">
+								
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Description:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".desc" 
+									type="text" 
+									value="" 
+									placeholder="按用户名查找" 
+									data-control-type="textbox" 
+									data-control-name="desc-filter" 
+									data-control-action="filter"
+								/>	
+							</div>	
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="当前第{current}页，共{pages}页" 
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+								
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>	
+						</div>
+						
+						<!-- data --> 
+						<div class="box text-shadow" id="table">
+							
+						</div>
+						<!-- end of data -->
+						
+						<div class="box jplist-no-results text-shadow align-center">
+							<p>No results found</p>
+						</div>
+						
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-bottom">						
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="{start} - {end} 条，共{all}条记录"
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+								
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging"
+								data-control-animate-to-top="true">
+							</div>
+					
+						</div>
+					</div>
+					<!-- end of demo -->
+				</div>
+				<h2>&ensp;</h2>
+	</section>
+	<!-- News End -->
+
+	<!--Footer-->
+	<footer class="footer_third">
+		<div class="container padding_top">
+			<!--CopyRight-->
+			<div class="copyright_simple">
+				<div class="row">
+					<div class="col-md-6 col-sm-5 top20 bottom20">
+						<p>
+							Copyright &copy; 2020 <span>TaoCheNet</span>. All rights
+							reserved.
+						</p>
+					</div>
+					<div class="col-md-6 col-sm-7 text-right top15 bottom10">
+						<ul class="social_share">
+							<li><a href="#." class="facebook"><i
+									class="icon-facebook-1"></i></a></li>
+							<li><a href="#." class="twitter"><i
+									class="icon-twitter-1"></i></a></li>
+							<li><a href="#." class="google"><i class="icon-google4"></i></a></li>
+							<li><a href="#." class="linkden"><i
+									class="fa fa-linkedin"></i></a></li>
+							<li><a href="#." class="vimo"><i class="icon-vimeo3"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="modal fade" id="updateModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改用户类别</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form name="updateForm" id="updateForm" 
+					onsubmit="return validateForm()"  class="form-validate">
+						<div class="modal-body">
+						<input id="id_check" style="border: none;" type="text" readonly>
+					
+						<br><input id="username_check" style="border: none;" type="text" readonly>
+										
+						<br>&ensp;所属类别： 
+						<select id="typeId">
+							<option value="3">买家用户组</option>
+							<option value="2">商家用户组</option>
+							<option value="1">管理员用户组</option>
+						</select>
+					</div>
+					
+										<div class="modal-footer">
+						<button type="submit" class="btn btn-warning" >修  改</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootsnav.js"></script>
+	<script src="js/jquery.parallax-1.1.3.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/jquery-countTo.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/range-Slider.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.cubeportfolio.min.js"></script>
+	<script src="js/selectbox-0.2.min.js"></script>
+	<script src="js/zelect.js"></script>
+	<script src="js/jquery.fancybox.js"></script>
+	<script src="js/jquery.themepunch.tools.min.js"></script>
+	<script src="js/jquery.themepunch.revolution.min.js"></script>
+	<script src="js/revolution.extension.layeranimation.min.js"></script>
+	<script src="js/revolution.extension.navigation.min.js"></script>
+	<script src="js/revolution.extension.parallax.min.js"></script>
+	<script src="js/revolution.extension.slideanims.min.js"></script>
+	<script src="js/revolution.extension.video.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/modernizr.custom.53451.js"></script>
+	<script>
+		function updateModal(obj) {
+			$("#updateModal").modal('show');
+			var $td = $(obj).parents('tr').children('td');
+			var id_check = $td.eq(0).text();
+			var username_check = $td.eq(1).text();
+		
+			$("#id_check").val(id_check);
+			$("#username_check").val(username_check);
+		};
+		function logout(){
+			var url = '/logout';
+			$.get(
+					url,
+					function(data) {
+					if(data==1){
+						window.location.reload();
+					}
+					if(data==0){
+						alert('退出有误！');
+					}
+					}
+					);
+		};
+		function validateForm() {
+			var cookieid = document.forms["updateForm"]["id_check"].value;
+			var userTypeId = document.forms["updateForm"]["typeId"].value;
+			cookieid = cookieid.replace(/\+/g, '%2B');
+			var action="/updateUserType?cookieid="+cookieid+"&userTypeId="+userTypeId;
+			$.get(
+					action,
+					function(data){
+						if(data=='1'){
+							alert('修改成功！');
+							window.location.reload();
+						}
+						if(data=='0'){
+							alert('修改失败！');	
+						}
+					});
+
+		}
+	</script>
+</body>
+</html>
+
