@@ -1,0 +1,19 @@
+package cn.edu.swjtu.demo.Service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import cn.edu.swjtu.demo.Pojo.CarInfo;
+import cn.edu.swjtu.demo.Pojo.UserInfo;
+
+@Service
+public interface BusinessService {
+
+	// 获取推荐用户目标
+	List<UserInfo> getAllRecommendUsers(String cookieid);
+
+	// 获取上架车辆
+	List<CarInfo> getAllSellingCars(String cookieid);
+
+}
