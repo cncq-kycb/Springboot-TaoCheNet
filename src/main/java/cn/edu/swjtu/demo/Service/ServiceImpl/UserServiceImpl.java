@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,
 			String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft, Integer selectedLichengRight,
-			Double selectedPriceLeft, Double selectedPriceRight) {
+			Integer selectedPriceLeft, Integer selectedPriceRight) {
 		try {
 			UserSearchPost record = new UserSearchPost();
 			record.setCookieid(cookieid);
@@ -229,6 +229,12 @@ public class UserServiceImpl implements UserService {
 			if (selectedLichengRight != null) {
 				record.setLichengRight(selectedLichengRight);
 			}
+			if (selectedPriceLeft != null) {
+				record.setPriceLeft(selectedPriceLeft);
+			}
+			if (selectedPriceRight != null) {
+				record.setPriceRight(selectedPriceRight);
+			}
 			record.setTime(new Date());
 			userSearchPostMapper.insert(record);
 		} catch (Exception e) {
@@ -240,7 +246,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<CarInfoWithBLOBs> getPostByCondition(Integer selectedBrand, Integer selectedSeries,
 			Integer selectedClassify, String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft,
-			Integer selectedLichengRight, Double selectedPriceLeft, Double selectedPriceRight) {
+			Integer selectedLichengRight, Integer selectedPriceLeft, Integer selectedPriceRight) {
 		List<CarInfoWithBLOBs> result = carInfoMapper.searchByCondition(selectedBrand, selectedSeries, selectedClassify,
 				selectedPaifang, selectedColor, selectedLichengLeft, selectedLichengRight, selectedPriceLeft,
 				selectedPriceRight);

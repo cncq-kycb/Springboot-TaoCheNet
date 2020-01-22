@@ -33,6 +33,5 @@ public interface CarInfoMapper {
 	List<CarInfoWithBLOBs> searchByCondition(@Param("brand_id") Integer brand_id, @Param("series_id") Integer series_id,
 			@Param("classify_id") Integer classify_id, @Param("paifang") String paifang, @Param("cid") Integer cid,
 			@Param("licheng_left") Integer licheng_left, @Param("licheng_right") Integer licheng_right,
-			@Param("selectedPriceLeft") Double selectedPriceLeft,
-			@Param("selectedPriceRight") Double selectedPriceRight);
+			@Param("price_left") Integer price_left, @Param("price_right") Integer price_right);
 }

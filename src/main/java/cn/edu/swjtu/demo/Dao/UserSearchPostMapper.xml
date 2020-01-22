@@ -10,8 +10,10 @@
     <result column="color_id" jdbcType="INTEGER" property="colorId" />
     <result column="paifang" jdbcType="VARCHAR" property="paifang" />
     <result column="licheng_right" jdbcType="INTEGER" property="lichengRight" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="licheng_left" jdbcType="INTEGER" property="lichengLeft" />
+    <result column="price_right" jdbcType="INTEGER" property="priceRight" />
+    <result column="price_left" jdbcType="INTEGER" property="priceLeft" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    record_id, cookieid, pid, cxid, cid, color_id, paifang, licheng_right, time, licheng_left
+    record_id, cookieid, pid, cxid, cid, color_id, paifang, licheng_right, licheng_left, 
+    price_right, price_left, time
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.UserSearchPostExample" resultMap="BaseResultMap">
     select
@@ -97,12 +100,14 @@
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.UserSearchPost">
     insert into user_search_post (record_id, cookieid, pid, 
       cxid, cid, color_id, 
-      paifang, licheng_right, time, 
-      licheng_left)
+      paifang, licheng_right, licheng_left, 
+      price_right, price_left, time
+      )
     values (#{recordId,jdbcType=BIGINT}, #{cookieid,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
       #{cxid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{colorId,jdbcType=INTEGER}, 
-      #{paifang,jdbcType=VARCHAR}, #{lichengRight,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
-      #{lichengLeft,jdbcType=INTEGER})
+      #{paifang,jdbcType=VARCHAR}, #{lichengRight,jdbcType=INTEGER}, #{lichengLeft,jdbcType=INTEGER}, 
+      #{priceRight,jdbcType=INTEGER}, #{priceLeft,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.UserSearchPost">
     insert into user_search_post
@@ -131,11 +136,17 @@
       <if test="lichengRight != null">
         licheng_right,
       </if>
-      <if test="time != null">
-        time,
-      </if>
       <if test="lichengLeft != null">
         licheng_left,
+      </if>
+      <if test="priceRight != null">
+        price_right,
+      </if>
+      <if test="priceLeft != null">
+        price_left,
+      </if>
+      <if test="time != null">
+        time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,11 +174,17 @@
       <if test="lichengRight != null">
         #{lichengRight,jdbcType=INTEGER},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
       <if test="lichengLeft != null">
         #{lichengLeft,jdbcType=INTEGER},
+      </if>
+      <if test="priceRight != null">
+        #{priceRight,jdbcType=INTEGER},
+      </if>
+      <if test="priceLeft != null">
+        #{priceLeft,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -204,11 +221,17 @@
       <if test="record.lichengRight != null">
         licheng_right = #{record.lichengRight,jdbcType=INTEGER},
       </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.lichengLeft != null">
         licheng_left = #{record.lichengLeft,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceRight != null">
+        price_right = #{record.priceRight,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceLeft != null">
+        price_left = #{record.priceLeft,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -225,8 +248,10 @@
       color_id = #{record.colorId,jdbcType=INTEGER},
       paifang = #{record.paifang,jdbcType=VARCHAR},
       licheng_right = #{record.lichengRight,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      licheng_left = #{record.lichengLeft,jdbcType=INTEGER}
+      licheng_left = #{record.lichengLeft,jdbcType=INTEGER},
+      price_right = #{record.priceRight,jdbcType=INTEGER},
+      price_left = #{record.priceLeft,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

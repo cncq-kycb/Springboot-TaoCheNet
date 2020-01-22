@@ -654,16 +654,16 @@
 				and paifang like #{paifang}
 			</if>
 			<if test="licheng_right != null and licheng_right != ''">
-				and licheng &lt;= #{licheng_right}
+				and licheng &lt; #{licheng_right}
 			</if>
 			<if test="licheng_left != null and licheng_left != ''">
-				and licheng &gt;= #{licheng_left}
+				and licheng &gt; #{licheng_left}
 			</if>
-			<if test="selectedPriceRight != null and selectedPriceRight != ''">
-				and price &lt;= #{selectedPriceRight}
+			<if test="price_right != null and price_right != ''">
+				and (price*10000) &lt; #{price_right}
 			</if>
-			<if test="selectedPriceLeft != null and selectedPriceLeft != ''">
-				and price &gt;= #{selectedPriceLeft}
+			<if test="price_left != null and price_left != ''">
+				and (price*10000) &gt; #{price_left}
 			</if>
 		</where>
 	</select>

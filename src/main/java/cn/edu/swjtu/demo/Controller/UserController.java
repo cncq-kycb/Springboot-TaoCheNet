@@ -71,8 +71,8 @@ public class UserController {
 			@RequestParam(required = false, value = "selectedColor") Integer selectedColor,
 			@RequestParam(required = false, value = "selectedLichengLeft") Integer selectedLichengLeft,
 			@RequestParam(required = false, value = "selectedLichengRight") Integer selectedLichengRight,
-			@RequestParam(required = false, value = "selectedPriceLeft") Double selectedPriceLeft,
-			@RequestParam(required = false, value = "selectedPriceRight") Double selectedPriceRight,
+			@RequestParam(required = false, value = "selectedPriceLeft") Integer selectedPriceLeft,
+			@RequestParam(required = false, value = "selectedPriceRight") Integer selectedPriceRight,
 			HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		if (userInfo != null) {

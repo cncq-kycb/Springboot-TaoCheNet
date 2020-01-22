@@ -19,9 +19,13 @@ public class UserSearchPost {
 
     private Integer lichengRight;
 
-    private Date time;
-
     private Integer lichengLeft;
+
+    private Integer priceRight;
+
+    private Integer priceLeft;
+
+    private Date time;
 
     public Long getRecordId() {
         return recordId;
@@ -87,19 +91,35 @@ public class UserSearchPost {
         this.lichengRight = lichengRight;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public Integer getLichengLeft() {
         return lichengLeft;
     }
 
     public void setLichengLeft(Integer lichengLeft) {
         this.lichengLeft = lichengLeft;
+    }
+
+    public Integer getPriceRight() {
+        return priceRight;
+    }
+
+    public void setPriceRight(Integer priceRight) {
+        this.priceRight = priceRight;
+    }
+
+    public Integer getPriceLeft() {
+        return priceLeft;
+    }
+
+    public void setPriceLeft(Integer priceLeft) {
+        this.priceLeft = priceLeft;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }
