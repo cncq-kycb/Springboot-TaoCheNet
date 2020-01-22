@@ -164,73 +164,73 @@ public class CarBusinessExample {
             return (Criteria) this;
         }
 
-        public Criteria andUnameIsNull() {
-            addCriterion("uname is null");
+        public Criteria andCookieidIsNull() {
+            addCriterion("cookieid is null");
             return (Criteria) this;
         }
 
-        public Criteria andUnameIsNotNull() {
-            addCriterion("uname is not null");
+        public Criteria andCookieidIsNotNull() {
+            addCriterion("cookieid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUnameEqualTo(String value) {
-            addCriterion("uname =", value, "uname");
+        public Criteria andCookieidEqualTo(String value) {
+            addCriterion("cookieid =", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameNotEqualTo(String value) {
-            addCriterion("uname <>", value, "uname");
+        public Criteria andCookieidNotEqualTo(String value) {
+            addCriterion("cookieid <>", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameGreaterThan(String value) {
-            addCriterion("uname >", value, "uname");
+        public Criteria andCookieidGreaterThan(String value) {
+            addCriterion("cookieid >", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameGreaterThanOrEqualTo(String value) {
-            addCriterion("uname >=", value, "uname");
+        public Criteria andCookieidGreaterThanOrEqualTo(String value) {
+            addCriterion("cookieid >=", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameLessThan(String value) {
-            addCriterion("uname <", value, "uname");
+        public Criteria andCookieidLessThan(String value) {
+            addCriterion("cookieid <", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameLessThanOrEqualTo(String value) {
-            addCriterion("uname <=", value, "uname");
+        public Criteria andCookieidLessThanOrEqualTo(String value) {
+            addCriterion("cookieid <=", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameLike(String value) {
-            addCriterion("uname like", value, "uname");
+        public Criteria andCookieidLike(String value) {
+            addCriterion("cookieid like", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameNotLike(String value) {
-            addCriterion("uname not like", value, "uname");
+        public Criteria andCookieidNotLike(String value) {
+            addCriterion("cookieid not like", value, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameIn(List<String> values) {
-            addCriterion("uname in", values, "uname");
+        public Criteria andCookieidIn(List<String> values) {
+            addCriterion("cookieid in", values, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameNotIn(List<String> values) {
-            addCriterion("uname not in", values, "uname");
+        public Criteria andCookieidNotIn(List<String> values) {
+            addCriterion("cookieid not in", values, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameBetween(String value1, String value2) {
-            addCriterion("uname between", value1, value2, "uname");
+        public Criteria andCookieidBetween(String value1, String value2) {
+            addCriterion("cookieid between", value1, value2, "cookieid");
             return (Criteria) this;
         }
 
-        public Criteria andUnameNotBetween(String value1, String value2) {
-            addCriterion("uname not between", value1, value2, "uname");
+        public Criteria andCookieidNotBetween(String value1, String value2) {
+            addCriterion("cookieid not between", value1, value2, "cookieid");
             return (Criteria) this;
         }
 

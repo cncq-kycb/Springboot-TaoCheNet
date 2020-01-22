@@ -3,7 +3,7 @@ package cn.edu.swjtu.demo.Pojo;
 public class CarBusiness {
     private Integer sid;
 
-    private String uname;
+    private String cookieid;
 
     private String sname;
 
@@ -29,12 +29,12 @@ public class CarBusiness {
         this.sid = sid;
     }
 
-    public String getUname() {
-        return uname;
+    public String getCookieid() {
+        return cookieid;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname == null ? null : uname.trim();
+    public void setCookieid(String cookieid) {
+        this.cookieid = cookieid == null ? null : cookieid.trim();
     }
 
     public String getSname() {

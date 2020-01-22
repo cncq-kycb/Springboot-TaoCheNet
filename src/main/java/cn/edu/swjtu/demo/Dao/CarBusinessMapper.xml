@@ -3,7 +3,7 @@
 <mapper namespace="cn.edu.swjtu.demo.Dao.CarBusinessMapper">
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.CarBusiness">
     <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
     <result column="sname" jdbcType="VARCHAR" property="sname" />
     <result column="haoping" jdbcType="DOUBLE" property="haoping" />
     <result column="dizhi" jdbcType="VARCHAR" property="dizhi" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sid, uname, sname, haoping, dizhi, tel, huiyuan, zaishou, yishou
+    sid, cookieid, sname, haoping, dizhi, tel, huiyuan, zaishou, yishou
   </sql>
   <sql id="Blob_Column_List">
     describe
@@ -116,11 +116,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.CarBusiness">
-    insert into car_business (sid, uname, sname, 
+    insert into car_business (sid, cookieid, sname, 
       haoping, dizhi, tel, 
       huiyuan, zaishou, yishou, 
       describe)
-    values (#{sid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+    values (#{sid,jdbcType=INTEGER}, #{cookieid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
       #{haoping,jdbcType=DOUBLE}, #{dizhi,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
       #{huiyuan,jdbcType=VARCHAR}, #{zaishou,jdbcType=INTEGER}, #{yishou,jdbcType=INTEGER}, 
       #{describe,jdbcType=LONGVARCHAR})
@@ -131,8 +131,8 @@
       <if test="sid != null">
         sid,
       </if>
-      <if test="uname != null">
-        uname,
+      <if test="cookieid != null">
+        cookieid,
       </if>
       <if test="sname != null">
         sname,
@@ -163,8 +163,8 @@
       <if test="sid != null">
         #{sid,jdbcType=INTEGER},
       </if>
-      <if test="uname != null">
-        #{uname,jdbcType=VARCHAR},
+      <if test="cookieid != null">
+        #{cookieid,jdbcType=VARCHAR},
       </if>
       <if test="sname != null">
         #{sname,jdbcType=VARCHAR},
@@ -204,8 +204,8 @@
       <if test="record.sid != null">
         sid = #{record.sid,jdbcType=INTEGER},
       </if>
-      <if test="record.uname != null">
-        uname = #{record.uname,jdbcType=VARCHAR},
+      <if test="record.cookieid != null">
+        cookieid = #{record.cookieid,jdbcType=VARCHAR},
       </if>
       <if test="record.sname != null">
         sname = #{record.sname,jdbcType=VARCHAR},
@@ -239,7 +239,7 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update car_business
     set sid = #{record.sid,jdbcType=INTEGER},
-      uname = #{record.uname,jdbcType=VARCHAR},
+      cookieid = #{record.cookieid,jdbcType=VARCHAR},
       sname = #{record.sname,jdbcType=VARCHAR},
       haoping = #{record.haoping,jdbcType=DOUBLE},
       dizhi = #{record.dizhi,jdbcType=VARCHAR},
@@ -255,7 +255,7 @@
   <update id="updateByExample" parameterType="map">
     update car_business
     set sid = #{record.sid,jdbcType=INTEGER},
-      uname = #{record.uname,jdbcType=VARCHAR},
+      cookieid = #{record.cookieid,jdbcType=VARCHAR},
       sname = #{record.sname,jdbcType=VARCHAR},
       haoping = #{record.haoping,jdbcType=DOUBLE},
       dizhi = #{record.dizhi,jdbcType=VARCHAR},

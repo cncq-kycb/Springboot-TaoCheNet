@@ -16,4 +16,7 @@ public interface BusinessService {
 	// 获取上架车辆
 	List<CarInfo> getAllSellingCars(String cookieid);
 
+	// 绑定用户与商家
+	int bindBusinessUser(String cookieid, String sname, String dizhi, String tel, String describe);
+
 }

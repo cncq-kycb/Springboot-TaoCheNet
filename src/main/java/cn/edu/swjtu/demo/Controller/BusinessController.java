@@ -38,7 +38,11 @@ public class BusinessController {
 	// 绑定商家信息
 	@GetMapping(value = "/bindBusinessUser")
 	@ResponseBody
-	public int bindBusinessUser() {
-		return 0;
+	public int bindBusinessUser(@RequestParam(required = true, value = "sname") String sname,
+			@RequestParam(required = true, value = "dizhi") String dizhi,
+			@RequestParam(required = true, value = "tel") String tel,
+			@RequestParam(required = true, value = "describe") String describe, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		return businessService.bindBusinessUser(userInfo.getCookieid(), sname, dizhi, tel, describe);
 	}
 }
