@@ -114,4 +114,20 @@ public class BusinessServiceImpl implements BusinessService {
 		}
 	}
 
+	@Override
+	public CarBusiness getCarBusiness(String cookieid) {
+		try {
+			CarBusinessExample example = new CarBusinessExample();
+			example.or().andCookieidEqualTo(cookieid);
+			List<CarBusiness> carBusinesses = carBusinessMapper.selectByExample(example);
+			if (carBusinesses.size() != 0) {
+				return carBusinesses.get(0);
+			}
+			return new CarBusiness();
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
 }

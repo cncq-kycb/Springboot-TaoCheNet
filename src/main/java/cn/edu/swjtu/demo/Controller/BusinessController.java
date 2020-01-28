@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.BusinessService;
@@ -19,6 +20,14 @@ public class BusinessController {
 
 	@Autowired
 	BusinessService businessService;
+
+	// 获取商家信息
+	@GetMapping(value = "/getSalerInfo")
+	@ResponseBody
+	public CarBusiness getCarBusiness(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		return businessService.getCarBusiness(userInfo.getCookieid());
+	}
 
 	// 获得推荐目标用户
 	@GetMapping(value = "/getAllRecommendUsers")

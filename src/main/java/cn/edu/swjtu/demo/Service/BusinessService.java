@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 
@@ -19,4 +20,6 @@ public interface BusinessService {
 	// 绑定用户与商家
 	int bindBusinessUser(String cookieid, String sname, String dizhi, String tel, String describe);
 
+	// 获取商家信息
+	CarBusiness getCarBusiness(String cookieid);
 }
