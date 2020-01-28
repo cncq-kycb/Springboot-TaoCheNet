@@ -22,9 +22,9 @@ public class BusinessController {
 	BusinessService businessService;
 
 	// 获取商家信息
-	@GetMapping(value = "/getSalerInfo")
+	@GetMapping(value = "/getBusinessInfo")
 	@ResponseBody
-	public CarBusiness getCarBusiness(HttpSession session) {
+	public CarBusiness getBusinessInfo(HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		return businessService.getCarBusiness(userInfo.getCookieid());
 	}

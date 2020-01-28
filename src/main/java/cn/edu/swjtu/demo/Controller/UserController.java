@@ -44,7 +44,7 @@ public class UserController {
 	// 帖子商家详情
 	@GetMapping(value = "/getSalerInfo")
 	@ResponseBody
-	public CarBusiness getCarBusiness(@RequestParam(required = true, value = "pid") Long pid) {
+	public CarBusiness getSalerInfo(@RequestParam(required = true, value = "pid") Long pid) {
 		return postService.getSalerInfo(pid);
 	}
 
