@@ -123,7 +123,9 @@ public class BusinessServiceImpl implements BusinessService {
 			if (carBusinesses.size() != 0) {
 				return carBusinesses.get(0);
 			}
-			return new CarBusiness();
+			CarBusiness carBusiness = new CarBusiness();
+			carBusiness.setSid(-1);
+			return carBusiness;
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
