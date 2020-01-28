@@ -26,23 +26,40 @@ $.get(
 	function(data) {
 		var user_info = data;
 		var old = '';
-		if(user_info.name==null||user_info.userTypeId != '3'){
+		if(user_info.name==null||user_info.userTypeId != '2'){
 			window.location.href='login.html';
 		}
 		else{
-			old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
-		$("#navbar-menu").html(old);
+			old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li class="dropdown megamenu-fw active"><a href="admin_main.html">商家首页</a></li>'
+				+'<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+		$("#navbar-menu").html(old);}
+	});
+var url = "/getBusinessInfo";
+$.get(
+		url,
+		function(data) {
+		var car_business = data;
+		if(car_business.describe==null){
+			car_business.describe = '';
+		}
 		var old2 = "";
-		old2 += '<h3 id="name">&ensp;'
-		+ user_info.name
+		if(car_business.sid==-1){
+			var old3 = ""; 
+			old3 += '<div class="col-sm-12 bottom40"><form class="callus"><div class="row"><div class="col-sm-6"><div class="form-group"><input type="text" id="newSname" class="form-control" placeholder="商家名称"></div><div class="form-group"><input id="newDianhua" type="text" class="form-control" placeholder="联系方式"></div><div class="form-group"><input id="newDizhi" type="email" class="form-control" placeholder="商家地址"></div></div><div class="col-sm-6"><div class="form-group"><textarea id="newDescribe" class="form-control" placeholder="店铺描述"></textarea></div></div><div class="col-sm-12 row"><div class="row"><div class="col-sm-3"><button class="btn btn-info" data-toggle="modal" onclick="return bindInfo()" >绑定商家信息</button></div></div></div></div></form></div>'
+				$("#bindInfo").html(old3);		
+		}
+		else{
+		old2 += '<h3 id="name">'
+		+ car_business.sname
 		+'</h3><p class="bottom30">&ensp;&ensp;'
-		+ user_info.username
+
 		+'</p><table class="agent_contact table"> <tbody><tr class="bottom10"><td><strong >手机:</strong></td><td class="text-left" id="tel">'
-		+ user_info.tel+'</td></tr><tr class="bottom10"><td><strong>地区:</strong></td><td class="text-left">'
-		+ user_info.location +'</td></tr><tr class="bottom10"><td><strong>年龄</strong></td><td class="text-left">'
-		+ user_info.age
+		+ car_business.tel+'</td></tr><tr class="bottom10"><td><strong>地址:</strong></td><td class="text-left">'
+		+ car_business.dizhi +'</td></tr><tr class="bottom10"><td><strong>店铺描述</strong></td><td class="text-left">'
+		+ car_business.describe
 		+'</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>'
-		$("#userInfo").html(old2);		}
+		}
+		$("#userInfo").html(old2);		
 	}
 );
 
@@ -84,20 +101,20 @@ function changePsw(){
 };
 
 function changeUserInfo(){
-	var newName =  $("#newName").val();
-	var newTel =  $("#newTel").val();
-	var newAge =  $("#newAge").val();
-	var newLocation =  $("#newLocation").val();
+	var sname =  $("#sname").val();
+	var tel =  $("#dianhua").val();
+	var describe =  $("#describe").val();
+	var dizhi =  $("#dizhi").val();
 
-	if(newName==null||newName==''||newTel==null||newTel==''||newAge==null||newAge==''||newLocation==null||newLocation==""){
+	if(sname==null||sname==''||tel==null||tel==''||dizhi==null||dizhi==''||describe==null||describe==''){
 		alert('信息不能为空！');
 		return false;
 	}
-	if(!(/^1[3456789]\d{9}$/.test(newTel))){ 
+	if(!(/^1[3456789]\d{9}$/.test(tel))){ 
         alert("手机号码格式有误，请重新填写！"); 
 		return false;
 	}
-	var url = "/changeUserInfo?newName=" + newName +"&newTel="+ newTel+"&newLocation="+ newLocation +"&newAge="+ newAge;
+	var url = "/bindBusinessUser?sname=" + sname +"&tel="+ tel+"&dizhi="+ dizhi +"&describe="+ describe;
 	$.get(
 			url,
 			function(data) {
@@ -106,6 +123,34 @@ function changeUserInfo(){
 				}
 				if(data==1){
 					alert('信息修改成功！');	
+					window.location.reload();
+				}
+			});
+};
+
+function bindInfo(){
+	var sname =  $("#newSname").val();
+	var tel =  $("#newDianhua").val();
+	var describe =  $("#newDescribe").val();
+	var dizhi =  $("#newDizhi").val();
+
+	if(sname==null||sname==''||tel==null||tel==''||dizhi==null||dizhi==''||describe==null||describe==''){
+		alert('信息不能为空！');
+		return false;
+	}
+	if(!(/^1[3456789]\d{9}$/.test(tel))){ 
+        alert("手机号码格式有误，请重新填写！"); 
+		return false;
+	}
+	var url = "/bindBusinessUser?sname=" + sname +"&tel="+ tel+"&dizhi="+ dizhi +"&describe="+ describe;
+	$.get(
+			url,
+			function(data) {
+				if(data==0){
+					alert('绑定失败，请重试！');
+				}
+				if(data==1){
+					alert('商家信息绑定功！');	
 					window.location.reload();
 				}
 			});
@@ -160,7 +205,7 @@ function changeUserInfo(){
           <div class="col-sm-6 bottom40">
             <div class="agent_wrap">
               <div class="image">
-                <img src="images/agent-three.jpg" alt="Agents">
+                <img src="images/agent-one.jpg" alt="Agents">
               </div>
             </div>
           </div>
@@ -170,27 +215,29 @@ function changeUserInfo(){
             </div>
           </div>
         </div>
+        <div id="bindInfo"></div>
       </div>
          <aside class="col-md-4 col-xs-12">
 		 
             <div class="row">
                <div class="col-md-12">
-                  <h3 class="bottom20">编辑个人资料</h3>
+                  <h3 class="bottom20">商家常用功能</h3>
                   <ul class="pro-list bottom20">
                      <li>				<div class="more">
 					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog" id="changePsw">修改密码</a>				
 				</div>
                      </li>
-                     </br>
+                   <!--  </br>
                      <li>				<div class="more">
-					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog2" id="changeInfo">修改个人信息</a>				
+					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog2" id="changeInfo">修改商家信息</a>				
 				</div>
-                     </li>
+                     </li>-->
                   </ul>
                </div>
             </div>
          </aside>
       </div>
+      
    </div>
 </section>
 <!-- News End -->
@@ -211,13 +258,13 @@ function changeUserInfo(){
 				</center>
 			</form>
 	</div>
-			<div id="small-dialog2" class="mfp-hide book-form">
-<h3>修改个人信息 </h3>
+				<div id="small-dialog2" class="mfp-hide book-form">
+<h3>管理商家信息 </h3>
 <form action="#" method="post">
-<p>修改昵称</p><input type="text" id="newName" required=""/>
-<p>修改手机号</p><input type="text" id="newTel" required=""/>
-<p>修改地区</p><input type="text" id="newLocation" required=""/>
-<p>修改年龄</p><input type="text" id="newAge" required=""/>	
+<p>商家名称</p><input type="text" id="sname" required=""/>
+<p>地址</p><input type="text" id="dizhi" required=""/>
+<p>联系电话</p><input type="text" id="dianhua" required=""/>
+<p>店铺描述</p><input type="text" id="describe" required=""/>	
 				<center>
 				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">确认修改</button>
 				</center></form>
