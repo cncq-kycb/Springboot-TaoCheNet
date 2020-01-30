@@ -23,10 +23,13 @@ public interface AdminService {
 	// 获取全部用户权限
 	List<UserPermission> getAllUserPermission();
 
-	// 修改用户类型
+	// 修改用户类型，1成功，0错误失败
 	int updateUserType(String cookieid, Long userTypeId);
 
-	// 修改用户权限
+	// 修改用户权限，1成功，0错误失败
 	int updateUserPermission(String cookieid, Long userPermissionId);
+
+	//手动修改模型，1成功，0失败，-1错误
+	int updateRecommendOnHand(String cookieid);
 
 }

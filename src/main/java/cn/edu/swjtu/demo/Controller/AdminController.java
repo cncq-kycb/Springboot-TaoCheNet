@@ -71,26 +71,6 @@ public class AdminController {
 	@GetMapping(value = "/updateRecommendOnHand")
 	@ResponseBody
 	public int updateRecommendOnHand(@RequestParam(required = false, value = "cookieid") String cookieid) {
-		String exe = "python";
-		String filePath = "";
-		String[] cmdArr = new String[] { exe, filePath, cookieid };
-		Process process;
-		try {
-			process = Runtime.getRuntime().exec(cmdArr);
-			InputStream is = process.getInputStream();
-			DataInputStream dis = new DataInputStream(is);
-			String str = dis.readLine();
-			try {
-				process.waitFor();
-				System.out.println(str);
-				return 1;
-			} catch (InterruptedException e) {
-				System.err.println(e);
-				return 0;
-			}
-		} catch (IOException e) {
-			System.err.println(e);
-			return 0;
-		}
+		return adminService.updateRecommendOnHand(cookieid);
 	}
 }

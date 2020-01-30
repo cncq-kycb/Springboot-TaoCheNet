@@ -1,5 +1,8 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,6 +130,32 @@ public class AdminServiceImpl implements AdminService {
 			System.err.println(e);
 			return 0;
 		}
+	}
+
+	@Override
+	public int updateRecommendOnHand(String cookieid) {
+		String exe = "python";
+		String filePath = "";
+		String[] cmdArr = new String[] { exe, filePath, cookieid };
+		Process process;
+		try {
+			process = Runtime.getRuntime().exec(cmdArr);
+			InputStream is = process.getInputStream();
+			DataInputStream dis = new DataInputStream(is);
+			String str = dis.readLine();
+			try {
+				process.waitFor();
+				if (str.equals("success")) {
+					return 1;
+				}
+				return 0;
+			} catch (InterruptedException e) {
+				System.err.println(e);
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+		return -1;
 	}
 
 }
