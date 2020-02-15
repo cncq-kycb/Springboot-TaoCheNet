@@ -11,6 +11,9 @@ public interface PostService {
 	// 帖子详情
 	CarInfoWithBLOBs getPostDetails(Long pid);
 
+	// 收藏情况帖子详情
+	CarInfoWithBLOBs getPostDetails(String cookieid, Long pid);
+
 	// 帖子卖家
 	CarBusiness getSalerInfo(Long pid);
 

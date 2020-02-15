@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.CarBusinessMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
+import cn.edu.swjtu.demo.Dao.UserFavoriteMapper;
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarBusinessExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.UserFavorite;
+import cn.edu.swjtu.demo.Pojo.UserFavoriteExample;
 import cn.edu.swjtu.demo.Service.PostService;
 
 @Component
@@ -20,6 +23,8 @@ public class PostServiceImpl implements PostService {
 	CarInfoMapper carInfoMapper;
 	@Autowired
 	CarBusinessMapper carBusinessMapper;
+	@Autowired
+	UserFavoriteMapper userFavoriteMapper;
 
 	@Override
 	public CarInfoWithBLOBs getPostDetails(Long pid) {
@@ -30,6 +35,28 @@ public class PostServiceImpl implements PostService {
 			return result.get(0);
 		}
 		return new CarInfoWithBLOBs();
+	}
+
+	@Override
+	public CarInfoWithBLOBs getPostDetails(String cookieid, Long pid) {
+		CarInfoExample example = new CarInfoExample();
+		example.or().andPidEqualTo(pid);
+		List<CarInfoWithBLOBs> results = carInfoMapper.selectByExampleWithBLOBs(example);
+		if (results.size() == 0) {
+			return new CarInfoWithBLOBs();
+		}
+		CarInfoWithBLOBs result = results.get(0);
+		UserFavoriteExample userFavoriteExample = new UserFavoriteExample();
+		userFavoriteExample.or().andCookieidEqualTo(cookieid).andPidEqualTo(pid);
+		List<UserFavorite> userFavorites = userFavoriteMapper.selectByExample(userFavoriteExample);
+		// 未收藏
+		if (userFavorites.size() == 0) {
+			result.setIsFavorite(0);
+			return result;
+		}
+		// 已收藏
+		result.setIsFavorite(1);
+		return result;
 	}
 
 	@Override

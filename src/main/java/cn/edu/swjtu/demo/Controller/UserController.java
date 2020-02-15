@@ -37,6 +37,8 @@ public class UserController {
 		if (userInfo != null) {
 			// 浏览帖子埋点
 			userService.viewLog(userInfo.getCookieid(), pid);
+			// 获取收藏情况
+			return postService.getPostDetails(userInfo.getCookieid(), pid);
 		}
 		return postService.getPostDetails(pid);
 	}
