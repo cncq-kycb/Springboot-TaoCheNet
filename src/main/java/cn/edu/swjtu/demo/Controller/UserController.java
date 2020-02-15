@@ -43,6 +43,28 @@ public class UserController {
 		return postService.getPostDetails(pid);
 	}
 
+	// 添加收藏帖子
+	@GetMapping(value = "/confirmFavorite")
+	@ResponseBody
+	public int confirmFavorite(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo != null) {
+			return userService.confirmFavorite(userInfo.getCookieid(), pid);
+		}
+		return -1;
+	}
+
+	// 取消收藏帖子
+	@GetMapping(value = "/cancelFavorite")
+	@ResponseBody
+	public int cancelFavorite(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo != null) {
+			return userService.cancelFavorite(userInfo.getCookieid(), pid);
+		}
+		return -1;
+	}
+
 	// 帖子商家详情
 	@GetMapping(value = "/getSalerInfo")
 	@ResponseBody

@@ -14,6 +14,7 @@ import cn.edu.swjtu.demo.Dao.CarColorMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
+import cn.edu.swjtu.demo.Dao.UserFavoriteMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
 import cn.edu.swjtu.demo.Dao.UserSearchPostMapper;
@@ -33,6 +34,8 @@ import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarPictureExample;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
+import cn.edu.swjtu.demo.Pojo.UserFavorite;
+import cn.edu.swjtu.demo.Pojo.UserFavoriteExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Pojo.UserInquirePost;
@@ -65,6 +68,8 @@ public class UserServiceImpl implements UserService {
 	CarPictureMapper carPictureMapper;
 	@Autowired
 	CarBusinessMapper carBusinessMapper;
+	@Autowired
+	UserFavoriteMapper userFavoriteMapper;
 
 	@Override
 	public boolean login(String username, String password) {
@@ -315,6 +320,34 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
+		}
+	}
+
+	@Override
+	public int confirmFavorite(String cookieid, Long pid) {
+		try {
+			UserFavorite record = new UserFavorite();
+			record.setCookieid(cookieid);
+			record.setPid(pid);
+			record.setFavoriteTime(new Date());
+			userFavoriteMapper.insert(record);
+			return 1;
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		}
+	}
+
+	@Override
+	public int cancelFavorite(String cookieid, Long pid) {
+		try {
+			UserFavoriteExample example = new UserFavoriteExample();
+			example.or().andCookieidEqualTo(cookieid).andPidEqualTo(pid);
+			userFavoriteMapper.deleteByExample(example);
+			return 1;
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
 		}
 	}
 

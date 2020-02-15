@@ -60,4 +60,10 @@ public interface UserService {
 	// 按帖子获取商家电话
 	String getBusinessTelFromPost(Long pid);
 
+	// 添加收藏
+	int confirmFavorite(String cookieid, Long pid);
+
+	// 取消收藏
+	int cancelFavorite(String cookieid, Long pid);
+
 }
