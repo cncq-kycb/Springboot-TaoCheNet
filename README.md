@@ -24,3 +24,6 @@
 * MySQL 5.7.27
 
 ## 数据库结构及数据见springboot-58/src/main/resources/[58.sql](https://github.com/AlbertoWang/springboot-58/blob/master/src/main/resources/58.sql)
+
+#### Powered by [AlbertoWang](github.com/albertowang) and [HaberZhang](https://github.com/haber8023)
+
