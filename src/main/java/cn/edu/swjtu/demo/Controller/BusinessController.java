@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
-import cn.edu.swjtu.demo.Pojo.CarInfo;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.BusinessService;
 
@@ -40,7 +40,7 @@ public class BusinessController {
 	// 查看全部上架车辆
 	@GetMapping(value = "/getAllSellingCars")
 	@ResponseBody
-	public List<CarInfo> getAllSellingCars(@RequestParam(required = true, value = "cookieid") String cookieid) {
+	public List<CarInfoWithBLOBs> getAllSellingCars(@RequestParam(required = true, value = "cookieid") String cookieid) {
 		return businessService.getAllSellingCars(cookieid);
 	}
 

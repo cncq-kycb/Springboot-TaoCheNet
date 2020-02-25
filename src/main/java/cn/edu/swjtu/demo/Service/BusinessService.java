@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
-import cn.edu.swjtu.demo.Pojo.CarInfo;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 
 @Service
@@ -15,7 +15,7 @@ public interface BusinessService {
 	List<UserInfo> getAllRecommendUsers(String cookieid);
 
 	// 获取上架车辆
-	List<CarInfo> getAllSellingCars(String cookieid);
+	List<CarInfoWithBLOBs> getAllSellingCars(String cookieid);
 
 	// 绑定用户与商家
 	int bindBusinessUser(String cookieid, String sname, String dizhi, String tel, String describe);

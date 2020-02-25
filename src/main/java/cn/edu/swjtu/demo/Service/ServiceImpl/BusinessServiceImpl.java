@@ -14,6 +14,7 @@ import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarBusinessExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
+import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.Recommend;
 import cn.edu.swjtu.demo.Pojo.RecommendExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
@@ -71,7 +72,7 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<CarInfo> getAllSellingCars(String cookieid) {
+	public List<CarInfoWithBLOBs> getAllSellingCars(String cookieid) {
 		try {
 			CarBusinessExample carBusinessExample = new CarBusinessExample();
 			carBusinessExample.or().andCookieidEqualTo(cookieid);
@@ -80,11 +81,11 @@ public class BusinessServiceImpl implements BusinessService {
 				Integer sid = businessUsers.get(0).getSid();
 				CarInfoExample carInfoExample = new CarInfoExample();
 				carInfoExample.or().andSidEqualTo((long) sid);
-				List<CarInfo> carInfos = carInfoMapper.selectByExample(carInfoExample);
+				List<CarInfoWithBLOBs> carInfos = carInfoMapper.selectByExampleWithBLOBs(carInfoExample);
 				if (carInfos.size() != 0) {
 					return carInfos;
 				}
-				return new ArrayList<CarInfo>();
+				return new ArrayList<CarInfoWithBLOBs>();
 			}
 			return null;
 		} catch (Exception e) {
