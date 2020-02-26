@@ -273,6 +273,8 @@
 									old + "<p style=\"font-size:20px;\"><strong>车况描述：</strong></p><div><p>"
 									+ miaoshu
 									+ "</p></div><img src=\"images/quote.png\" alt=\"quote\" class=\"quote\">");
+							if(car_info.isFavorite==0){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>'); }
+							if(car_info.isFavorite==1){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-dark text-uppercase" onclick="disfollow()">取消收藏</button>'); }
 						});
 		var url = "/getDetailsPic?pid=" + pid;
 		$.get(
@@ -351,7 +353,7 @@
 					old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href=#>宝贝详情</a></li><li><a href="login.html">登录/注册</a></li></ul>';
 				}
 				else{
-					old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href=#>宝贝详情</a></li><li><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+					old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li class="dropdown megamenu-fw active"><a href=#>宝贝详情</a></li><li><a href="favorite.html">收藏夹</a></li><li><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 				}
 				$("#navbar-menu").html(old);
 				}
@@ -372,7 +374,7 @@
 				url,
 				function(data) {
 					if(data==1){
-						$('follow').html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-green text-uppercase" onclick="disfollow()">已收藏</button>');	
+						window.location.reload();
 					}
 					if(data==0){
 						alert('操作失败，请重新尝试！');
@@ -389,7 +391,7 @@
 				url,
 				function(data) {
 					if(data==1){
-						$('follow').html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>');	
+						window.location.reload();
 					}
 					if(data==0){
 						alert('操作失败，请重新尝试！');
