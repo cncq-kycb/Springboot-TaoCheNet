@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -63,6 +64,17 @@ public class UserController {
 			return userService.cancelFavorite(userInfo.getCookieid(), pid);
 		}
 		return -1;
+	}
+	
+	// 收藏列表
+	@GetMapping(value = "/getFavoriteList")
+	@ResponseBody
+	public List<CarInfoWithBLOBs> getFavoriteList(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if(userInfo.getCookieid()!=null) {
+			return userService.getFavoriteList(userInfo.getCookieid());
+		}
+		return new ArrayList<CarInfoWithBLOBs>();
 	}
 
 	// 帖子商家详情

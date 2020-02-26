@@ -351,4 +351,26 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public List<CarInfoWithBLOBs> getFavoriteList(String cookieid) {
+		try {
+			UserFavoriteExample userFavoriteExample = new UserFavoriteExample();
+			userFavoriteExample.or().andCookieidEqualTo(cookieid);
+			List<UserFavorite> userFavorites = userFavoriteMapper.selectByExample(userFavoriteExample);
+			if (userFavorites.size() > 0) {
+				List<CarInfoWithBLOBs> result = new ArrayList<CarInfoWithBLOBs>();
+				for (UserFavorite userFavorite : userFavorites) {
+					CarInfoExample carInfoExample = new CarInfoExample();
+					carInfoExample.or().andPidEqualTo(userFavorite.getPid());
+					result.addAll(carInfoMapper.selectByExampleWithBLOBs(carInfoExample));
+				}
+				return result;
+			}
+			return new ArrayList<CarInfoWithBLOBs>();
+		} catch (Exception e) {
+			System.err.println(e);
+			return new ArrayList<CarInfoWithBLOBs>();
+		}
+	}
+
 }

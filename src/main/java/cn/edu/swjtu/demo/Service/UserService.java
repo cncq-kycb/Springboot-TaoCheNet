@@ -66,4 +66,7 @@ public interface UserService {
 	// 取消收藏
 	int cancelFavorite(String cookieid, Long pid);
 
+	// 获取收藏
+	List<CarInfoWithBLOBs> getFavoriteList(String cookieid);
+
 }
