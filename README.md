@@ -1,21 +1,21 @@
 # Springboot-TaoCheNet
-### 基于SpringBoot + MyBaties[58二手车](https://www.58.com/ershouche/)山寨版
+### 基于 SpringBoot + MyBaties 框架的 [58二手车](https://www.58.com/ershouche/)山寨版
 ### A demo imitates the [58net](https://www.58.com/ershouche/) adopted SpringBoot and MyBaties framework.
 
 ## 涵盖功能
 ### 普通用户类型
-* 用户信息管理
-* 兴趣商品推荐 (TODO:python代码完成并接口测试)
-* 商品按条件检索
-* 商品浏览及用户行为日志
-* 用户收藏功能 (TODO:前端接口实现)
+1. 用户信息管理
+2. 兴趣商品推荐 (TODO:python代码完成并接口测试)
+3. 商品按条件检索
+4. 商品浏览及用户行为日志
+5. 用户收藏功能 (TODO:前端接口实现)
 ### 商家用户类型
-* 商家信息管理
-* 潜在用户推荐
-* 发布商品管理
+1. 商家信息管理
+2. 潜在用户推荐
+3. 发布商品管理
 ### 管理员用户类型
-* 系统内数据信息管理
-* 实时修改推荐模型 (TODO:python代码完成并接口测试)
+1. 系统内数据信息管理
+2. 实时修改推荐模型 (TODO:python代码完成并接口测试)
 
 ## 环境要求
 ### 以下环境测试可运行
