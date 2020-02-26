@@ -63,10 +63,12 @@
     
 	  <div class=" listing1 property-details" style="width:640px;height:400px;float:right;">
 	  <h2>&ensp;</h2><h4>&ensp;</h4>
-	  <div class="agent_wrap" id="title"></h3></div><div>
-<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>	
-
-</div></div></div>
+	  <div class="agent_wrap" id="title"></h3></div>
+	  <div id="follow">
+		<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;
+		<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>	
+	</div>
+</div></div>
 	<div class="row">
       <div class="col-md-10 listing1 property-details">
         <h2>&nbsp;</h2>
@@ -362,7 +364,42 @@
 				function(data) {
 					alert('电话号码：'+data);
 				});
-	}
+	};
+	
+	function follow(){
+		var url = "/confirmFavorite?pid=" + pid;
+		$.get(
+				url,
+				function(data) {
+					if(data==1){
+						$('follow').html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-green text-uppercase" onclick="disfollow()">已收藏</button>');	
+					}
+					if(data==0){
+						alert('操作失败，请重新尝试！');
+					}
+					if(data=='-1'){
+						alert('请登录后再进行操作！');
+					}
+				});
+	};
+	
+	function disfollow(){
+		var url = "/cancelFavorite?pid=" + pid;
+		$.get(
+				url,
+				function(data) {
+					if(data==1){
+						$('follow').html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>');	
+					}
+					if(data==0){
+						alert('操作失败，请重新尝试！');
+					}
+					if(data=='-1'){
+						alert('请登录后再进行操作！');
+					}
+				});
+	};
+	
 	function logout(){
 		var url = '/logout';
 		$.get(
