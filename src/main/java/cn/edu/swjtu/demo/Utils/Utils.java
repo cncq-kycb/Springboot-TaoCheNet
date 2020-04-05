@@ -14,4 +14,9 @@ public class Utils {
 		}
 		return sb.toString();
 	}
+
+	public static String[] splitString(String input) {
+		String[] temp = input.split(",");
+		return temp;
+	}
 }

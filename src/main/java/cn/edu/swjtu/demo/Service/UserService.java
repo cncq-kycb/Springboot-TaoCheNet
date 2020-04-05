@@ -51,8 +51,11 @@ public interface UserService {
 			String selectedPaifang, Integer selectedColor, Integer selectedLichengLeft, Integer selectedLichengRight,
 			Integer selectedPriceLeft, Integer selectedPriceRight);
 
-	// 获取推荐
+	// 获取随机推荐结果
 	List<CarInfoWithBLOBs> getRecommend();
+	
+	// 获取推荐
+	List<CarInfoWithBLOBs> getRecommend(String cookieid);
 
 	// 获取帖子图片
 	List<CarPicture> getCarPicture(Long pid);

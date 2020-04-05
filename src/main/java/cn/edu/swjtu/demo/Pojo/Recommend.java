@@ -7,7 +7,7 @@ public class Recommend {
 
     private String cookieid;
 
-    private Long pid;
+    private String pids;
 
     private Date rtime;
 
@@ -27,12 +27,12 @@ public class Recommend {
         this.cookieid = cookieid == null ? null : cookieid.trim();
     }
 
-    public Long getPid() {
-        return pid;
+    public String getPid() {
+        return pids;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
+    public void setPid(String pids) {
+        this.pids = pids;
     }
 
     public Date getRtime() {

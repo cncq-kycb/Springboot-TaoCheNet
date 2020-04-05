@@ -1,8 +1,8 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,16 +140,16 @@ public class AdminServiceImpl implements AdminService {
 		Process process;
 		try {
 			process = Runtime.getRuntime().exec(cmdArr);
-			InputStream is = process.getInputStream();
-			DataInputStream dis = new DataInputStream(is);
-			String str = dis.readLine();
-			try {
-				process.waitFor();
-				System.out.println(str);
-				return str;
-			} catch (InterruptedException e) {
-				System.err.println(e);
+			BufferedReader br = null;
+			br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line = null;
+			StringBuilder sb = new StringBuilder();
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
 			}
+			System.out.println();
+			// process.waitFor();
+			return sb.toString();
 		} catch (IOException e) {
 			System.err.println(e);
 		}

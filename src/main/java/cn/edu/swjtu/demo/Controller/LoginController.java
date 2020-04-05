@@ -53,8 +53,13 @@ public class LoginController {
 	@GetMapping(value = "/getRecommend")
 	@ResponseBody
 	public List<CarInfoWithBLOBs> getRecommend(HttpSession session) {
-		// UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		return userService.getRecommend();
+//		// 随机推荐，展示用，屏蔽清注释，并开启下面被的注释代码
+//		return userService.getRecommend();
+		
+		// 按数据推荐，若数据不一致将会得不到数据
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		String cookieid = userInfo.getCookieid();
+		return userService.getRecommend(cookieid);
 	}
 
 	// 用户退出
