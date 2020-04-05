@@ -70,7 +70,7 @@ public class AdminController {
 	// 实时修改模型
 	@GetMapping(value = "/updateRecommendOnHand")
 	@ResponseBody
-	public int updateRecommendOnHand(@RequestParam(required = false, value = "cookieid") String cookieid) {
-		return adminService.updateRecommendOnHand(cookieid);
+	public String updateRecommendOnHand() {
+		return adminService.updateRecommendOnHand();
 	}
 }

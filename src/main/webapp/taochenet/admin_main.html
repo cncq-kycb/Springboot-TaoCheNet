@@ -22,7 +22,8 @@
 <script src="js/jquery-2.1.4.js"></script>
 <script type="text/javascript">
 	var action = "/getUserInfo";
-	$.get(
+	$
+			.get(
 					action,
 					function(data) {
 						var user_info = data;
@@ -32,13 +33,13 @@
 							window.location.href = 'login.html';
 						} else {
 							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li class="dropdown megamenu-fw active"><a href="admin_main.html">管理员首页</a></li>'
-							+'<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+									+ '<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 							$("#navbar-menu").html(old);
 							var old2 = "";
 							old2 += '<h3 id="name">&ensp;欢迎您，'
 									+ user_info.name
 									+ '</h3><p class="bottom30">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;'
-										
+
 									+ '</p><table class="agent_contact table"> <tbody><tr class="bottom10"><td><strong >手机:</strong></td><td class="text-left" id="tel">'
 									+ user_info.tel
 									+ '</td></tr><tr class="bottom10"><td><strong>地区:</strong></td><td class="text-left">'
@@ -126,6 +127,20 @@
 									<div class="more">
 										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
 											data-wow-delay=".5s" href="admin_manage_user_permission.html">管理用户权限</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-12">
+							<ul class="pro-list bottom20">
+								<li>
+									<div class="more">
+										<form name="updateForm" id="updateForm"
+											onsubmit="return validateForm()" class="form-validate">
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-warning">修改模型</button>
+											</div>
+										</form>
 									</div>
 								</li>
 							</ul>
@@ -224,6 +239,14 @@
 				if (data == 0) {
 					alert('退出有误！');
 				}
+			});
+		};
+	</script>
+	<script>
+		function validateForm() {
+			var action = "/updateRecommendOnHand";
+			$.get(action, function(data) {
+				alert(data);
 			});
 		};
 	</script>

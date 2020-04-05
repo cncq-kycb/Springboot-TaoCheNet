@@ -30,6 +30,6 @@ public interface AdminService {
 	int updateUserPermission(String cookieid, Long userPermissionId);
 
 	//手动修改模型，1成功，0失败，-1错误
-	int updateRecommendOnHand(String cookieid);
+	String updateRecommendOnHand();
 
 }

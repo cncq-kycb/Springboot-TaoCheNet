@@ -133,10 +133,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateRecommendOnHand(String cookieid) {
+	public String updateRecommendOnHand() {
 		String exe = "python";
-		String filePath = "";
-		String[] cmdArr = new String[] { exe, filePath, cookieid };
+		String filePath = "/Users/alberto/git/1.py";
+		String[] cmdArr = new String[] { exe, filePath };
 		Process process;
 		try {
 			process = Runtime.getRuntime().exec(cmdArr);
@@ -145,17 +145,15 @@ public class AdminServiceImpl implements AdminService {
 			String str = dis.readLine();
 			try {
 				process.waitFor();
-				if (str.equals("success")) {
-					return 1;
-				}
-				return 0;
+				System.out.println(str);
+				return str;
 			} catch (InterruptedException e) {
 				System.err.println(e);
 			}
 		} catch (IOException e) {
 			System.err.println(e);
 		}
-		return -1;
+		return "failed";
 	}
 
 }
