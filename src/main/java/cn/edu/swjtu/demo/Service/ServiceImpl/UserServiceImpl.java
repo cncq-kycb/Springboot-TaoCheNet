@@ -15,6 +15,8 @@ import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
 import cn.edu.swjtu.demo.Dao.RecommendMapper;
+import cn.edu.swjtu.demo.Dao.UserChatMapper;
+import cn.edu.swjtu.demo.Dao.UserDriveMapper;
 import cn.edu.swjtu.demo.Dao.UserFavoriteMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
@@ -37,6 +39,9 @@ import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
 import cn.edu.swjtu.demo.Pojo.Recommend;
 import cn.edu.swjtu.demo.Pojo.RecommendExample;
+import cn.edu.swjtu.demo.Pojo.UserChat;
+import cn.edu.swjtu.demo.Pojo.UserDrive;
+import cn.edu.swjtu.demo.Pojo.UserDriveExample;
 import cn.edu.swjtu.demo.Pojo.UserFavorite;
 import cn.edu.swjtu.demo.Pojo.UserFavoriteExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
@@ -76,6 +81,10 @@ public class UserServiceImpl implements UserService {
 	UserFavoriteMapper userFavoriteMapper;
 	@Autowired
 	RecommendMapper recommendMapper;
+	@Autowired
+	UserDriveMapper userDriveMapper;
+	@Autowired
+	UserChatMapper userChatMapper;
 
 	@Override
 	public boolean login(String username, String password) {
@@ -133,6 +142,34 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			System.err.println(e);
 		}
+	}
+
+	@Override
+	public int driveLog(String cookieid, Long pid) {
+		try {
+			UserDrive userDrive = new UserDrive();
+			userDrive.setCookieid(cookieid);
+			userDrive.setPid(pid);
+			userDrive.setTime(new Date());
+			return 1;
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int chatLog(String cookieid, Long pid) {
+		try {
+			UserChat userChat = new UserChat();
+			userChat.setCookieid(cookieid);
+			userChat.setPid(pid);
+			userChat.setTime(new Date());
+			return 1;
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		return 0;
 	}
 
 	@Override

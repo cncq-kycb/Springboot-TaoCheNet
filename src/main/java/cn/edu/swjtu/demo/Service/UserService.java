@@ -25,6 +25,12 @@ public interface UserService {
 
 	// 记录用户咨询日志
 	void inquireLog(String cookieid, Long pid);
+	
+	// 记录用申请试驾日志
+	int driveLog(String cookieid, Long pid);
+
+	// 记录用户微聊日志
+	int chatLog(String cookieid, Long pid);
 
 	// 记录用户搜索日志
 	void searchLog(String cookieid, Integer selectedBrand, Integer selectedSeries, Integer selectedClassify,

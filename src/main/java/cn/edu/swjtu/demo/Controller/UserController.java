@@ -95,6 +95,30 @@ public class UserController {
 		}
 		return userService.getBusinessTelFromPost(pid);
 	}
+	
+	// 申请试驾
+	@GetMapping(value = "/driveRequest")
+	@ResponseBody
+	public int driveRequest(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo != null) {
+			// 联系商家埋点
+			return userService.driveLog(userInfo.getCookieid(), pid);
+		}
+		return 0;
+	}
+	
+	// 发起微聊
+	@GetMapping(value = "/chatRequest")
+	@ResponseBody
+	public int chatRequest(@RequestParam(required = true, value = "pid") Long pid, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo != null) {
+			// 联系商家埋点
+			return userService.chatLog(userInfo.getCookieid(), pid);
+		}
+		return 0;
+	}
 
 	// 搜索帖子
 	@GetMapping(value = "/searchPost")
