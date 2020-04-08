@@ -62,12 +62,18 @@
     </div>
     
 	  <div class=" listing1 property-details" style="width:640px;height:400px;float:right;">
-	  <h2>&ensp;</h2><h4>&ensp;</h4>
+	  <h2>&ensp;</h2>
 	  <div class="agent_wrap" id="title"></h3></div>
 	  <div id="follow">
-		<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;
-		<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>	
+		<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="follow()">加入收藏夹</button>	
 	</div>
+	<h4>&ensp;</h4>
+	              <div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div>
+              <ul class="social_share">
+                <li><a href="javascript:void(0)" onclick="showOw()" class="google" title="查看电话"><i class="icon-phone"></i></a></li>
+                <li><a href="javascript:void(0)" onclick="drive()"  class="google"  title="申请试驾"><i class="icon-road"></i></a></li>
+                <li><a href="javascript:void(0)" onclick="chat()"  class="google" title="在线微聊"><i class="icon-hangouts"></i></a></li>
+              </ul>
 </div></div>
 	<div class="row">
       <div class="col-md-10 listing1 property-details">
@@ -273,8 +279,8 @@
 									old + "<p style=\"font-size:20px;\"><strong>车况描述：</strong></p><div><p>"
 									+ miaoshu
 									+ "</p></div><img src=\"images/quote.png\" alt=\"quote\" class=\"quote\">");
-							if(car_info.isFavorite==0){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="follow()">加入收藏夹</button>'); }
-							if(car_info.isFavorite==1){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="showOw()">查 看 电 话 号 码</button>&ensp;&ensp;&ensp;<button type="submit" class="border_radius btn-dark text-uppercase" onclick="disfollow()">取消收藏</button>'); }
+							if(car_info.isFavorite==0){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="follow()">加 入 收 藏 夹</button>'); }
+							if(car_info.isFavorite==1){ $("#follow").html('<button type="submit" class="border_radius btn-dark text-uppercase" onclick="disfollow()">取 消 收 藏</button>'); }
 						});
 		var url = "/getDetailsPic?pid=" + pid;
 		$.get(
@@ -365,6 +371,32 @@
 				url,
 				function(data) {
 					alert('电话号码：'+data);
+				});
+	};
+	
+	function drive(){
+		var url = "/driveRequest?pid=" + pid;
+		$.get(
+				url,
+				function(data) {
+					if(data==1)
+					alert('申请试驾成功！');
+					else{
+					alert('申请试驾失败！');		
+					}
+				});
+	};
+	
+	function chat(){
+		var url = "/chatRequest?pid=" + pid;
+		$.get(
+				url,
+				function(data) {
+					if(data==1)
+						alert('在线微聊成功！');
+						else{
+						alert('在线微聊失败！');		
+						}
 				});
 	};
 	
