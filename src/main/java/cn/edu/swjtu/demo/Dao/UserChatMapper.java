@@ -3,8 +3,11 @@ package cn.edu.swjtu.demo.Dao;
 import cn.edu.swjtu.demo.Pojo.UserChat;
 import cn.edu.swjtu.demo.Pojo.UserChatExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserChatMapper {
     long countByExample(UserChatExample example);
 

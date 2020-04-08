@@ -151,6 +151,7 @@ public class UserServiceImpl implements UserService {
 			userDrive.setCookieid(cookieid);
 			userDrive.setPid(pid);
 			userDrive.setTime(new Date());
+			userDriveMapper.insert(userDrive);
 			return 1;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -165,6 +166,7 @@ public class UserServiceImpl implements UserService {
 			userChat.setCookieid(cookieid);
 			userChat.setPid(pid);
 			userChat.setTime(new Date());
+			userChatMapper.insert(userChat);
 			return 1;
 		} catch (Exception e) {
 			System.err.println(e);

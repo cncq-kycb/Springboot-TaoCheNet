@@ -3,8 +3,11 @@ package cn.edu.swjtu.demo.Dao;
 import cn.edu.swjtu.demo.Pojo.UserDrive;
 import cn.edu.swjtu.demo.Pojo.UserDriveExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserDriveMapper {
     long countByExample(UserDriveExample example);
 
