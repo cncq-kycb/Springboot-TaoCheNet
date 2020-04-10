@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swjtu.demo.Dao.RecommendMapper">
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.Recommend">
-    <result column="record_id" jdbcType="INTEGER" property="recordId" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
     <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
-    <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="rtime" jdbcType="TIMESTAMP" property="rtime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.swjtu.demo.Pojo.Recommend">
+    <result column="pid" jdbcType="LONGVARCHAR" property="pid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,8 +68,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    record_id, cookieid, pid, rtime
+    record_id, cookieid, rtime
   </sql>
+  <sql id="Blob_Column_List">
+    pid
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.swjtu.demo.Pojo.RecommendExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from recommend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.RecommendExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -89,10 +110,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.Recommend">
-    insert into recommend (record_id, cookieid, pid, 
-      rtime)
-    values (#{recordId,jdbcType=INTEGER}, #{cookieid,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
-      #{rtime,jdbcType=TIMESTAMP})
+    insert into recommend (record_id, cookieid, rtime, 
+      pid)
+    values (#{recordId,jdbcType=BIGINT}, #{cookieid,jdbcType=VARCHAR}, #{rtime,jdbcType=TIMESTAMP}, 
+      #{pid,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.Recommend">
     insert into recommend
@@ -103,25 +124,25 @@
       <if test="cookieid != null">
         cookieid,
       </if>
-      <if test="pid != null">
-        pid,
-      </if>
       <if test="rtime != null">
         rtime,
+      </if>
+      <if test="pid != null">
+        pid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="recordId != null">
-        #{recordId,jdbcType=INTEGER},
+        #{recordId,jdbcType=BIGINT},
       </if>
       <if test="cookieid != null">
         #{cookieid,jdbcType=VARCHAR},
       </if>
-      <if test="pid != null">
-        #{pid,jdbcType=BIGINT},
-      </if>
       <if test="rtime != null">
         #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -135,27 +156,36 @@
     update recommend
     <set>
       <if test="record.recordId != null">
-        record_id = #{record.recordId,jdbcType=INTEGER},
+        record_id = #{record.recordId,jdbcType=BIGINT},
       </if>
       <if test="record.cookieid != null">
         cookieid = #{record.cookieid,jdbcType=VARCHAR},
       </if>
-      <if test="record.pid != null">
-        pid = #{record.pid,jdbcType=BIGINT},
-      </if>
       <if test="record.rtime != null">
         rtime = #{record.rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update recommend
+    set record_id = #{record.recordId,jdbcType=BIGINT},
+      cookieid = #{record.cookieid,jdbcType=VARCHAR},
+      rtime = #{record.rtime,jdbcType=TIMESTAMP},
+      pid = #{record.pid,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByExample" parameterType="map">
     update recommend
-    set record_id = #{record.recordId,jdbcType=INTEGER},
+    set record_id = #{record.recordId,jdbcType=BIGINT},
       cookieid = #{record.cookieid,jdbcType=VARCHAR},
-      pid = #{record.pid,jdbcType=BIGINT},
       rtime = #{record.rtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

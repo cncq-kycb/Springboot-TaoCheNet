@@ -115,52 +115,52 @@ public class RecommendExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdEqualTo(Integer value) {
+        public Criteria andRecordIdEqualTo(Long value) {
             addCriterion("record_id =", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdNotEqualTo(Integer value) {
+        public Criteria andRecordIdNotEqualTo(Long value) {
             addCriterion("record_id <>", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdGreaterThan(Integer value) {
+        public Criteria andRecordIdGreaterThan(Long value) {
             addCriterion("record_id >", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRecordIdGreaterThanOrEqualTo(Long value) {
             addCriterion("record_id >=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdLessThan(Integer value) {
+        public Criteria andRecordIdLessThan(Long value) {
             addCriterion("record_id <", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdLessThanOrEqualTo(Integer value) {
+        public Criteria andRecordIdLessThanOrEqualTo(Long value) {
             addCriterion("record_id <=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdIn(List<Integer> values) {
+        public Criteria andRecordIdIn(List<Long> values) {
             addCriterion("record_id in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdNotIn(List<Integer> values) {
+        public Criteria andRecordIdNotIn(List<Long> values) {
             addCriterion("record_id not in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdBetween(Integer value1, Integer value2) {
+        public Criteria andRecordIdBetween(Long value1, Long value2) {
             addCriterion("record_id between", value1, value2, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andRecordIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andRecordIdNotBetween(Long value1, Long value2) {
             addCriterion("record_id not between", value1, value2, "recordId");
             return (Criteria) this;
         }
@@ -232,66 +232,6 @@ public class RecommendExample {
 
         public Criteria andCookieidNotBetween(String value1, String value2) {
             addCriterion("cookieid not between", value1, value2, "cookieid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIsNull() {
-            addCriterion("pid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIsNotNull() {
-            addCriterion("pid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidEqualTo(Long value) {
-            addCriterion("pid =", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotEqualTo(Long value) {
-            addCriterion("pid <>", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidGreaterThan(Long value) {
-            addCriterion("pid >", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidGreaterThanOrEqualTo(Long value) {
-            addCriterion("pid >=", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidLessThan(Long value) {
-            addCriterion("pid <", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidLessThanOrEqualTo(Long value) {
-            addCriterion("pid <=", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIn(List<Long> values) {
-            addCriterion("pid in", values, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotIn(List<Long> values) {
-            addCriterion("pid not in", values, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidBetween(Long value1, Long value2) {
-            addCriterion("pid between", value1, value2, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotBetween(Long value1, Long value2) {
-            addCriterion("pid not between", value1, value2, "pid");
             return (Criteria) this;
         }
 
