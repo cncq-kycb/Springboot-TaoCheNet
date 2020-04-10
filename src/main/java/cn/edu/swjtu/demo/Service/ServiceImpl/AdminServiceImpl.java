@@ -1,8 +1,5 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,7 @@ import cn.edu.swjtu.demo.Pojo.UserPermissionExample;
 import cn.edu.swjtu.demo.Pojo.UserType;
 import cn.edu.swjtu.demo.Pojo.UserTypeExample;
 import cn.edu.swjtu.demo.Service.AdminService;
+import cn.edu.swjtu.demo.Utils.Utils;
 
 @Component
 public class AdminServiceImpl implements AdminService {
@@ -134,26 +132,17 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String updateRecommendOnHand() {
-		String exe = "python";
-		String filePath = "/Users/alberto/git/1.py";
-		String[] cmdArr = new String[] { exe, filePath };
-		Process process;
-		try {
-			process = Runtime.getRuntime().exec(cmdArr);
-			BufferedReader br = null;
-			br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line = null;
-			StringBuilder sb = new StringBuilder();
-			while ((line = br.readLine()) != null) {
-				sb.append(line + "\n");
-			}
-			System.out.println();
-			// process.waitFor();
-			return sb.toString();
-		} catch (IOException e) {
-			System.err.println(e);
-		}
-		return "failed";
+		return Utils.cmdCall("python", "");
+	}
+
+	@Override
+	public String setTimer() {
+		return Utils.cmdCall("python", "");
+	}
+
+	@Override
+	public String trainModel() {
+		return Utils.cmdCall("python", "");
 	}
 
 }

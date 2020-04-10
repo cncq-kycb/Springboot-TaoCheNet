@@ -29,7 +29,13 @@ public interface AdminService {
 	// 修改用户权限，1成功，0错误失败
 	int updateUserPermission(String cookieid, Long userPermissionId);
 
-	//手动修改模型，1成功，0失败，-1错误
+	// 手动修改模型，1成功，0失败，-1错误
 	String updateRecommendOnHand();
+
+	// 设置定时器，1成功，否则失败
+	String setTimer();
+
+	// 更新模型，1成功，否则失败
+	String trainModel();
 
 }

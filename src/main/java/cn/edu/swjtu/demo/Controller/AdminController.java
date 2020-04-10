@@ -1,8 +1,5 @@
 package cn.edu.swjtu.demo.Controller;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +63,26 @@ public class AdminController {
 		return adminService.updateUserPermission(cookieid, userPermissionId);
 	}
 
-	// TODO
 	// 实时修改模型
 	@GetMapping(value = "/updateRecommendOnHand")
 	@ResponseBody
 	public String updateRecommendOnHand() {
 		return adminService.updateRecommendOnHand();
 	}
+
+	// 设置定时器定时更新
+	@GetMapping(value = "/setTimer")
+	@ResponseBody
+	public String setTimer() {
+		return adminService.setTimer();
+	}
+
+	// TODO
+	// 更新模型
+	@GetMapping(value = "/trainModel")
+	@ResponseBody
+	public String trainModel() {
+		return adminService.trainModel();
+	}
+
 }

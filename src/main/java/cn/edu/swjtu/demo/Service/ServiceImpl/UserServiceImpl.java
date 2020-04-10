@@ -41,7 +41,6 @@ import cn.edu.swjtu.demo.Pojo.Recommend;
 import cn.edu.swjtu.demo.Pojo.RecommendExample;
 import cn.edu.swjtu.demo.Pojo.UserChat;
 import cn.edu.swjtu.demo.Pojo.UserDrive;
-import cn.edu.swjtu.demo.Pojo.UserDriveExample;
 import cn.edu.swjtu.demo.Pojo.UserFavorite;
 import cn.edu.swjtu.demo.Pojo.UserFavoriteExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
