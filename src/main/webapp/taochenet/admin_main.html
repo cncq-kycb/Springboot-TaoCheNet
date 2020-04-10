@@ -131,16 +131,28 @@
 								</li>
 							</ul>
 						</div>
+						
 						<div class="col-md-12">
+							<h3 class="bottom20">管理模型功能</h3>
 							<ul class="pro-list bottom20">
 								<li>
 									<div class="more">
-										<form name="updateForm" id="updateForm"
-											 class="form-validate">
-											<div class="modal-footer">
-												<button type="button" class="btn btn-warning" onclick="return changeModel()">修改模型</button>
-											</div>
-										</form>
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="changeModel()">修改模型</a>
+									</div>
+								</li>
+								</br>
+								<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="timeSet()">启动定时器</a>
+									</div>
+								</li>
+																</br>
+								<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="teachModel()">训练模型</a>
 									</div>
 								</li>
 							</ul>
@@ -245,6 +257,18 @@
 	<script>
 		function changeModel() {
 			var action = "/updateRecommendOnHand";
+			$.get(action, function(data) {
+				alert(data);
+			});
+		};
+		function timeSet() {
+			var action = "/setTimer";
+			$.get(action, function(data) {
+				alert(data);
+			});
+		};
+		function teachModel() {
+			var action = "/trainModel";
 			$.get(action, function(data) {
 				alert(data);
 			});
