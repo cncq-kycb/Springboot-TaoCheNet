@@ -58,6 +58,9 @@ public class LoginController {
 		
 		// 按数据推荐，若数据不一致将会得不到数据
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if(userInfo == null) {
+			return userService.getRecommend();
+		}
 		String cookieid = userInfo.getCookieid();
 		return userService.getRecommend(cookieid);
 	}
