@@ -14,7 +14,7 @@ import cn.edu.swjtu.demo.Dao.CarColorMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
-import cn.edu.swjtu.demo.Dao.RecommendMapper;
+import cn.edu.swjtu.demo.Dao.RecommenderListMapper;
 import cn.edu.swjtu.demo.Dao.UserChatMapper;
 import cn.edu.swjtu.demo.Dao.UserDriveMapper;
 import cn.edu.swjtu.demo.Dao.UserFavoriteMapper;
@@ -37,8 +37,8 @@ import cn.edu.swjtu.demo.Pojo.CarPicture;
 import cn.edu.swjtu.demo.Pojo.CarPictureExample;
 import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
-import cn.edu.swjtu.demo.Pojo.Recommend;
-import cn.edu.swjtu.demo.Pojo.RecommendExample;
+import cn.edu.swjtu.demo.Pojo.RecommenderList;
+import cn.edu.swjtu.demo.Pojo.RecommenderListExample;
 import cn.edu.swjtu.demo.Pojo.UserChat;
 import cn.edu.swjtu.demo.Pojo.UserDrive;
 import cn.edu.swjtu.demo.Pojo.UserFavorite;
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserFavoriteMapper userFavoriteMapper;
 	@Autowired
-	RecommendMapper recommendMapper;
+	RecommenderListMapper recommenderListMapper;
 	@Autowired
 	UserDriveMapper userDriveMapper;
 	@Autowired
@@ -331,14 +331,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<CarInfoWithBLOBs> getRecommend(String cookieid) {
 		try {
-			RecommendExample recommendExample = new RecommendExample();
+			RecommenderListExample recommendExample = new RecommenderListExample();
 			recommendExample.or().andCookieidEqualTo(cookieid);
-			List<Recommend> pids = recommendMapper.selectByExample(recommendExample);
+			List<RecommenderList> pids = recommenderListMapper.selectByExample(recommendExample);
 			if (pids.size() != 0) {
-				String[] pidList = Utils.splitString(pids.get(0).getPid());
+				List<String> pidList = Utils.splitJson(pids.get(0).getRecommenderPids());
 				List<CarInfoWithBLOBs> result = new ArrayList<CarInfoWithBLOBs>();
-				for (int i = 0; i < pidList.length; i++) {
-					Long pid = Long.parseLong(pidList[i]);
+				for (int i = 0; i < pidList.size(); i++) {
+					Long pid = Long.parseLong(pidList.get(i));
 					CarInfoExample carInfoExample = new CarInfoExample();
 					carInfoExample.or().andPidEqualTo(pid);
 					result.addAll(carInfoMapper.selectByExampleWithBLOBs(carInfoExample));
