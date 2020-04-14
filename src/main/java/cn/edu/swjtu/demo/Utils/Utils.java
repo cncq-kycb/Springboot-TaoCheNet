@@ -3,6 +3,8 @@ package cn.edu.swjtu.demo.Utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -21,6 +23,17 @@ public class Utils {
 	public static String[] splitString(String input) {
 		String[] temp = input.split(",");
 		return temp;
+	}
+
+	public static List<String> splitJson(String input) {
+		input = input.replace("\\", "").replace(":", "").replace(",", "").replace("{", "").replace("}", "")
+				.replace("\"", "");
+		String[] temp = input.split(" ");
+		List<String> result = new ArrayList<String>();
+		for (int i = 0; i < temp.length; i += 2) {
+			result.add(temp[i]);
+		}
+		return result;
 	}
 
 	public static String cmdCall(String lang, String file) {
