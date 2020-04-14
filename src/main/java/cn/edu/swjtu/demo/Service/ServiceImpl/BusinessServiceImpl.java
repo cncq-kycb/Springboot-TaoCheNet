@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.CarBusinessMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
+import cn.edu.swjtu.demo.Dao.RecommendBusinessMapper;
 import cn.edu.swjtu.demo.Dao.RecommendMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
@@ -16,10 +17,13 @@ import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.Recommend;
+import cn.edu.swjtu.demo.Pojo.RecommendBusiness;
+import cn.edu.swjtu.demo.Pojo.RecommendBusinessExample;
 import cn.edu.swjtu.demo.Pojo.RecommendExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Service.BusinessService;
+import cn.edu.swjtu.demo.Utils.Utils;
 
 @Component
 public class BusinessServiceImpl implements BusinessService {
@@ -31,7 +35,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Autowired
 	CarInfoMapper carInfoMapper;
 	@Autowired
-	RecommendMapper recommendMapper;
+	RecommendBusinessMapper recommendBusinessMapper;
 
 	@Override
 	public List<UserInfo> getAllRecommendUsers(String cookieid) {
@@ -48,11 +52,24 @@ public class BusinessServiceImpl implements BusinessService {
 				List<CarInfo> carInfos = carInfoMapper.selectByExample(carInfoExample);
 				if (carInfos.size() != 0) {
 					for (CarInfo carInfo : carInfos) {
-						RecommendExample example = new RecommendExample();
-						example.or().andPidEqualTo(carInfo.getPid());
-						List<Recommend> temp = recommendMapper.selectByExample(example);
-						for (Recommend recommend : temp) {
-							userCookieids.add(recommend.getCookieid());
+						RecommendBusinessExample recommendBusinessExample = new RecommendBusinessExample();
+						recommendBusinessExample.or().andPidEqualTo(carInfo.getPid().toString());
+						List<RecommendBusiness> recommendBusinesses = recommendBusinessMapper
+								.selectByExample(recommendBusinessExample);
+						for (RecommendBusiness item : recommendBusinesses) {
+							List<String> cookieids = Utils.splitJson(item.getRecommenderCookieids());
+							for (int i = 0; i < cookieids.size(); i++) {
+								Boolean flag = true;
+								for (String cookieid_exist : userCookieids) {
+									if (cookieid_exist.equals(cookieids.get(i))) {
+										flag = false;
+										break;
+									}
+								}
+								if (flag) {
+									userCookieids.add(cookieids.get(i));
+								}
+							}
 						}
 					}
 					for (String userCookieid : userCookieids) {
