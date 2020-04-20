@@ -32,6 +32,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Springboot定时任务 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- 资源配置框架 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
