@@ -47,10 +47,11 @@ public class Utils {
 			br = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String line = null;
 			StringBuilder sb = new StringBuilder();
-			while ((line = br.readLine()) != null) {
+			while (br.readLine() != null) {
+				line = br.readLine();
 				sb.append(line + "\n");
 			}
-			System.out.println();
+			System.out.println("Call function success");
 			// process.waitFor();
 			return sb.toString();
 		} catch (IOException e) {
