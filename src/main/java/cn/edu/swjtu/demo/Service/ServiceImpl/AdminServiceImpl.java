@@ -1,9 +1,11 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
@@ -27,6 +29,8 @@ public class AdminServiceImpl implements AdminService {
 	UserTypeMapper userTypeMapper;
 	@Autowired
 	UserPermissionMapper userPermissionMapper;
+
+	private boolean scheduledSwitch = false;
 
 	@Override
 	public List<UserInfo> getAllUsers() {
@@ -137,12 +141,26 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String setTimer() {
-		return Utils.cmdCall("python", "");
+		// return Utils.cmdCall("python", "");
+		if (scheduledSwitch == false) {
+			scheduledSwitch = true;
+			return "已开启定时任务";
+		}
+		scheduledSwitch = false;
+		return "已关闭定时任务";
 	}
 
 	@Override
 	public String trainModel() {
 		return Utils.cmdCall("python", "");
+	}
+
+	// 1000 * n = n秒调度间隔, 次数表示30min调度一次
+	@Scheduled(fixedRate = 1000 * 60 * 30)
+	private void scheduledTask() {
+		if (scheduledSwitch == true) {
+			// TODO: 插入定时任务
+		}
 	}
 
 }
