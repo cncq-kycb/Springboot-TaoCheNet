@@ -454,7 +454,8 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<h3 class="bottom40 margin40">猜您喜欢</h3>
+								<h3 class="bottom40 margin40">猜您喜欢<div style="float:right"><a href="javascript:void(0)" onclick="changeRecommender()"><h5>换一批</h5></a></div></h3>
+								
 								<div id="recommend">
 								</div>
 							</div>
@@ -572,6 +573,9 @@
 						}
 						);
 			};
+			function changeRecommender(){
+				window.location.reload();
+			}
 		</script>
 	</body>
 </html>
