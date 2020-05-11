@@ -589,7 +589,6 @@
 			function details(pid){
 
 							$("#recommendTitle").html('同款推荐');
-							
 							var url2 = '/getRecommendCarList?pid='+pid;
 							$.get(
 									url2,
@@ -602,6 +601,12 @@
 											item.pid + ")\">" +
 											item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
 											"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" )\"><span style=\"font-size:15px;color:#F00\">" + item.price +
+											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
+										}
+										old +="<h3>&ensp;</h3><h3>历史成交价</h3><h3>&ensp;</h3>"
+										for(i in data.RecordPrice){
+											var item = data.RecordPrice[i];
+											old += "<div class=\"row bottom20\"> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><div style=\"float:left;\"	><span style=\"font-size:15px;color:#F00\">" + item +
 											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 										}
 										$("#recommendDetails").html(old);
