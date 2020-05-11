@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cn.edu.swjtu.demo.Pojo.TransactionRecord;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPermission;
 import cn.edu.swjtu.demo.Pojo.UserType;
@@ -37,5 +38,8 @@ public interface AdminService {
 
 	// 更新模型，1成功，否则失败
 	String trainModel();
+
+	// 获取交易记录，1为推荐交易，0为非推荐交易
+	List<TransactionRecord> getTransactionRecords(Integer transactionType);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.edu.swjtu.demo.Pojo.TransactionRecord;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPermission;
 import cn.edu.swjtu.demo.Pojo.UserType;
@@ -24,6 +25,20 @@ public class AdminController {
 	@ResponseBody
 	public List<UserInfo> getAllUsers() {
 		return adminService.getAllUsers();
+	}
+
+	// 推荐型查询交易记录
+	@GetMapping(value = "/getRecommendTransactionRecords")
+	@ResponseBody
+	public List<TransactionRecord> getRecommendTransactionRecords() {
+		return adminService.getTransactionRecords(1);
+	}
+
+	// 非推荐型查询交易记录
+	@GetMapping(value = "/getTransactionRecords")
+	@ResponseBody
+	public List<TransactionRecord> getTransactionRecords() {
+		return adminService.getTransactionRecords(0);
 	}
 
 	// 按cookieid获取全部用户信息

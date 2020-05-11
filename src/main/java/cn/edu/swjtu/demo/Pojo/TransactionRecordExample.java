@@ -415,6 +415,66 @@ public class TransactionRecordExample {
             addCriterion("cookieid not between", value1, value2, "cookieid");
             return (Criteria) this;
         }
+
+        public Criteria andTransactionTypeIsNull() {
+            addCriterion("transaction_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeIsNotNull() {
+            addCriterion("transaction_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeEqualTo(Integer value) {
+            addCriterion("transaction_type =", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeNotEqualTo(Integer value) {
+            addCriterion("transaction_type <>", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeGreaterThan(Integer value) {
+            addCriterion("transaction_type >", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("transaction_type >=", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeLessThan(Integer value) {
+            addCriterion("transaction_type <", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("transaction_type <=", value, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeIn(List<Integer> values) {
+            addCriterion("transaction_type in", values, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeNotIn(List<Integer> values) {
+            addCriterion("transaction_type not in", values, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeBetween(Integer value1, Integer value2) {
+            addCriterion("transaction_type between", value1, value2, "transactionType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("transaction_type not between", value1, value2, "transactionType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

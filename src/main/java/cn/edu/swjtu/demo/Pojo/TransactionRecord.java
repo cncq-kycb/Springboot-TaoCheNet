@@ -14,6 +14,8 @@ public class TransactionRecord {
 
     private String cookieid;
 
+    private Integer transactionType;
+
     public Long getRecordId() {
         return recordId;
     }
@@ -52,5 +54,13 @@ public class TransactionRecord {
 
     public void setCookieid(String cookieid) {
         this.cookieid = cookieid == null ? null : cookieid.trim();
+    }
+
+    public Integer getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(Integer transactionType) {
+        this.transactionType = transactionType;
     }
 }
