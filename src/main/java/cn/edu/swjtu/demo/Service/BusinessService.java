@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public interface BusinessService {
 	// 获取推荐用户目标
 	List<UserInfo> getAllRecommendUsers(String cookieid);
 
+	// 按车辆获取推荐用户目标
+	List<UserInfo> getAllRecommendUsersByPid(String pid);
+
 	// 获取上架车辆
 	List<CarInfoWithBLOBs> getAllSellingCars(String cookieid);
 
@@ -22,4 +26,8 @@ public interface BusinessService {
 
 	// 获取商家信息
 	CarBusiness getCarBusiness(String cookieid);
+
+	// 获取用户近期历史行为
+	HashMap<String, List> getUserHistory(String cookieid);
+
 }

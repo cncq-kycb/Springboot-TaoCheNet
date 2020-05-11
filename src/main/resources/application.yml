@@ -5,9 +5,9 @@ server:
 spring:
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/58?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
-      username: root
-      password: haber8023
+      url: jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/58?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+      username: 'spring58'
+      password: 'qwe123!@#'
       max-idle: 10
       max-wait: 10000
       min-idle: 5

@@ -1,6 +1,7 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,12 @@ import org.springframework.stereotype.Component;
 import cn.edu.swjtu.demo.Dao.CarBusinessMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.RecommendBusinessMapper;
+import cn.edu.swjtu.demo.Dao.UserChatMapper;
+import cn.edu.swjtu.demo.Dao.UserDriveMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
+import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
+import cn.edu.swjtu.demo.Dao.UserSearchPostMapper;
+import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarBusinessExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
@@ -17,8 +23,18 @@ import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.RecommendBusiness;
 import cn.edu.swjtu.demo.Pojo.RecommendBusinessExample;
+import cn.edu.swjtu.demo.Pojo.UserChat;
+import cn.edu.swjtu.demo.Pojo.UserChatExample;
+import cn.edu.swjtu.demo.Pojo.UserDrive;
+import cn.edu.swjtu.demo.Pojo.UserDriveExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
+import cn.edu.swjtu.demo.Pojo.UserInquirePost;
+import cn.edu.swjtu.demo.Pojo.UserInquirePostExample;
+import cn.edu.swjtu.demo.Pojo.UserSearchPost;
+import cn.edu.swjtu.demo.Pojo.UserSearchPostExample;
+import cn.edu.swjtu.demo.Pojo.UserViewPost;
+import cn.edu.swjtu.demo.Pojo.UserViewPostExample;
 import cn.edu.swjtu.demo.Service.BusinessService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -33,6 +49,16 @@ public class BusinessServiceImpl implements BusinessService {
 	CarInfoMapper carInfoMapper;
 	@Autowired
 	RecommendBusinessMapper recommendBusinessMapper;
+	@Autowired
+	UserSearchPostMapper userSearchPostMapper;
+	@Autowired
+	UserViewPostMapper userViewPostMapper;
+	@Autowired
+	UserInquirePostMapper userInquirePostMapper;
+	@Autowired
+	UserDriveMapper userDriveMapper;
+	@Autowired
+	UserChatMapper userChatMapper;
 
 	@Override
 	public List<UserInfo> getAllRecommendUsers(String cookieid) {
@@ -79,6 +105,33 @@ public class BusinessServiceImpl implements BusinessService {
 				return new ArrayList<UserInfo>();
 			}
 			return null;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<UserInfo> getAllRecommendUsersByPid(String pid) {
+		List<UserInfo> result = new ArrayList<UserInfo>();
+		try {
+			RecommendBusinessExample recommendBusinessExample = new RecommendBusinessExample();
+			recommendBusinessExample.or().andPidEqualTo(pid);
+			List<RecommendBusiness> recommendBusinesses = recommendBusinessMapper
+					.selectByExampleWithBLOBs(recommendBusinessExample);
+			if (recommendBusinesses.size() != 0) {
+				String recommender_cookieids = recommendBusinesses.get(0).getRecommenderCookieids();
+				List<String> cookieids = Utils.splitJson(recommender_cookieids);
+				for (String cookieid : cookieids) {
+					UserInfoExample userInfoExample = new UserInfoExample();
+					userInfoExample.or().andCookieidEqualTo(cookieid);
+					List<UserInfo> userInfos = userInfoMapper.selectByExample(userInfoExample);
+					if (userInfos.size() != 0) {
+						result.add(userInfos.get(0));
+					}
+				}
+			}
+			return result;
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
@@ -141,6 +194,37 @@ public class BusinessServiceImpl implements BusinessService {
 			CarBusiness carBusiness = new CarBusiness();
 			carBusiness.setSid(-1);
 			return carBusiness;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	@Override
+	public HashMap<String, List> getUserHistory(String cookieid) {
+		HashMap<String, List> data = new HashMap<String, List>();
+		UserSearchPostExample userSearchPostExample = new UserSearchPostExample();
+		userSearchPostExample.or().andCookieidEqualTo(cookieid);
+		UserViewPostExample userViewPostExample = new UserViewPostExample();
+		userViewPostExample.or().andCookieidEqualTo(cookieid);
+		UserInquirePostExample userInquirePostExample = new UserInquirePostExample();
+		userInquirePostExample.or().andCookieidEqualTo(cookieid);
+		UserDriveExample userDriveExample = new UserDriveExample();
+		userDriveExample.or().andCookieidEqualTo(cookieid);
+		UserChatExample userChatExample = new UserChatExample();
+		userChatExample.or().andCookieidEqualTo(cookieid);
+		try {
+			List<UserSearchPost> userSearchPosts = userSearchPostMapper.selectByExample(userSearchPostExample);
+			List<UserViewPost> userViewPosts = userViewPostMapper.selectByExample(userViewPostExample);
+			List<UserInquirePost> userInquirePosts = userInquirePostMapper.selectByExample(userInquirePostExample);
+			List<UserDrive> userDrives = userDriveMapper.selectByExample(userDriveExample);
+			List<UserChat> userChats = userChatMapper.selectByExample(userChatExample);
+			data.put("UserSearch", userSearchPosts);
+			data.put("UserView", userViewPosts);
+			data.put("UserInquire", userInquirePosts);
+			data.put("UserDrive", userDrives);
+			data.put("UserChat", userChats);
+			return data;
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
