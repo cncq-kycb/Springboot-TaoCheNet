@@ -99,7 +99,6 @@ public class AdminController {
 		return adminService.setTimer();
 	}
 
-	// TODO
 	// 更新模型
 	@GetMapping(value = "/trainModel")
 	@ResponseBody

@@ -190,14 +190,14 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String trainModel() {
-		return Utils.cmdCall("python", "");
+		return Utils.cmdCall("python", "F:\\QMDownload\\58RecommendationRank\\trainer.py");
 	}
 
 	// 1000 * n = n秒调度间隔, 次数表示30min调度一次
 	@Scheduled(fixedRate = 1000 * 60 * 30)
 	private void scheduledTask() {
 		if (scheduledSwitch == true) {
-			// TODO: 插入定时任务
+			Utils.cmdCall("python", "F:\\QMDownload\\58RecommendationRank\\trainer.py");
 		}
 	}
 
