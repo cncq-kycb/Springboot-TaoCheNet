@@ -1,7 +1,9 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.CarPictureMapper;
 import cn.edu.swjtu.demo.Dao.CarSeriesMapper;
 import cn.edu.swjtu.demo.Dao.RecommenderListMapper;
+import cn.edu.swjtu.demo.Dao.TransactionRecordMapper;
 import cn.edu.swjtu.demo.Dao.UserChatMapper;
 import cn.edu.swjtu.demo.Dao.UserDriveMapper;
 import cn.edu.swjtu.demo.Dao.UserFavoriteMapper;
@@ -39,6 +42,8 @@ import cn.edu.swjtu.demo.Pojo.CarSeries;
 import cn.edu.swjtu.demo.Pojo.CarSeriesExample;
 import cn.edu.swjtu.demo.Pojo.RecommenderList;
 import cn.edu.swjtu.demo.Pojo.RecommenderListExample;
+import cn.edu.swjtu.demo.Pojo.TransactionRecord;
+import cn.edu.swjtu.demo.Pojo.TransactionRecordExample;
 import cn.edu.swjtu.demo.Pojo.UserChat;
 import cn.edu.swjtu.demo.Pojo.UserDrive;
 import cn.edu.swjtu.demo.Pojo.UserFavorite;
@@ -84,6 +89,8 @@ public class UserServiceImpl implements UserService {
 	UserDriveMapper userDriveMapper;
 	@Autowired
 	UserChatMapper userChatMapper;
+	@Autowired
+	TransactionRecordMapper transactionRecordMapper;
 
 	@Override
 	public boolean login(String username, String password) {
@@ -439,6 +446,41 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			System.err.println(e);
 			return new ArrayList<CarInfoWithBLOBs>();
+		}
+	}
+
+	@Override
+	public HashMap<String, Object> getRecommendCarList(Long pid) {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		List<BigDecimal> recordPrice = new ArrayList<BigDecimal>();
+		CarInfoExample carInfoExample = new CarInfoExample();
+		carInfoExample.or().andPidEqualTo(pid);
+		try {
+			List<CarInfoWithBLOBs> carInfoWithBLOBs = carInfoMapper.selectByExampleWithBLOBs(carInfoExample);
+			if (carInfoWithBLOBs.size() != 0) {
+				CarInfo carInfo = carInfoWithBLOBs.get(0);
+				carInfoExample.clear();
+				carInfoExample.or().andSeriesIdEqualTo(carInfo.getSeriesId()).andBrandIdEqualTo(carInfo.getBrandId());
+				List<CarInfoWithBLOBs> carInfos = carInfoMapper.selectByExampleWithBLOBs(carInfoExample);
+				if (carInfos.size() != 0) {
+					data.put("CarInfo", carInfos);
+					// 历史成交价
+					for (CarInfoWithBLOBs item : carInfos) {
+						TransactionRecordExample transactionRecordExample = new TransactionRecordExample();
+						transactionRecordExample.or().andPidEqualTo(item.getPid());
+						List<TransactionRecord> transactionRecords = transactionRecordMapper
+								.selectByExample(transactionRecordExample);
+						if (transactionRecords.size() != 0) {
+							recordPrice.add(transactionRecords.get(0).getPrice());
+						}
+					}
+					data.put("RecordPrice", recordPrice);
+				}
+			}
+			return data;
+		} catch (Exception e) {
+			System.err.println(e);
+			return data;
 		}
 	}
 

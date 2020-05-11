@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public interface UserService {
 
 	// 记录用户咨询日志
 	void inquireLog(String cookieid, Long pid);
-	
+
 	// 记录用申请试驾日志
 	int driveLog(String cookieid, Long pid);
 
@@ -59,7 +60,7 @@ public interface UserService {
 
 	// 获取随机推荐结果
 	List<CarInfoWithBLOBs> getRecommend();
-	
+
 	// 获取推荐
 	List<CarInfoWithBLOBs> getRecommend(String cookieid);
 
@@ -77,5 +78,8 @@ public interface UserService {
 
 	// 获取收藏
 	List<CarInfoWithBLOBs> getFavoriteList(String cookieid);
+
+	// 获取同车型历史价格与信息
+	HashMap<String, Object> getRecommendCarList(Long pid);
 
 }

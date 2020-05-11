@@ -1,6 +1,7 @@
 package cn.edu.swjtu.demo.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,13 @@ public class UserController {
 	UserService userService;
 	@Autowired
 	PostService postService;
+
+	// 获取同车型历史价格与信息
+	@GetMapping(value = "/getRecommendCarList")
+	@ResponseBody
+	public HashMap<String, Object> getRecommendCarList(@RequestParam(required = true, value = "pid") Long pid) {
+		return userService.getRecommendCarList(pid);
+	}
 
 	// 浏览帖子详情
 	@GetMapping(value = "/getDetails")
@@ -65,13 +73,13 @@ public class UserController {
 		}
 		return -1;
 	}
-	
+
 	// 收藏列表
 	@GetMapping(value = "/getFavoriteList")
 	@ResponseBody
 	public List<CarInfoWithBLOBs> getFavoriteList(HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
-		if(userInfo.getCookieid()!=null) {
+		if (userInfo.getCookieid() != null) {
 			return userService.getFavoriteList(userInfo.getCookieid());
 		}
 		return new ArrayList<CarInfoWithBLOBs>();
@@ -95,7 +103,7 @@ public class UserController {
 		}
 		return userService.getBusinessTelFromPost(pid);
 	}
-	
+
 	// 申请试驾
 	@GetMapping(value = "/driveRequest")
 	@ResponseBody
@@ -107,7 +115,7 @@ public class UserController {
 		}
 		return 0;
 	}
-	
+
 	// 发起微聊
 	@GetMapping(value = "/chatRequest")
 	@ResponseBody
