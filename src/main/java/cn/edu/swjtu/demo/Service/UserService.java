@@ -22,7 +22,7 @@ public interface UserService {
 	UserInfo getUserInfo(String username);
 
 	// 记录用户浏览日志
-	void viewLog(String cookieid, Long pid);
+	void viewLog(String cookieid, Long pid, Integer viewType);
 
 	// 记录用户咨询日志
 	void inquireLog(String cookieid, Long pid);

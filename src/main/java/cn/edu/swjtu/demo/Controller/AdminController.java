@@ -41,6 +41,13 @@ public class AdminController {
 		return adminService.getTransactionRecords(0);
 	}
 
+	// 计算推荐点击率
+	@GetMapping(value = "/getRecommendClickRate")
+	@ResponseBody
+	public double gerRecommendClickRate() {
+		return adminService.getRecommendClickRate() * 100;
+	}
+
 	// 按cookieid获取全部用户信息
 	@GetMapping(value = "/getUserInfoByCookieid")
 	@ResponseBody

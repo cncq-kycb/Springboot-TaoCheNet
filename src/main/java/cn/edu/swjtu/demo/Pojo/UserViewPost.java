@@ -11,6 +11,8 @@ public class UserViewPost {
 
     private Date time;
 
+    private Integer viewType;
+
     public Long getRecordId() {
         return recordId;
     }
@@ -41,5 +43,13 @@ public class UserViewPost {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(Integer viewType) {
+        this.viewType = viewType;
     }
 }
