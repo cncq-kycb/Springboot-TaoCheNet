@@ -42,4 +42,7 @@ public interface AdminService {
 	// 获取交易记录，1为推荐交易，0为非推荐交易
 	List<TransactionRecord> getTransactionRecords(Integer transactionType);
 
+	// 计算推荐点击率
+	double getRecommendClickRate();
+
 }

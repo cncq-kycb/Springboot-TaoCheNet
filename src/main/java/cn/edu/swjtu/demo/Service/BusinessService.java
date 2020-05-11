@@ -28,6 +28,7 @@ public interface BusinessService {
 	CarBusiness getCarBusiness(String cookieid);
 
 	// 获取用户近期历史行为
+	@SuppressWarnings("rawtypes")
 	HashMap<String, List> getUserHistory(String cookieid);
 
 }

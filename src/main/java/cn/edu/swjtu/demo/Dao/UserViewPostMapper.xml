@@ -6,6 +6,7 @@
     <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
     <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="view_type" jdbcType="INTEGER" property="viewType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    record_id, cookieid, pid, time
+    record_id, cookieid, pid, time, view_type
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.UserViewPostExample" resultMap="BaseResultMap">
     select
@@ -90,9 +91,9 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.UserViewPost">
     insert into user_view_post (record_id, cookieid, pid, 
-      time)
+      time, view_type)
     values (#{recordId,jdbcType=BIGINT}, #{cookieid,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
-      #{time,jdbcType=TIMESTAMP})
+      #{time,jdbcType=TIMESTAMP}, #{viewType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.UserViewPost">
     insert into user_view_post
@@ -109,6 +110,9 @@
       <if test="time != null">
         time,
       </if>
+      <if test="viewType != null">
+        view_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="recordId != null">
@@ -122,6 +126,9 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewType != null">
+        #{viewType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.viewType != null">
+        view_type = #{record.viewType,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,7 +166,8 @@
     set record_id = #{record.recordId,jdbcType=BIGINT},
       cookieid = #{record.cookieid,jdbcType=VARCHAR},
       pid = #{record.pid,jdbcType=BIGINT},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      view_type = #{record.viewType,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

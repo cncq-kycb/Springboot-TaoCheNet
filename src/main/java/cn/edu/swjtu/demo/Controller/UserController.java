@@ -45,7 +45,22 @@ public class UserController {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		if (userInfo != null) {
 			// 浏览帖子埋点
-			userService.viewLog(userInfo.getCookieid(), pid);
+			userService.viewLog(userInfo.getCookieid(), pid, 0);
+			// 获取收藏情况
+			return postService.getPostDetails(userInfo.getCookieid(), pid);
+		}
+		return postService.getPostDetails(pid);
+	}
+
+	// 浏览推荐帖子详情
+	@GetMapping(value = "/getRecommendDetails")
+	@ResponseBody
+	public CarInfoWithBLOBs getRecommendDetails(@RequestParam(required = true, value = "pid") Long pid,
+			HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo != null) {
+			// 浏览帖子埋点
+			userService.viewLog(userInfo.getCookieid(), pid, 1);
 			// 获取收藏情况
 			return postService.getPostDetails(userInfo.getCookieid(), pid);
 		}

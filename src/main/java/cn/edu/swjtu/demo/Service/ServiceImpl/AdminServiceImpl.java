@@ -11,6 +11,7 @@ import cn.edu.swjtu.demo.Dao.TransactionRecordMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserPermissionMapper;
 import cn.edu.swjtu.demo.Dao.UserTypeMapper;
+import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
 import cn.edu.swjtu.demo.Pojo.TransactionRecord;
 import cn.edu.swjtu.demo.Pojo.TransactionRecordExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
@@ -19,6 +20,7 @@ import cn.edu.swjtu.demo.Pojo.UserPermission;
 import cn.edu.swjtu.demo.Pojo.UserPermissionExample;
 import cn.edu.swjtu.demo.Pojo.UserType;
 import cn.edu.swjtu.demo.Pojo.UserTypeExample;
+import cn.edu.swjtu.demo.Pojo.UserViewPostExample;
 import cn.edu.swjtu.demo.Service.AdminService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -33,6 +35,8 @@ public class AdminServiceImpl implements AdminService {
 	UserPermissionMapper userPermissionMapper;
 	@Autowired
 	TransactionRecordMapper transactionRecordMapper;
+	@Autowired
+	UserViewPostMapper userViewPostMapper;
 
 	private boolean scheduledSwitch = false;
 
@@ -153,6 +157,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public double getRecommendClickRate() {
+		try {
+			UserViewPostExample userViewPostExample = new UserViewPostExample();
+			userViewPostExample.or().andViewTypeEqualTo(1);
+			double recommendClickTimes = userViewPostMapper.countByExample(userViewPostExample);
+			userViewPostExample.clear();
+			userViewPostExample.or();
+			double clickTimes = userViewPostMapper.countByExample(userViewPostExample);
+			return recommendClickTimes / clickTimes;
+		} catch (Exception e) {
+			System.err.println(e);
+			return -1;
+		}
+	}
+
+	@Override
 	public String updateRecommendOnHand() {
 		return Utils.cmdCall("python", "");
 	}
@@ -170,14 +190,14 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String trainModel() {
-		return Utils.cmdCall("python", "");
+		return Utils.cmdCall("python", "F:\\QMDownload\\58RecommendationRank\\trainer.py");
 	}
 
 	// 1000 * n = n秒调度间隔, 次数表示30min调度一次
 	@Scheduled(fixedRate = 1000 * 60 * 30)
 	private void scheduledTask() {
 		if (scheduledSwitch == true) {
-			// TODO: 插入定时任务
+			Utils.cmdCall("python", "F:\\QMDownload\\58RecommendationRank\\trainer.py");
 		}
 	}
 

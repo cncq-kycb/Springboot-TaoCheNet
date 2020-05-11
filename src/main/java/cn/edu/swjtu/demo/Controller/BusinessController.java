@@ -39,6 +39,7 @@ public class BusinessController {
 	}
 
 	// 获取用户近期历史行为
+	@SuppressWarnings("rawtypes")
 	@GetMapping(value = "getUserHistory")
 	@ResponseBody
 	public HashMap<String, List> getUserHistory(@RequestParam(required = true, value = "cookieid") String cookieid) {

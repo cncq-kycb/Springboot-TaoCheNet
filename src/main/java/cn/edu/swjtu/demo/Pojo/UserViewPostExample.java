@@ -354,6 +354,66 @@ public class UserViewPostExample {
             addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
+
+        public Criteria andViewTypeIsNull() {
+            addCriterion("view_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeIsNotNull() {
+            addCriterion("view_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeEqualTo(Integer value) {
+            addCriterion("view_type =", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeNotEqualTo(Integer value) {
+            addCriterion("view_type <>", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeGreaterThan(Integer value) {
+            addCriterion("view_type >", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("view_type >=", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeLessThan(Integer value) {
+            addCriterion("view_type <", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("view_type <=", value, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeIn(List<Integer> values) {
+            addCriterion("view_type in", values, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeNotIn(List<Integer> values) {
+            addCriterion("view_type not in", values, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeBetween(Integer value1, Integer value2) {
+            addCriterion("view_type between", value1, value2, "viewType");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("view_type not between", value1, value2, "viewType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

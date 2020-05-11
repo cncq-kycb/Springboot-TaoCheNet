@@ -9,17 +9,17 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserViewPostMapper {
-    long countByExample(UserViewPostExample example);
+	long countByExample(UserViewPostExample example);
 
-    int deleteByExample(UserViewPostExample example);
+	int deleteByExample(UserViewPostExample example);
 
-    int insert(UserViewPost record);
+	int insert(UserViewPost record);
 
-    int insertSelective(UserViewPost record);
+	int insertSelective(UserViewPost record);
 
-    List<UserViewPost> selectByExample(UserViewPostExample example);
+	List<UserViewPost> selectByExample(UserViewPostExample example);
 
-    int updateByExampleSelective(@Param("record") UserViewPost record, @Param("example") UserViewPostExample example);
+	int updateByExampleSelective(@Param("record") UserViewPost record, @Param("example") UserViewPostExample example);
 
-    int updateByExample(@Param("record") UserViewPost record, @Param("example") UserViewPostExample example);
+	int updateByExample(@Param("record") UserViewPost record, @Param("example") UserViewPostExample example);
 }

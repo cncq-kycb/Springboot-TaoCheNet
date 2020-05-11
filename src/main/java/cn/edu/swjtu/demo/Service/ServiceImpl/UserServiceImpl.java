@@ -125,11 +125,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void viewLog(String cookieid, Long pid) {
+	public void viewLog(String cookieid, Long pid, Integer viewType) {
 		UserViewPost record = new UserViewPost();
 		record.setCookieid(cookieid);
 		record.setPid(pid);
 		record.setTime(new Date());
+		record.setViewType(viewType);
 		try {
 			userViewPostMapper.insert(record);
 		} catch (Exception e) {
