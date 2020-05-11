@@ -41,7 +41,7 @@
 										window.location.href='login.html';
 									} else {
 										old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="admin_main.html">商家首页</a></li>'
-											+'<li class="dropdown megamenu-fw active"><a href="on_sale.html">在售车辆</a></li><li><a href="recommend_user.html">推荐用户</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+											+'<li class="dropdown megamenu-fw active"><a href="on_sale.html">在售车辆</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 										$("#navbar-menu").html(old);
 										var cookieid = user_info.cookieid;
 										cookieid = cookieid.replace(/\+/g, '%2B');
@@ -72,7 +72,7 @@
 														"</a></h4><p><span style=\"font-size:15px\">" +
 														subtitle +
 														"</span></p><span style=\"font-size:30px;color:#F00\"  class=\"like\">" + item.price +
-														"</span><span style=\"font-size:15px;color:#F00\">万</span></div></div></div></div>";
+														"</span><span style=\"font-size:15px;color:#F00\">万</span><div style=\"float:right;\"><a href=\"recommend_user.html?pid="+item.pid+"\"><button class=\"border_radius btn-blue\">查看推荐用户</button></a></div></div></div></div></div>";
 												}
 												$("#resultList").html(old);
 												$('#demo').jplist({

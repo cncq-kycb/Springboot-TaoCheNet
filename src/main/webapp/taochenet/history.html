@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>用户历史行为</title>
+
+<link rel="stylesheet" type="text/css" href="history/css/base.css">
+<link rel="stylesheet" type="text/css" href="history/css/tab.css">
+</head>
+<body>
+
+<div class="aui-nav-content-box">
+	<div class="aui-nav-list-box">
+		<ul>
+			<li class="aui-current">
+				<a href="#">微聊记录</a>
+			</li>
+			<li>
+				<a href="#">电话记录</a>
+			</li>
+			<li>
+				<a href="#">浏览记录</a>
+			</li>
+			<li>
+				<a href="#">试驾记录</a>
+			</li>
+			<li>
+				<a href="#">搜索记录</a>
+			</li>
+			<div style="float:right;"><br></div>
+		</ul>
+	</div>
+	<div class="aui-nav-list-tab">
+		<div class="aui-nav-list-item" style="display:block" id="chat">
+		</div>
+				<div class="aui-nav-list-item" id="tel">
+		</div>
+				<div class="aui-nav-list-item" id="view">
+
+		</div>
+
+
+		<div class="aui-nav-list-item" id="drive">
+
+		</div>
+		<div class="aui-nav-list-item" id="search">
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="history/js/jquery.min.js"></script>
+<script type="text/javascript">
+var query = window.location.search.substring(1);
+var cookieid = -1;
+var vars = query.split("&");
+for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == "cookieid"){
+        	cookieid = pair[1];
+     	   }
+}
+$.get(
+		"/getUserHistory?cookieid="+cookieid,
+		function(data){
+			
+			for(i in data.UserChat){
+				var userChat = data.UserChat[i];
+				var pid = userChat.pid;
+				var url = "/getDetails?pid=" + pid;
+				$.get(
+						url,
+						function(data) {
+							var chat="";
+							var name = data.name;
+							var src = data.src;
+							chat+='<div class="aui-page-list"><div class="aui-page-img"><a href="#"><img src="'+src
+							+'"></a></div><div class="aui-page-text"><h2><a href="#">'+name
+							+'</a></h2><p><em>'+userChat.time.substring(0,10)+' '+userChat.time.substring(11,19)+'</em></p></div></div>';
+							$("#chat").append(chat);
+						}
+					);
+			}			
+			for(i in data.UserInquire){
+				var userInquire = data.UserInquire[i];
+				var pid = userInquire.pid;
+				var url = "/getDetails?pid=" + pid;
+				$.get(
+						url,
+						function(data) {
+							var tel="";
+							var name = data.name;
+							var src = data.src;
+							tel+='<div class="aui-page-list"><div class="aui-page-img"><a href="#"><img src="'+src
+							+'"></a></div><div class="aui-page-text"><h2><a href="#">'+name
+							+'</a></h2><p><em>'+userInquire.time.substring(0,10)+' '+userInquire.time.substring(11,19)+'</em></p></div></div>';
+							$("#tel").append(tel);
+						}
+					);
+			}
+			for(i in data.UserView){
+				var userView = data.UserView[i];
+				var url = "/getDetails?pid=" + userView.pid;
+
+				$.get(
+						url,
+						function(data) {
+							var view="";
+							var name = data.name;
+							var src = data.src;
+							var href= "#";
+							view+='<div class="aui-page-list"><div class="aui-page-img"><a href="'+href+'"><img src="'+src
+							+'"></a></div><div class="aui-page-text"><h2><a href="'+href+'">'+name
+							+'</a></h2><p><em>'+userView.time.substring(0,10)+' '+userView.time.substring(11,19)+'</em></p></div></div>';
+							$("#view").append(view);
+						}
+					);
+			}
+			for(i in data.UserDrive){
+				var userDrive = data.UserDrive[i];
+				var pid = userDrive.pid;
+				var url = "/getDetails?pid=" + pid;
+				$.get(
+						url,
+						function(data) {
+							var drive="";
+							var name = data.name;
+							var src = data.src;
+							var href= "#";
+							drive+='<div class="aui-page-list"><div class="aui-page-img"><a href="'+href+'"><img src="'+src
+							+'"></a></div><div class="aui-page-text"><h2><a href="'+href+'">'+name
+							+'</a></h2><p><em>'+userDrive.time.substring(0,10)+' '+userDrive.time.substring(11,19)+'</em></p></div></div>';
+							$("#drive").append(drive);
+						}
+					);
+			}
+			
+			var search="";
+			for(i in data.UserSearch){
+				var userSearch = data.UserSearch[i];						
+							search+='<div class="aui-page-list"><div class="aui-page-text">颜色ID：'+userSearch.colorId+'&ensp;&ensp;排量：'+userSearch.paifang+'<br>里程：'+userSearch.lichengLeft+'~'+userSearch.lichengRight+'<br>价格：'+userSearch.priceLeft+'~'+userSearch.priceRight+'<p><em>'+userDrive.time.substring(0,10)+' '+userDrive.time.substring(11,19)+'</em></p></div></div>';			
+			}
+			$("#search").append(search);
+		});
+</script>
+<script type="text/javascript"> 
+//tab切换
+$(function(){
+	$('.aui-nav-list-box ul li').click(function(){
+		$(this).addClass('aui-current').siblings().removeClass('aui-current');
+		$('.aui-nav-list-tab>div:eq('+$(this).index()+')').show().siblings().hide();
+	})
+});
+
+//导航浮动
+$(function(){
+	var _line=parseInt($(window).height()/3);
+	$(window).scroll(function(){
+		if ($(window).scrollTop()>60) {
+			$('.aui-nav-list-box').css({'position':'fixed','top':0})
+		}else{
+			$('.aui-nav-list-box').css({'position':'','top':''})
+		};
+	});
+
+});
+</script>
+
+</body>
+</html>
+
