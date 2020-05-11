@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href=" fenye/css/styles.min.css" />
         <link href=" fenye/img/common/favicon.png" rel="shortcut icon" />
 		<link href="fenye/css/jplist.min.css" rel="stylesheet" type="text/css" />
-		
+		<link rel="stylesheet" href="syalert/syalert.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/reality-icon.css">
@@ -29,6 +29,7 @@
 <!-- js -->		
         <script src="js/jquery-2.1.4.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="syalert/syalert.min.js"></script>
 		<script type="text/javascript">
 			window.onload = function() {		
 				var json = {};
@@ -159,9 +160,9 @@
 						var old = $("#recommend").html();
 						for (i in list) {
 							var item = list[i];
-							old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+							old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"javascript:void(0);\" onclick=\"details(" +
 							item.pid + ")\"><img src=" + item.src +
-							" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+							" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"javascript:void(0);\" onclick=\"details(" +
 							item.pid + ")\">" +
 							item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
 							"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
@@ -465,6 +466,16 @@
 			</div>
 		</section>
 		<h2>&ensp;</h2>
+		<!-- 自定义弹窗 -->
+<div class="sy-alert sy-alert-model animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="confirm" sy-mask="true" id="alert4">
+  <div class="sy-title" id="recommendTitle"></div>
+  <div class="sy-content" id="recommendDetails"  style="height:300px;overflow-y:auto">
+  </div> 
+  <div class="sy-btn">
+    <button onClick="syalert.syhide('alert4')"></button>
+    <button onClick="syalert.syhide('alert4')">关闭</button>
+  </div> 
+</div>
 		<!-- footer -->
 		<footer class="box" id="footer">
 			<div class="center">			
@@ -537,7 +548,7 @@
 								old +=" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 									item.pid + ")\"\"><img src=" +
 									item.src +
-									" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" =\"details(" +
+									" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
 									item.pid + ")\">" +
 									title +
 									"</a></h4><p><span style=\"font-size:15px\">" +
@@ -575,6 +586,30 @@
 			function changeRecommender(){
 				window.location.reload();
 			};
+			function details(pid){
+
+							$("#recommendTitle").html('同款推荐');
+							
+							var url2 = '/getRecommendCarList?pid='+pid;
+							$.get(
+									url2,
+									function(data) {
+										var old="";
+										for(i in data.CarInfo){
+											var item = data.CarInfo[i];
+											old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"detail.html?pid="+item.pid+" \"><img src=" + item.src +
+											" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"javascript:void(0);\" onclick=\"details(" +
+											item.pid + ")\">" +
+											item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
+											"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" )\"><span style=\"font-size:15px;color:#F00\">" + item.price +
+											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
+										}
+										$("#recommendDetails").html(old);
+									}
+									);
+
+				syalert.syopen('alert4')
+			}
 		</script>
 	</body>
 </html>
