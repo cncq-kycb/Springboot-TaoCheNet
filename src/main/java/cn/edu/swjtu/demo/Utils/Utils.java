@@ -20,9 +20,18 @@ public class Utils {
 		return sb.toString();
 	}
 
-	public static String[] splitString(String input) {
-		String[] temp = input.split(",");
-		return temp;
+	public static List<Integer> getIndex(int bound) {
+		List<Integer> indexs = new ArrayList<Integer>();
+		Random rand = new Random();
+		for (int i = 0; i < 10; i++) {
+			Integer index = new Integer(rand.nextInt(bound));
+			if (!(indexs.contains(index))) {
+				indexs.add(index);
+			} else {
+				i--;
+			}
+		}
+		return indexs;
 	}
 
 	public static List<String> splitJson(String input) {
