@@ -200,6 +200,7 @@ public class BusinessServiceImpl implements BusinessService {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public HashMap<String, List> getUserHistory(String cookieid) {
 		HashMap<String, List> data = new HashMap<String, List>();
