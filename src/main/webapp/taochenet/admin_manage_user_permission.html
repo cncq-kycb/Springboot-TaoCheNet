@@ -36,7 +36,7 @@
 							window.location.href = 'login.html';
 						} else {
 							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="admin_main.html">管理员首页</a></li>'
-							+'<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li class="dropdown megamenu-fw active"><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+							+'<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li class="dropdown megamenu-fw active"><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="admin_deal.html">成交量监控</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 							$("#navbar-menu").html(old);
 							
 						}
@@ -260,7 +260,20 @@
 								data-control-action="paging"
 								data-control-animate-to-top="true">
 							</div>
-					
+																				<!-- items per page dropdown -->
+							<div 
+								class="jplist-drop-down" 
+								data-control-type="drop-down" 
+								data-control-name="paging" 
+								data-control-action="paging">
+								
+								<ul>
+									<li><span data-number="3"> 3 per page </span></li>
+									<li><span data-number="5"> 5 per page </span></li>
+									<li><span data-number="10" data-default="true"> 10 per page </span></li>
+									<li><span data-number="all"> view all </span></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<!-- end of demo -->

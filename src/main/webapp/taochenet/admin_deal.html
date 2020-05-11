@@ -31,48 +31,41 @@
 					function(data) {
 						var user_info = data;
 						var old = '';
-						if(user_info.name==null||user_info.userTypeId != '2'){
-							window.location.href='login.html';
+						if (user_info.name == null
+								|| user_info.userTypeId != '1') {
+							window.location.href = 'login.html';
 						} else {
-							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="admin_main.html">商家首页</a></li>'
-								+'<li><a href="on_sale.html">在售车辆</a></li><li class="dropdown megamenu-fw active"><a href="recommend_user.html">推荐用户</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="admin_main.html">管理员首页</a></li>'
+							+'<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li class="dropdown megamenu-fw active"><a href="admin_deal.html">成交量监控</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 							$("#navbar-menu").html(old);
+							
 						}
 					});
-    var query = window.location.search.substring(1);
-    var pid = -1;
-    var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
-            var pair = vars[i].split("=");
-            if(pair[0] == "pid"){
-         	   pid = pair[1];
-         	   }
-    }
+	action = "/getRecommendTransactionRecords";
 	$.get(
-			"/getAllRecommendUsers?pid="+pid,
+			action,
 			function(data){
 				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>用户名</th><th>昵称</th><th>年龄</th><th>手机号码</th><th>所在地</th><th>历史行为</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>cookieId</th></tr></thead><tbody>';
 				for(i in list){
 					var item = list[i];
-					var cookieid = item.cookieid+"";
 					var type;
-					if(item.userTypeId=='1'){type='管理员用户组';}
-					if(item.userTypeId=='2'){type='商家用户组';}
-					if(item.userTypeId=='3'){type='买家用户组';}
-					old += '<tr class="tbl-item"><td class="td-block"><p class="desc">'
-					+ item.username
-					+'</p></td><td class="td-block"><p>'
-					+ item.name
-					+'</p></td><td class="td-block"><p class="like">'
-					+ item.age
-					+'</p></td><td class="td-block"><p>'
-					+ item.tel
-					+'</p></td><td class="td-block"><p>'
-					+ item.location
-					+'</p></td><td class="td-block"><p><button type="button" class="border_radius btn-yellow text-uppercase" onclick=\'checkHistory("'+cookieid+'")\'>查看</button></p></td></tr>';
+
+				
+					old += '<tr class="tbl-item"><td class="td-block"><p class="title">'
+					+ item.recordId
+					+'</p></td><td class="td-block"><p class="desc"><a href="detail.html?pid='
+					+ item.pid
+					+'">点击跳转</a></p></td><td class="td-block"><p>'
+					+ item.price
+					+'</p></td><td class="td-block"><p class="desc">'
+					+ item.recordTime.substring(0,10)
+					+'</p></td><td class="td-block"><p class="title">'
+					+ item.cookieid
+					+'</p></td></tr>';
 				}
 				old += '</tbody></table>';
+				$("#table").html(old);
 				$("#table").html(old);
 				$('#demo').jplist({
 					
@@ -96,12 +89,31 @@
 					}
 				});
 			});
-	
-</script>
-		<script>
-			$('document').ready(function(){
-				$('#demo').jplist({
-				
+	action = "/getTransactionRecords";
+	$.get(
+			action,
+			function(data){
+				var list = data;
+				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>cookieId</th></tr></thead><tbody>';
+				for(i in list){
+					var item = list[i];
+					var type;
+					old += '<tr class="tbl-item"><td class="td-block"><p class="title">'
+					+ item.recordId
+					+'</p></td><td class="td-block"><p class="desc"><a href="detail.html?pid='
+					+ item.pid
+					+'">点击跳转</a></p></td><td class="td-block"><p>'
+					+ item.price
+					+'</p></td><td class="td-block"><p class="desc">'
+					+ item.recordTime.substring(0,10)
+					+'</p></td><td class="td-block"><p class="title">'
+					+ item.cookieid
+					+'</p></td></tr>';
+				}
+				old += '</tbody></table>';
+				$("#table2").html(old);
+				$('#demo2').jplist({
+					
 					itemsBox: '.demo-tbl tbody' 
 					,itemPath: '.tbl-item' 
 					,panelPath: '.jplist-panel'
@@ -122,12 +134,6 @@
 					}
 				});
 			});
-		</script>
-<script>
-function checkHistory(cookieid){
-	
-	window.open("history.html?cookieid="+encodeURIComponent(cookieid),"blank");   
-};
 </script>
 </head>
 <body>
@@ -171,8 +177,9 @@ function checkHistory(cookieid){
 
 	<!-- News Start -->
 	<section id="news-section-1" class="property-details padding_top">
+	
 			<div class="container" id="show-panel">
-
+			<h1>推荐成交记录</h1>
 							<!-- demo -->
 					<div id="demo" class="box jplist table-layout-2">
 					
@@ -187,6 +194,25 @@ function checkHistory(cookieid){
 							
 					
 							
+							<!-- filter by title -->
+							<div class="text-filter-box">
+							
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Title:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".title" 
+									type="text" 
+									value="" 
+									placeholder="按cookieID查找" 
+									data-control-type="textbox" 
+									data-control-name="title-filter" 
+									data-control-action="filter"
+								/>
+							</div>
 							
 							<!-- filter by description -->
 							<div class="text-filter-box">
@@ -201,7 +227,7 @@ function checkHistory(cookieid){
 									data-path=".desc" 
 									type="text" 
 									value="" 
-									placeholder="按用户名查找" 
+									placeholder="按日期查找" 
 									data-control-type="textbox" 
 									data-control-name="desc-filter" 
 									data-control-action="filter"
@@ -216,7 +242,7 @@ function checkHistory(cookieid){
 								data-control-name="paging" 
 								data-control-action="paging">
 							</div>
-								
+							
 							<!-- pagination -->
 							<div 
 								class="jplist-pagination" 
@@ -253,7 +279,7 @@ function checkHistory(cookieid){
 								data-control-name="paging" 
 								data-control-action="paging">
 							</div>
-								
+
 							<!-- pagination -->
 							<div 
 								class="jplist-pagination" 
@@ -282,8 +308,140 @@ function checkHistory(cookieid){
 				</div>
 				<h2>&ensp;</h2>
 	</section>
-	<!-- News End -->
+	<!-- News End --><hr size="30" />
+	<!-- News Start -->
+	<section id="news-section-1" class="property-details padding_top">
+	
+			<div class="container" id="show-panel">
+			<h1>普通成交记录</h1>
+							<!-- demo -->
+					<div id="demo2" class="box jplist table-layout-2">
+					
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-top">					
+							
+					
+							
+							<!-- filter by title -->
+							<div class="text-filter-box">
+							
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Title:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".title" 
+									type="text" 
+									value="" 
+									placeholder="按cookieID查找" 
+									data-control-type="textbox" 
+									data-control-name="title-filter" 
+									data-control-action="filter"
+								/>
+							</div>
+							
+							<!-- filter by description -->
+							<div class="text-filter-box">
+								
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Description:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".desc" 
+									type="text" 
+									value="" 
+									placeholder="按日期查找" 
+									data-control-type="textbox" 
+									data-control-name="desc-filter" 
+									data-control-action="filter"
+								/>	
+							</div>	
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="当前第{current}页，共{pages}页" 
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
+							
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>	
+						</div>
+						
+						<!-- data --> 
+						<div class="box text-shadow" id="table2">
+							
+						</div>
+						<!-- end of data -->
+						
+						<div class="box jplist-no-results text-shadow align-center">
+							<p>No results found</p>
+						</div>
+						
+						<!-- ios button: show/hide panel -->
+						<div class="jplist-ios-button">
+							<i class="fa fa-sort"></i>
+							jPList Actions
+						</div>
+						
+						<!-- panel -->
+						<div class="jplist-panel box panel-bottom">						
+							
+							<!-- pagination results -->
+							<div 
+								class="jplist-label" 
+								data-type="{start} - {end} 条，共{all}条记录"
+								data-control-type="pagination-info" 
+								data-control-name="paging" 
+								data-control-action="paging">
+							</div>
 
+							<!-- pagination -->
+							<div 
+								class="jplist-pagination" 
+								data-control-type="pagination" 
+								data-control-name="paging" 
+								data-control-action="paging"
+								data-control-animate-to-top="true">
+							</div>
+																				<!-- items per page dropdown -->
+							<div 
+								class="jplist-drop-down" 
+								data-control-type="drop-down" 
+								data-control-name="paging" 
+								data-control-action="paging">
+								
+								<ul>
+									<li><span data-number="3"> 3 per page </span></li>
+									<li><span data-number="5"> 5 per page </span></li>
+									<li><span data-number="10" data-default="true"> 10 per page </span></li>
+									<li><span data-number="all"> view all </span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- end of demo -->
+				</div>
+				<h2>&ensp;</h2>
+	</section>
 	<!--Footer-->
 	<footer class="footer_third">
 		<div class="container padding_top">
@@ -313,7 +471,36 @@ function checkHistory(cookieid){
 		</div>
 	</footer>
 
+	<div class="modal fade" id="updateModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改用户权限</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form name="updateForm" id="updateForm" 
+					onsubmit="return validateForm()"  class="form-validate">
+						<div class="modal-body">
+						<input id="id_check" style="border: none;" type="text" readonly>
+					
+						<br><input id="username_check" style="border: none;" type="text" readonly>
+										
+						<br>&ensp;用户权限： 
+						<div id="selectUserPermissionBox"></div>
+					</div>
+					
+										<div class="modal-footer">
+						<button type="submit" class="btn btn-warning" >修  改</button>
 
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootsnav.js"></script>
 	<script src="js/jquery.parallax-1.1.3.js"></script>
@@ -361,6 +548,24 @@ function checkHistory(cookieid){
 					}
 					);
 		};
+		function validateForm() {
+			var cookieid = document.forms["updateForm"]["id_check"].value;
+			var userPermissionId = document.forms["updateForm"]["typeId"].value;
+			cookieid = cookieid.replace(/\+/g, '%2B');
+			var action="/updateUserPermission?cookieid="+cookieid+"&userPermissionId="+userPermissionId;
+			$.get(
+					action,
+					function(data){
+						if(data=='1'){
+							alert('修改成功！');
+							window.location.reload();
+						}
+						if(data=='0'){
+							alert('修改失败！');	
+						}
+					});
+
+		}
 	</script>
 </body>
 </html>
