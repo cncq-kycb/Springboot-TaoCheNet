@@ -341,17 +341,18 @@ public class UserServiceImpl implements UserService {
 		try {
 			RecommenderListExample recommendExample = new RecommenderListExample();
 			recommendExample.or().andCookieidEqualTo(cookieid);
-			List<RecommenderList> pids = recommenderListMapper.selectByExample(recommendExample);
+			List<RecommenderList> pids = recommenderListMapper.selectByExampleWithBLOBs(recommendExample);
 			if (pids.size() != 0) {
 				List<String> pidList = Utils.splitJson(pids.get(0).getRecommenderPids());
-				List<CarInfoWithBLOBs> result = new ArrayList<CarInfoWithBLOBs>();
-				for (int i = 0; i < pidList.size(); i++) {
-					Long pid = Long.parseLong(pidList.get(i));
+				List<Integer> indexs = Utils.getIndex(pidList.size());
+				List<CarInfoWithBLOBs> info = new ArrayList<CarInfoWithBLOBs>();
+				for (int i = 0; i < indexs.size(); i++) {
+					Long pid = Long.parseLong(pidList.get(indexs.get(i)));
 					CarInfoExample carInfoExample = new CarInfoExample();
 					carInfoExample.or().andPidEqualTo(pid);
-					result.addAll(carInfoMapper.selectByExampleWithBLOBs(carInfoExample));
+					info.addAll(carInfoMapper.selectByExampleWithBLOBs(carInfoExample));
 				}
-				return new ArrayList<CarInfoWithBLOBs>();
+				return info;
 			} else {
 				return new ArrayList<CarInfoWithBLOBs>();
 			}
