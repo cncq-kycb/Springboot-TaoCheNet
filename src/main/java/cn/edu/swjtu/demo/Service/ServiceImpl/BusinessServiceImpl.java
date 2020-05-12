@@ -1,6 +1,7 @@
 package cn.edu.swjtu.demo.Service.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 import cn.edu.swjtu.demo.Dao.CarBusinessMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
 import cn.edu.swjtu.demo.Dao.RecommendBusinessMapper;
+import cn.edu.swjtu.demo.Dao.TransactionRecordMapper;
+import cn.edu.swjtu.demo.Dao.TransactionViewMapper;
 import cn.edu.swjtu.demo.Dao.UserChatMapper;
 import cn.edu.swjtu.demo.Dao.UserDriveMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
@@ -23,6 +26,10 @@ import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
 import cn.edu.swjtu.demo.Pojo.RecommendBusiness;
 import cn.edu.swjtu.demo.Pojo.RecommendBusinessExample;
+import cn.edu.swjtu.demo.Pojo.TransactionRecord;
+import cn.edu.swjtu.demo.Pojo.TransactionRecordExample;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
+import cn.edu.swjtu.demo.Pojo.TransactionViewExample;
 import cn.edu.swjtu.demo.Pojo.UserChat;
 import cn.edu.swjtu.demo.Pojo.UserChatExample;
 import cn.edu.swjtu.demo.Pojo.UserDrive;
@@ -59,6 +66,10 @@ public class BusinessServiceImpl implements BusinessService {
 	UserDriveMapper userDriveMapper;
 	@Autowired
 	UserChatMapper userChatMapper;
+	@Autowired
+	TransactionViewMapper transactionViewMapper;
+	@Autowired
+	TransactionRecordMapper transactionRecordMapper;
 
 	@Override
 	public List<UserInfo> getAllRecommendUsers(String cookieid) {
@@ -230,6 +241,43 @@ public class BusinessServiceImpl implements BusinessService {
 			System.out.println(e);
 			return null;
 		}
+	}
+
+	@Override
+	public List<TransactionView> getBuyList(String cookieid) {
+		try {
+			TransactionViewExample transactionViewExample = new TransactionViewExample();
+			transactionViewExample.setOrderByClause("transaction_status ASC");
+			transactionViewExample.or().andBusinessCookieidEqualTo(cookieid);
+			List<TransactionView> transactionViews = transactionViewMapper.selectByExample(transactionViewExample);
+			return transactionViews;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	@Override
+	public int sellCar(Long recordId) {
+		try {
+			TransactionRecordExample transactionRecordExample = new TransactionRecordExample();
+			transactionRecordExample.or().andRecordIdEqualTo(recordId);
+			List<TransactionRecord> transactionRecords = transactionRecordMapper
+					.selectByExample(transactionRecordExample);
+			if (transactionRecords.size() != 0) {
+				if (transactionRecords.get(0).getTransactionStatus() == 0) {
+					TransactionRecord transactionRecord = new TransactionRecord();
+					transactionRecord.setRecordId(recordId);
+					transactionRecord.setTransactionStatus(1);
+					transactionRecord.setRecordTime(new Date());
+					transactionRecordMapper.updateByExampleSelective(transactionRecord, transactionRecordExample);
+					return 1;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
 	}
 
 }

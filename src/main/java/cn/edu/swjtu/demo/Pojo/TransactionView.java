@@ -16,6 +16,8 @@ public class TransactionView {
 
     private String businessCookieid;
 
+    private Integer transactionStatus;
+
     private Integer transactionType;
 
     public Long getRecordId() {
@@ -64,6 +66,14 @@ public class TransactionView {
 
     public void setBusinessCookieid(String businessCookieid) {
         this.businessCookieid = businessCookieid == null ? null : businessCookieid.trim();
+    }
+
+    public Integer getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(Integer transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 
     public Integer getTransactionType() {

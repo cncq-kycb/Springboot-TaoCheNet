@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,5 +82,8 @@ public interface UserService {
 
 	// 获取同车型历史价格与信息
 	HashMap<String, Object> getRecommendCarList(Long pid);
+
+	// 发起买车申请
+	int buyCar(Long pid, String cookieid, BigDecimal price, int buyType);
 
 }

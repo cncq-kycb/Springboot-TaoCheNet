@@ -486,6 +486,66 @@ public class TransactionViewExample {
             return (Criteria) this;
         }
 
+        public Criteria andTransactionStatusIsNull() {
+            addCriterion("transaction_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusIsNotNull() {
+            addCriterion("transaction_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusEqualTo(Integer value) {
+            addCriterion("transaction_status =", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusNotEqualTo(Integer value) {
+            addCriterion("transaction_status <>", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusGreaterThan(Integer value) {
+            addCriterion("transaction_status >", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("transaction_status >=", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusLessThan(Integer value) {
+            addCriterion("transaction_status <", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("transaction_status <=", value, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusIn(List<Integer> values) {
+            addCriterion("transaction_status in", values, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusNotIn(List<Integer> values) {
+            addCriterion("transaction_status not in", values, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusBetween(Integer value1, Integer value2) {
+            addCriterion("transaction_status between", value1, value2, "transactionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("transaction_status not between", value1, value2, "transactionStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andTransactionTypeIsNull() {
             addCriterion("transaction_type is null");
             return (Criteria) this;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Service.BusinessService;
 
@@ -63,5 +64,20 @@ public class BusinessController {
 			@RequestParam(required = true, value = "describe") String describe, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		return businessService.bindBusinessUser(userInfo.getCookieid(), sname, dizhi, tel, describe);
+	}
+
+	// 获取交易列表
+	@GetMapping(value = "/getBuyList")
+	@ResponseBody
+	public List<TransactionView> getBuyList(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		return businessService.getBuyList(userInfo.getCookieid());
+	}
+
+	// 通过用户买车申请
+	@GetMapping(value = "/sellCar")
+	@ResponseBody
+	public int sellCar(@RequestParam(required = true, value = "recordId") Long recordId) {
+		return businessService.sellCar(recordId);
 	}
 }

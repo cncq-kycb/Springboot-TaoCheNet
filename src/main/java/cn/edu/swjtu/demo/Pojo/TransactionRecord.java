@@ -16,6 +16,8 @@ public class TransactionRecord {
 
     private Integer transactionType;
 
+    private Integer transactionStatus;
+
     public Long getRecordId() {
         return recordId;
     }
@@ -62,5 +64,13 @@ public class TransactionRecord {
 
     public void setTransactionType(Integer transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public Integer getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(Integer transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 }

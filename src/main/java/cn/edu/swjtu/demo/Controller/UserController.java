@@ -1,5 +1,6 @@
 package cn.edu.swjtu.demo.Controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -202,4 +203,15 @@ public class UserController {
 	public List<CarPicture> getDetailsPic(@RequestParam(required = true, value = "pid") Long pid) {
 		return userService.getCarPicture(pid);
 	}
+
+	// 买车申请
+	@GetMapping(value = "/buyCar")
+	@ResponseBody
+	public int buyCar(@RequestParam(required = true, value = "pid") Long pid,
+			@RequestParam(required = true, value = "buyType") int buyType,
+			@RequestParam(required = true, value = "price") BigDecimal price, HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		return userService.buyCar(pid, userInfo.getCookieid(), price, buyType);
+	}
+
 }

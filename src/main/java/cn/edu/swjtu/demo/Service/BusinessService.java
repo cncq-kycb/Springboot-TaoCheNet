@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 
 @Service
@@ -30,5 +31,11 @@ public interface BusinessService {
 	// 获取用户近期历史行为
 	@SuppressWarnings("rawtypes")
 	HashMap<String, List> getUserHistory(String cookieid);
+
+	// 获取交易列表
+	List<TransactionView> getBuyList(String cookieid);
+
+	// 通过用户购买请求
+	int sellCar(Long recordId);
 
 }

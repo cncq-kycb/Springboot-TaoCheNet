@@ -486,4 +486,22 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public int buyCar(Long pid, String cookieid, BigDecimal price, int buyType) {
+		try {
+			TransactionRecord record = new TransactionRecord();
+			record.setCookieid(cookieid);
+			record.setPid(pid);
+			record.setPrice(price);
+			record.setTransactionStatus(0);
+			record.setTransactionType(buyType);
+			record.setRecordTime(new Date());
+			transactionRecordMapper.insert(record);
+			return 1;
+		} catch (Exception e) {
+			System.err.println(e);
+			return 0;
+		}
+	}
+
 }

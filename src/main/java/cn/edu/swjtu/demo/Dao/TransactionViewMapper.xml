@@ -8,6 +8,7 @@
     <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
     <result column="user_cookieid" jdbcType="VARCHAR" property="userCookieid" />
     <result column="business_cookieid" jdbcType="VARCHAR" property="businessCookieid" />
+    <result column="transaction_status" jdbcType="INTEGER" property="transactionStatus" />
     <result column="transaction_type" jdbcType="INTEGER" property="transactionType" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    record_id, pid, price, record_time, user_cookieid, business_cookieid, transaction_type
+    record_id, pid, price, record_time, user_cookieid, business_cookieid, transaction_status, 
+    transaction_type
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.TransactionViewExample" resultMap="BaseResultMap">
     select
@@ -94,10 +96,10 @@
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.TransactionView">
     insert into transaction_view (record_id, pid, price, 
       record_time, user_cookieid, business_cookieid, 
-      transaction_type)
+      transaction_status, transaction_type)
     values (#{recordId,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL}, 
       #{recordTime,jdbcType=TIMESTAMP}, #{userCookieid,jdbcType=VARCHAR}, #{businessCookieid,jdbcType=VARCHAR}, 
-      #{transactionType,jdbcType=INTEGER})
+      #{transactionStatus,jdbcType=INTEGER}, #{transactionType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.TransactionView">
     insert into transaction_view
@@ -119,6 +121,9 @@
       </if>
       <if test="businessCookieid != null">
         business_cookieid,
+      </if>
+      <if test="transactionStatus != null">
+        transaction_status,
       </if>
       <if test="transactionType != null">
         transaction_type,
@@ -142,6 +147,9 @@
       </if>
       <if test="businessCookieid != null">
         #{businessCookieid,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionStatus != null">
+        #{transactionStatus,jdbcType=INTEGER},
       </if>
       <if test="transactionType != null">
         #{transactionType,jdbcType=INTEGER},
@@ -175,6 +183,9 @@
       <if test="record.businessCookieid != null">
         business_cookieid = #{record.businessCookieid,jdbcType=VARCHAR},
       </if>
+      <if test="record.transactionStatus != null">
+        transaction_status = #{record.transactionStatus,jdbcType=INTEGER},
+      </if>
       <if test="record.transactionType != null">
         transaction_type = #{record.transactionType,jdbcType=INTEGER},
       </if>
@@ -191,6 +202,7 @@
       record_time = #{record.recordTime,jdbcType=TIMESTAMP},
       user_cookieid = #{record.userCookieid,jdbcType=VARCHAR},
       business_cookieid = #{record.businessCookieid,jdbcType=VARCHAR},
+      transaction_status = #{record.transactionStatus,jdbcType=INTEGER},
       transaction_type = #{record.transactionType,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
