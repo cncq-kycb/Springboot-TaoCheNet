@@ -4,6 +4,9 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv = "pragma" content = "no-cache">
+<meta http-equiv = "Cache-Control" content = "no-cache,must-revalidate">
+<meta http-equiv = "expires" content = "0">
 		<title>淘车网-优质二手车交易平台</title>
 
 	    <!-- css -->
@@ -57,11 +60,11 @@
 							var subtitle = item.shangpai.substr(0, 4) + "年·" + item.licheng + "公里";
 							old =
 								old +
-								" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
-								item.pid + ")\"\"><img src=" +
+								" <div class=\"col-sm-6 list-item box\"><div class=\"property_item heading_space\"><div class=\"image\"><a href=\"detail.html?pid="+item.pid+"\" "
+								+ "><img src=" +
 								item.src +
-								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
-								item.pid + ")\">" +
+								" height=\"364\"width=\"254\" alt=\"latest property\" class=\"img-responsive\"></a><div class=\"price clearfix\"></div></div><div class=\"proerty_content\"><div class=\"proerty_text\"><h4 class=\"captlize\"><a href=\"detail.html?pid="+item.pid+"\" " +
+								">" +
 								item.name +
 								"</a></h4><p><span style=\"font-size:15px\">" +
 								subtitle +
@@ -165,7 +168,7 @@
 							" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"javascript:void(0);\" onclick=\"details(" +
 							item.pid + ")\">" +
 							item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
-							"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" onclick=\"details(" +
+							"公里 </p></div><div style=\"float:right;\"	><a href=\"javascript:void(0);\" onclick=\"details(" +
 							item.pid + ")\"><span style=\"font-size:15px;color:#F00\">" + item.price +
 							"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 						}
