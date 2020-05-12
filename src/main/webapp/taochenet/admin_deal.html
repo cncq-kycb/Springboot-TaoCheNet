@@ -46,11 +46,9 @@
 			action,
 			function(data){
 				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>cookieId</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>用户cookieId</th><th>商家cookieId</th></tr></thead><tbody>';
 				for(i in list){
 					var item = list[i];
-					var type;
-
 				
 					old += '<tr class="tbl-item"><td class="td-block"><p class="title">'
 					+ item.recordId
@@ -61,7 +59,9 @@
 					+'</p></td><td class="td-block"><p class="desc">'
 					+ item.recordTime.substring(0,10)
 					+'</p></td><td class="td-block"><p class="title">'
-					+ item.cookieid
+					+ item.userCookieid
+					+'</p></td><td class="td-block"><p class="like">'
+					+ item.businessCookieid
 					+'</p></td></tr>';
 				}
 				old += '</tbody></table>';
@@ -94,10 +94,10 @@
 			action,
 			function(data){
 				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>cookieId</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>记录ID</th><th>车辆链接</th><th>成交价格</th><th>记录日期</th><th>用户cookieId</th><th>商家cookieId</th></tr></thead><tbody>';
 				for(i in list){
 					var item = list[i];
-					var type;
+				
 					old += '<tr class="tbl-item"><td class="td-block"><p class="title">'
 					+ item.recordId
 					+'</p></td><td class="td-block"><p class="desc"><a href="detail.html?pid='
@@ -107,7 +107,9 @@
 					+'</p></td><td class="td-block"><p class="desc">'
 					+ item.recordTime.substring(0,10)
 					+'</p></td><td class="td-block"><p class="title">'
-					+ item.cookieid
+					+ item.userCookieid
+					+'</p></td><td class="td-block"><p class="like">'
+					+ item.businessCookieid
 					+'</p></td></tr>';
 				}
 				old += '</tbody></table>';
@@ -193,12 +195,31 @@
 									data-path=".title" 
 									type="text" 
 									value="" 
-									placeholder="按cookieID查找" 
+									placeholder="按用户cookieid查找" 
 									data-control-type="textbox" 
 									data-control-name="title-filter" 
 									data-control-action="filter"
 								/>
 							</div>
+														<!-- filter by description -->
+							<div class="text-filter-box">
+								
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Description:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".like" 
+									type="text" 
+									value="" 
+									placeholder="按商家cookieid查找" 
+									data-control-type="textbox" 
+									data-control-name="like-filter" 
+									data-control-action="filter"
+								/>	
+							</div>	
 							
 							<!-- filter by description -->
 							<div class="text-filter-box">
@@ -219,6 +240,7 @@
 									data-control-action="filter"
 								/>	
 							</div>	
+						
 							
 							<!-- pagination results -->
 							<div 
@@ -327,13 +349,30 @@
 									data-path=".title" 
 									type="text" 
 									value="" 
-									placeholder="按cookieID查找" 
+									placeholder="按用户cookieid查找" 
 									data-control-type="textbox" 
 									data-control-name="title-filter" 
 									data-control-action="filter"
 								/>
 							</div>
-							
+														<div class="text-filter-box">
+								
+								<i class="fa fa-search  jplist-icon"></i>
+								
+								<!--[if lt IE 10]>
+								<div class="jplist-label">Filter by Description:</div>
+								<![endif]-->
+								
+								<input 
+									data-path=".like" 
+									type="text" 
+									value="" 
+									placeholder="按商家cookieid查找" 
+									data-control-type="textbox" 
+									data-control-name="like-filter" 
+									data-control-action="filter"
+								/>	
+							</div>	
 							<!-- filter by description -->
 							<div class="text-filter-box">
 								
