@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.edu.swjtu.demo.Pojo.TransactionRecord;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPermission;
 import cn.edu.swjtu.demo.Pojo.UserType;
@@ -30,14 +30,14 @@ public class AdminController {
 	// 推荐型查询交易记录
 	@GetMapping(value = "/getRecommendTransactionRecords")
 	@ResponseBody
-	public List<TransactionRecord> getRecommendTransactionRecords() {
+	public List<TransactionView> getRecommendTransactionRecords() {
 		return adminService.getTransactionRecords(1);
 	}
 
 	// 非推荐型查询交易记录
 	@GetMapping(value = "/getTransactionRecords")
 	@ResponseBody
-	public List<TransactionRecord> getTransactionRecords() {
+	public List<TransactionView> getTransactionRecords() {
 		return adminService.getTransactionRecords(0);
 	}
 

@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import cn.edu.swjtu.demo.Dao.TransactionRecordMapper;
+import cn.edu.swjtu.demo.Dao.TransactionViewMapper;
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserPermissionMapper;
 import cn.edu.swjtu.demo.Dao.UserTypeMapper;
 import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
-import cn.edu.swjtu.demo.Pojo.TransactionRecord;
-import cn.edu.swjtu.demo.Pojo.TransactionRecordExample;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
+import cn.edu.swjtu.demo.Pojo.TransactionViewExample;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Pojo.UserPermission;
@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	UserPermissionMapper userPermissionMapper;
 	@Autowired
-	TransactionRecordMapper transactionRecordMapper;
+	TransactionViewMapper transactionViewMapper;
 	@Autowired
 	UserViewPostMapper userViewPostMapper;
 
@@ -143,12 +143,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<TransactionRecord> getTransactionRecords(Integer transactionType) {
-		List<TransactionRecord> resultList = new ArrayList<TransactionRecord>();
-		TransactionRecordExample transactionRecordExample = new TransactionRecordExample();
-		transactionRecordExample.or().andTransactionTypeEqualTo(transactionType);
+	public List<TransactionView> getTransactionRecords(Integer transactionType) {
+		List<TransactionView> resultList = new ArrayList<TransactionView>();
+		TransactionViewExample transactionViewExample = new TransactionViewExample();
+		transactionViewExample.or().andTransactionTypeEqualTo(transactionType);
 		try {
-			resultList = transactionRecordMapper.selectByExample(transactionRecordExample);
+			resultList = transactionViewMapper.selectByExample(transactionViewExample);
 			return resultList;
 		} catch (Exception e) {
 			System.err.println(e);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cn.edu.swjtu.demo.Pojo.TransactionRecord;
+import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPermission;
 import cn.edu.swjtu.demo.Pojo.UserType;
@@ -40,7 +40,7 @@ public interface AdminService {
 	String trainModel();
 
 	// 获取交易记录，1为推荐交易，0为非推荐交易
-	List<TransactionRecord> getTransactionRecords(Integer transactionType);
+	List<TransactionView> getTransactionRecords(Integer transactionType);
 
 	// 计算推荐点击率
 	double getRecommendClickRate();
