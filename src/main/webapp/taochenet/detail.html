@@ -5,6 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>淘车网-优质二手车交易平台</title>
+
+<link rel="stylesheet" href="syalert/syalert.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/reality-icon.css">
@@ -136,6 +138,22 @@
   </div>
 </footer>
 
+<!-- 自定义弹窗 -->
+<div class="sy-alert sy-alert-model animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="confirm" sy-mask="true" id="alert4">
+  <div class="sy-title">用户您好！申请购车须先完成登录操作</div>
+  <div class="sy-content">
+    <div class="form">
+        <p class="input-item"><input type="text" id="username" placeholder="请输入用户名" /></p>
+    
+    <p class="input-item"><input type="password" id="password" placeholder="请输入密码" /></p>
+
+    </div>
+  </div> 
+  <div class="sy-btn">
+    <button onClick="syalert.syhide('alert4')">取消</button>
+    <button onClick="ok('alert4')">登录</button>
+  </div> 
+</div>
 
 
 <script src="js/jquery-2.1.4.js"></script> 
@@ -161,6 +179,7 @@
 <script src="js/revolution.extension.video.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/functions.js"></script>
+<script src="syalert/syalert.min.js"></script>
 <script type="text/javascript">
 	
 	       var query = window.location.search.substring(1);
@@ -279,8 +298,8 @@
 									old + "<p style=\"font-size:20px;\"><strong>车况描述：</strong></p><div><p>"
 									+ miaoshu
 									+ "</p></div><img src=\"images/quote.png\" alt=\"quote\" class=\"quote\">");
-							if(car_info.isFavorite==0){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="follow()">加 入 收 藏 夹</button>'); }
-							if(car_info.isFavorite==1){ $("#follow").html('<button type="submit" class="border_radius btn-dark text-uppercase" onclick="disfollow()">取 消 收 藏</button>'); }
+							if(car_info.isFavorite==0){ $("#follow").html('<button type="submit" class="border_radius btn-yellow text-uppercase" onclick="follow()">加 入 收 藏 夹</button>&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="buyCar()">立 即 购 买</button>'); }
+							if(car_info.isFavorite==1){ $("#follow").html('<button type="submit" class="border_radius btn-dark text-uppercase" onclick="disfollow()">取 消 收 藏</button>&ensp;&ensp;<button type="submit" class="border_radius btn-blue text-uppercase" onclick="buyCar()">立 即 购 买</button>'); }
 						});
 		var url = "/getDetailsPic?pid=" + pid;
 		$.get(
@@ -420,6 +439,45 @@
 				});
 	};
 	
+	function buyCar(){
+		var buyType = '0';
+	       var query = window.location.search.substring(1);
+	       var pid = -1;
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == "pid"){
+	            	   pid = pair[1];
+	            	   }
+	               if(pair[2]=="buyType"){
+	            	   buyType = '1';
+	               }
+	       }
+	       
+	   	var price ='-1';
+	   	$.get(
+				"/getDatels?pid="+pid,
+				function(data) {
+					price=data.price;
+				});
+	       
+		var url = "/buyCar?pid=" + pid+"&buyType=" + buyType+"&price=" + price ;
+		$.get(
+				url,
+				function(data) {
+					if(data==1){
+						window.location.reload();
+						alert('购买申请已发送至商家');
+					}
+					if(data==0){
+						alert('申请购买失败，请重新尝试！');
+					}
+					if(data=='-1'){
+						syalert.syopen('alert4');
+					}
+				});
+	};
+	
 	function disfollow(){
 		var url = "/cancelFavorite?pid=" + pid;
 		$.get(
@@ -433,6 +491,7 @@
 					}
 					if(data=='-1'){
 						alert('请登录后再进行操作！');
+						
 					}
 				});
 	};
@@ -450,6 +509,39 @@
 				}
 				}
 				);
+	};
+	function ok(id){
+		var username = document.getElementById('username').value;
+		var password = document.getElementById('password').value;
+		var login = {
+			"username" : username,
+			"password" : password
+		};
+		var jsonData = JSON.stringify(login);
+		var action = "/login";
+		$.ajax({
+			type : "post",
+			url : action,
+			data : jsonData,
+			dataType : "json",
+			contentType : "application/json;charset=UTF-8",
+			success : function(result) {
+				if (result == '3') {
+						buyCar();
+				} else if (result == '2') {
+					window.location.href = 'business_main.html';
+				} else if (result == '1') {
+					window.location.href = 'admin_main.html';
+				} else if (result == '-1') {
+					alert("账号存在违规行为，已被封禁处理");
+				} else {
+					alert("账号不存在/密码错误");
+				}
+			},
+			error : function(result) {
+				alert("err back");
+			}
+		});
 	};
 </script>
 </body>

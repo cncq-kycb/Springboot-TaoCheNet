@@ -596,10 +596,10 @@
 										var old="";
 										for(i in data.CarInfo){
 											var item = data.CarInfo[i];
-											old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"detail.html?pid="+item.pid+" \"><img src=" + item.src +
+											old += "<div class=\"row bottom20\"><div class=\"col-md-4 col-sm-4 col-xs-6 p-image\"><a href=\"detail.html?pid="+item.pid+"&buyType=1 \"><img src=" + item.src +
 											" alt=\"image \" width=\"93px\" height=\"70px\" /></a></div> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><h5><a href=\"detail.html?pid="+item.pid+" \">" +
 											item.name + "</h5><div style=\"float:left;\"><p>" + item.licheng +
-											"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"\" )\"><span style=\"font-size:15px;color:#F00\">" + item.price +
+											"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"&buyType=1\" )\"><span style=\"font-size:15px;color:#F00\">" + item.price +
 											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 										}
 										old +="<h3>&ensp;</h3><h3>历史成交价</h3><h3>&ensp;</h3>"
