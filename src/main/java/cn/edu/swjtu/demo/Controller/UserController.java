@@ -211,6 +211,9 @@ public class UserController {
 			@RequestParam(required = true, value = "buyType") int buyType,
 			@RequestParam(required = true, value = "price") BigDecimal price, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo == null) {
+			return -1;
+		}
 		return userService.buyCar(pid, userInfo.getCookieid(), price, buyType);
 	}
 
