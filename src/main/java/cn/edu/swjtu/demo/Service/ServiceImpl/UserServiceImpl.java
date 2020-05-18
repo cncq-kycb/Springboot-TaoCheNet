@@ -470,12 +470,25 @@ public class UserServiceImpl implements UserService {
 					// 历史成交价
 					for (CarInfoWithBLOBs item : carInfos) {
 						TransactionRecordExample transactionRecordExample = new TransactionRecordExample();
-						transactionRecordExample.or().andPidEqualTo(item.getPid());
+						transactionRecordExample.or().andPidEqualTo(item.getPid()).andTransactionStatusEqualTo(1);
 						List<TransactionRecord> transactionRecords = transactionRecordMapper
 								.selectByExample(transactionRecordExample);
 						if (transactionRecords.size() != 0) {
 							recordPrice.add(transactionRecords.get(0).getPrice());
 							recordTime.add(transactionRecords.get(0).getRecordTime());
+						}
+					}
+					// 历史成交记录排序
+					for (int i = 0; i < recordTime.size() - 1; i++) {
+						for (int j = i + 1; j < recordTime.size(); j++) {
+							if (recordTime.get(i).after(recordTime.get(j))) {
+								Date tempDate = recordTime.get(i);
+								BigDecimal tempDecimal = recordPrice.get(i);
+								recordTime.set(i, recordTime.get(j));
+								recordPrice.set(i, recordPrice.get(j));
+								recordTime.set(j, tempDate);
+								recordPrice.set(j, tempDecimal);
+							}
 						}
 					}
 					data.put("RecordPrice", recordPrice);
