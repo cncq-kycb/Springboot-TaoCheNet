@@ -64,7 +64,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			List<UserPrefer> userPrefers = userPreferMapper.selectByExample(userPreferExample);
 			if (userPrefers.size() != 0) {
 				userPrefer.setRecordId(userPrefers.get(0).getRecordId());
-				userPreferMapper.updateByExample(userPrefer, userPreferExample);
+				userPreferMapper.updateByExampleSelective(userPrefer, userPreferExample);
 			} else {
 				userPreferMapper.insert(userPrefer);
 			}
