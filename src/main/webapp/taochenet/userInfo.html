@@ -42,13 +42,94 @@ $.get(
 		+ user_info.username
 		+'</p><table class="agent_contact table"> <tbody><tr class="bottom10"><td><strong >手机:</strong></td><td class="text-left" id="tel">'
 		+ user_info.tel+'</td></tr><tr class="bottom10"><td><strong>地区:</strong></td><td class="text-left">'
-		+ user_info.location +'</td></tr><tr class="bottom10"><td><strong>年龄</strong></td><td class="text-left">'
-		+ user_info.age
-		+'</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>'
-		$("#userInfo").html(old2);		}
+		+ user_info.location +'</td></tr><tr class="bottom10"><td><strong>年龄:</strong></td><td class="text-left">'
+		+ user_info.age ;
+	
+		$.get(
+				"/getUserPrefer",
+			function(data) {
+				old2 +='</td></tr><tr class="bottom10"><td><strong>偏好品牌:</strong></td><td class="text-left">'
+					+ data.brandName +'</td></tr><tr class="bottom10"><td><strong>偏好类型:</strong></td><td class="text-left">'
+					+ data.classsifyName +'</td></tr><tr class="bottom10"><td><strong>偏好车系:</strong></td><td class="text-left">'
+					+ data.seriesName +'</td></tr><tr class="bottom10"><td><strong>偏好颜色:</strong></td><td class="text-left">'
+					+ data.colorName
+					+'</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>';
+				$("#userInfo").html(old2);
+				}
+		);
+
+				}
 	}
 );
 
+action = "/getBrandSelectBox";
+$.get(
+	action,
+	function(data) {
+		var list = data;
+		var old = $("#selectBrandBox").html();
+		old += "<select id=\"selectedBrand\"><option value=\"-1\" class=\"active\">品牌-不限</option>";
+		for (i in list) {
+			var item = list[i];
+			old +=
+				"<option value=" + item.pid + ">" + item.pname + "</option>";
+		}
+		old += "</select>";
+		$("#selectBrandBox").append(old);
+		$('#selectedBrand').zelect();
+	}
+);
+action = "/getSeriesSelectBox";
+$.get(
+	action,
+	function(data) {
+		var list = data;
+		var old = $("#selectSeriesBox").html();
+		old += "<select id=\"selectedSeries\"><option value=\"-1\" class=\"active\">车系-不限</option>";
+		for (i in list) {
+			var item = list[i];
+			old +=
+				"<option value=" + item.cxid + ">" + item.cxname + "</option>";
+		}
+		$("#selectSeriesBox").html(
+			old + "</select>");
+		$('#selectedSeries').zelect();
+	}
+);
+action = "/getClassifySelectBox";
+$.get(
+	action,
+	function(data) {
+		var list = data;
+		var old = $("#selectClassifyBox").html();
+		old += "<select id=\"selectClassify\"><option value=\"-1\" class=\"active\">类型-不限</option>";
+		for (i in list) {
+			var item = list[i];
+			old +=
+				"<option value=" + item.cid + ">" + item.cname + "</option>";
+		}
+		$("#selectClassifyBox").html(
+			old + "</select>");
+		$('#selectClassify').zelect();
+	}
+);
+action = "/getColorSelectBox";
+$.get(
+	action,
+	function(data) {
+		var list = data;
+		var old = $("#selectColorBox").html();
+		old += "<select id=\"selectedColor\"><option value=\"-1\" class=\"active\">颜色-不限</option>";
+		for (i in list) {
+			var item = list[i];
+			old +=
+				"<option value=" + item.colorId + ">" + item.colorName + "</option>";
+		}
+		$("#selectColorBox").html(
+			old + "</select>");
+		$('#selectedColor').zelect();
+	}
+);
 function changePsw(){
 	var oldPsw =  $("#oldPsw").val();
 	var newPsw =  $("#newPsw").val();
@@ -113,6 +194,29 @@ function changeUserInfo(){
 				}
 			});
 };
+function changeLike(){
+	var selectedBrand = $("#selectBrandBox option:selected").val();
+	var selectedSeries = $("#selectSeriesBox option:selected").val();
+	var selectedClassify = $("#selectClassifyBox option:selected").val();
+	var selectedColor = $("#selectColorBox option:selected").val();
+	if(selectedBrand == -1){selectedBrand = ""};
+	if(selectedSeries == -1){selectedSeries = ""};
+	if(selectedClassify == -1){selectedClassify = ""};
+	if(selectedColor == -1){selectedColor = ""};
+
+	var url = "/changeUserInfo?selectedBrand="+selectedBrand+"&selectedSeries="+selectedSeries+"&selectedClassify="+selectedClassify+"&selectedColor="+selectedColor;
+	$.get(
+			url,
+			function(data) {
+				if(data==0){
+					alert('个人偏好修改有误，请重试！');
+				}
+				if(data==1){
+					alert('个人偏好修改成功！');	
+					window.location.reload();
+				}
+			});
+};
 </script>
 </head>
 <body>
@@ -172,6 +276,11 @@ function changeUserInfo(){
 
             </div>
           </div>
+                    <div class="col-sm-6 bottom40">
+            <div class="agent_wrap" id="LikeInfo">
+
+            </div>
+          </div>
         </div>
       </div>
          <aside class="col-md-4 col-xs-12">
@@ -181,12 +290,16 @@ function changeUserInfo(){
                   <h3 class="bottom20">编辑个人资料</h3>
                   <ul class="pro-list bottom20">
                      <li>				<div class="more">
-					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog" id="changePsw">修改密码</a>				
+					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog3" id="changePsw">修改密码</a>				
 				</div>
                      </li>
                      </br>
                      <li>				<div class="more">
 					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog2" id="changeInfo">修改个人信息</a>				
+				</div>
+                     </li></br>
+                                          <li>				<div class="more">
+					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog" id="changeLike">修改个人偏好</a>				
 				</div>
                      </li>
                   </ul>
@@ -201,16 +314,43 @@ function changeUserInfo(){
 	<!-- changeInfo -->
 	<div class="pop-up"> 
 		<div id="small-dialog" class="mfp-hide book-form">
-		<h3>修改密码 </h3>
+		<h3>修改个人偏好 </h3>
 			<form action="#" method="post">
-				<p>请输入原密码：</p>
-				<input type="password" id="oldPsw" class="password" placeholder="" required=""/>
-				<p>请输入新密码：</p>
-				<input type="password" id="newPsw" class="password" placeholder="" required=""/>
-				<p>请重复新密码：</p>
-				<input type="password" id="checkedPsw" class="password" placeholder="" required=""/>					
+																								<div class="search-2 col-sm-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="single-query form-group">
+												<div class="intro" id="selectBrandBox">
+												</div>
+											</div>
+										</div>
+											<div class="col-sm-6">
+											<div class="single-query form-group">
+												<div class="intro" id="selectSeriesBox">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+																<div class="search-2 col-sm-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="single-query form-group">
+												<div class="intro" id="selectColorBox">
+												</div>
+											</div>
+										</div>
+											<div class="col-sm-6">
+											<div class="single-query form-group">
+												<div class="intro" id="selectClassifyBox">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<h1>&ensp;</h1>
 				<center>
-				<button type="button" class="btn-blue border_radius" onclick="return changePsw()">确认修改</button>
+				<button type="button" class="btn-blue border_radius" onclick="return changeLike()">确认修改</button>
 				</center>
 			</form>
 	</div>
@@ -224,6 +364,21 @@ function changeUserInfo(){
 				<center>
 				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">确认修改</button>
 				</center></form>
+	</div>
+	
+		<div id="small-dialog3" class="mfp-hide book-form">
+		<h3>修改密码 </h3>
+			<form action="#" method="post">
+				<p>请输入原密码：</p>
+				<input type="password" id="oldPsw" class="password" placeholder="" required=""/>
+				<p>请输入新密码：</p>
+				<input type="password" id="newPsw" class="password" placeholder="" required=""/>
+				<p>请重复新密码：</p>
+				<input type="password" id="checkedPsw" class="password" placeholder="" required=""/>					
+				<center>
+				<button type="button" class="btn-blue border_radius" onclick="return changePsw()">确认修改</button>
+				</center>
+			</form>
 	</div>
 </div>	
 <!-- // changeInfo  -->
@@ -278,6 +433,17 @@ function changeUserInfo(){
 <script>
 						$(document).ready(function() {
 						$('#changeInfo').magnificPopup({
+							type: 'inline',
+							fixedContentPos: false,
+							fixedBgPos: true,
+							overflowY: 'auto',
+							closeBtnInside: true,
+							preloader: false,
+							midClick: true,
+							removalDelay: 300,
+							mainClass: 'my-mfp-zoom-in'
+						});
+						$('#changeLike').magnificPopup({
 							type: 'inline',
 							fixedContentPos: false,
 							fixedBgPos: true,
