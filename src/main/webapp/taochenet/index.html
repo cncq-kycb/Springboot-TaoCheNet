@@ -513,6 +513,12 @@
 		<script src="js/custom.js"></script>
 		<script src="js/functions.js"></script>
 		<script src="layui/layui.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/themes/dark-unica.js"></script>
 		<script>
 			function sender() {
 				var selectedPriceLeft = document.getElementById("leftPrice").innerText;
@@ -590,7 +596,7 @@
 				window.location.reload();
 			};
 			function details(pid){
-
+							
 							$("#recommendTitle").html('同款推荐');
 							var url2 = '/getRecommendCarList?pid='+pid;
 							$.get(
@@ -605,13 +611,53 @@
 											"公里 </p></div><div style=\"float:right;\"	><a href=\"detail.html?pid="+item.pid+"&buyType=1\" )\"><span style=\"font-size:15px;color:#F00\">" + item.price +
 											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 										}
-										old +="<h3>&ensp;</h3><h3>历史成交价</h3><h3>&ensp;</h3>"
+										old +='<div id="container" style="max-width:800px;height:400px"></div>';
+										var priceData = [];
+										var priceDate = [];
 										for(i in data.RecordPrice){
 											var item = data.RecordPrice[i];
-											old += "<div class=\"row bottom20\"> <div class = \"col-md-8 col-sm-8 col-xs-6\" ><div class = \"feature-p-text\" ><div style=\"float:left;\"	><span style=\"font-size:15px;color:#F00\">" + item +
-											"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
+											priceData.push(item);
+										}
+										for(i in data.RecordTime){
+											var item = data.RecordTime[i].substring(0,10)+' '+data.RecordTime[i].substring(11,19);
+											priceDate.push(item);
 										}
 										$("#recommendDetails").html(old);
+										
+										var chart = Highcharts.chart('container', {
+										    chart: {
+										        type: 'line'
+										    },
+										    title: {
+										        text: '历史价格'
+										    },
+										    subtitle: {
+										        text: ''
+										    },
+										    xAxis: {
+										        categories: priceDate
+										    },
+										    yAxis: {
+										        title: {
+										            text: '元'
+										        }
+										    },
+										    plotOptions: {
+										        line: {
+										            dataLabels: {
+										                // 开启数据标签
+										                enabled: true         
+										            },
+										            // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+										            enableMouseTracking: false
+										        }
+										    },
+										    series: [{
+										        name: '价格',
+										        data: priceData
+										    }]
+										});
+										
 									}
 									);
 
