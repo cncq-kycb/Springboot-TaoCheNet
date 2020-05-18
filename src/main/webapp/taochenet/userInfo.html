@@ -50,7 +50,7 @@ $.get(
 			function(data) {
 				old2 +='</td></tr><tr class="bottom10"><td><strong>偏好品牌:</strong></td><td class="text-left">'
 					+ data.brandName +'</td></tr><tr class="bottom10"><td><strong>偏好类型:</strong></td><td class="text-left">'
-					+ data.classsifyName +'</td></tr><tr class="bottom10"><td><strong>偏好车系:</strong></td><td class="text-left">'
+					+ data.classifyName +'</td></tr><tr class="bottom10"><td><strong>偏好车系:</strong></td><td class="text-left">'
 					+ data.seriesName +'</td></tr><tr class="bottom10"><td><strong>偏好颜色:</strong></td><td class="text-left">'
 					+ data.colorName
 					+'</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>';
@@ -199,10 +199,10 @@ function changeLike(){
 	var selectedSeries = $("#selectSeriesBox option:selected").val();
 	var selectedClassify = $("#selectClassifyBox option:selected").val();
 	var selectedColor = $("#selectColorBox option:selected").val();
-	if(selectedBrand == -1){selectedBrand = ""};
-	if(selectedSeries == -1){selectedSeries = ""};
-	if(selectedClassify == -1){selectedClassify = ""};
-	if(selectedColor == -1){selectedColor = ""};
+	if(selectedBrand == -1){selectedBrand = "品牌-不限"};
+	if(selectedSeries == -1){selectedSeries = "车系-不限"};
+	if(selectedClassify == -1){selectedClassify = "类型-不限"};
+	if(selectedColor == -1){selectedColor = "颜色-不限"};
 
 	var url = "/changeUserInfo?selectedBrand="+selectedBrand+"&selectedSeries="+selectedSeries+"&selectedClassify="+selectedClassify+"&selectedColor="+selectedColor;
 	$.get(
