@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserPreferMapper;
+import cn.edu.swjtu.demo.Dao.UserPreferViewMapper;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
 import cn.edu.swjtu.demo.Pojo.UserPrefer;
 import cn.edu.swjtu.demo.Pojo.UserPreferExample;
+import cn.edu.swjtu.demo.Pojo.UserPreferView;
+import cn.edu.swjtu.demo.Pojo.UserPreferViewExample;
 import cn.edu.swjtu.demo.Service.UserInfoService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -21,6 +24,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	UserInfoMapper userInfoMapper;
 	@Autowired
 	UserPreferMapper userPreferMapper;
+	@Autowired
+	UserPreferViewMapper userPreferViewMapper;
 
 	@Override
 	public boolean changePsw(String cookieid, String oldPsw, String newPsw) {
@@ -95,6 +100,21 @@ public class UserInfoServiceImpl implements UserInfoService {
 			System.err.println(e);
 			return 3;
 		}
+	}
+
+	@Override
+	public UserPreferView getUserPrefer(String cookieid) {
+		UserPreferViewExample userPreferViewExample = new UserPreferViewExample();
+		userPreferViewExample.or().andCookieidEqualTo(cookieid);
+		try {
+			List<UserPreferView> userPreferViews = userPreferViewMapper.selectByExample(userPreferViewExample);
+			if (userPreferViews.size() != 0) {
+				return userPreferViews.get(0);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new UserPreferView();
 	}
 
 }

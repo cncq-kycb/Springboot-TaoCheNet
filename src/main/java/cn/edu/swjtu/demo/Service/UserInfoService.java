@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPrefer;
+import cn.edu.swjtu.demo.Pojo.UserPreferView;
 
 @Service
 public interface UserInfoService {
@@ -16,5 +17,8 @@ public interface UserInfoService {
 
 	// 注册新用户
 	int signup(String username, String password, String name, String tel, String location, Integer age);
+
+	// 获取用户偏好
+	UserPreferView getUserPrefer(String cookieid);
 
 }

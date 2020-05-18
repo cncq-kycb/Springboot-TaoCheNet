@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserPrefer;
+import cn.edu.swjtu.demo.Pojo.UserPreferView;
 import cn.edu.swjtu.demo.Service.UserInfoService;
 
 @RestController
@@ -100,5 +101,16 @@ public class UserInfoController {
 			return result;
 		}
 		return userInfo;
+	}
+
+	// 获取用户偏好
+	@GetMapping(value = "getUserPrefer")
+	@ResponseBody
+	public UserPreferView getUserPrefer(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo == null) {
+			return new UserPreferView();
+		}
+		return userInfoService.getUserPrefer(userInfo.getCookieid());
 	}
 }
