@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.UserInfo;
+import cn.edu.swjtu.demo.Pojo.UserPrefer;
 import cn.edu.swjtu.demo.Service.UserInfoService;
 
 @RestController
@@ -48,7 +49,11 @@ public class UserInfoController {
 	public int changeUserInfo(@RequestParam(required = false, value = "newName") String newName,
 			@RequestParam(required = false, value = "newTel") String newTel,
 			@RequestParam(required = false, value = "newLocation") String newLocation,
-			@RequestParam(required = false, value = "NewAge") Integer NewAge, HttpSession session) {
+			@RequestParam(required = false, value = "NewAge") Integer NewAge,
+			@RequestParam(required = false, value = "selectedBrand") Integer selectedBrand,
+			@RequestParam(required = false, value = "selectedSeries") Integer selectedSeries,
+			@RequestParam(required = false, value = "selectedClassify") Integer selectedClassify,
+			@RequestParam(required = false, value = "selectedColor") Integer selectedColor, HttpSession session) {
 		UserInfo userInfo = (UserInfo) session.getAttribute("user");
 		if (newName != null && !newName.equals("")) {
 			userInfo.setName(newName);
@@ -62,8 +67,21 @@ public class UserInfoController {
 		if (NewAge != null) {
 			userInfo.setAge(NewAge);
 		}
+		UserPrefer userPrefer = new UserPrefer();
+		if (selectedBrand != null) {
+			userPrefer.setBrandId(selectedBrand);
+		}
+		if (selectedSeries != null) {
+			userPrefer.setSeriesId(selectedSeries);
+		}
+		if (selectedClassify != null) {
+			userPrefer.setClassifyId(selectedClassify);
+		}
+		if (selectedColor != null) {
+			userPrefer.setCid(selectedColor);
+		}
 		try {
-			userInfoService.changeUserInfo(userInfo.getCookieid(), userInfo);
+			userInfoService.changeUserInfo(userInfo.getCookieid(), userInfo, userPrefer);
 			return 1;
 		} catch (Exception e) {
 			System.err.println(e);

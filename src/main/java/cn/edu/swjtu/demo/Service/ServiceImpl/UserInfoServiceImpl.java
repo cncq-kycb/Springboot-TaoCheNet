@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.UserInfoMapper;
+import cn.edu.swjtu.demo.Dao.UserPreferMapper;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
 import cn.edu.swjtu.demo.Pojo.UserInfoExample;
+import cn.edu.swjtu.demo.Pojo.UserPrefer;
+import cn.edu.swjtu.demo.Pojo.UserPreferExample;
 import cn.edu.swjtu.demo.Service.UserInfoService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -16,6 +19,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Autowired
 	UserInfoMapper userInfoMapper;
+	@Autowired
+	UserPreferMapper userPreferMapper;
 
 	@Override
 	public boolean changePsw(String cookieid, String oldPsw, String newPsw) {
@@ -43,11 +48,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public void changeUserInfo(String cookieid, UserInfo userInfo) {
+	public void changeUserInfo(String cookieid, UserInfo userInfo, UserPrefer userPrefer) {
 		try {
-			UserInfoExample example = new UserInfoExample();
-			example.or().andCookieidEqualTo(cookieid);
-			userInfoMapper.updateByExample(userInfo, example);
+			UserInfoExample userInfoExample = new UserInfoExample();
+			userInfoExample.or().andCookieidEqualTo(cookieid);
+			userInfoMapper.updateByExample(userInfo, userInfoExample);
+
+			UserPreferExample userPreferExample = new UserPreferExample();
+			userPreferExample.or().andCookieidEqualTo(cookieid);
+			userPreferMapper.updateByExample(userPrefer, userPreferExample);
 		} catch (Exception e) {
 			System.err.println(e);
 		}
