@@ -455,6 +455,7 @@ public class UserServiceImpl implements UserService {
 	public HashMap<String, Object> getRecommendCarList(Long pid) {
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		List<BigDecimal> recordPrice = new ArrayList<BigDecimal>();
+		List<Date> recordTime = new ArrayList<Date>();
 		CarInfoExample carInfoExample = new CarInfoExample();
 		carInfoExample.or().andPidEqualTo(pid);
 		try {
@@ -474,9 +475,11 @@ public class UserServiceImpl implements UserService {
 								.selectByExample(transactionRecordExample);
 						if (transactionRecords.size() != 0) {
 							recordPrice.add(transactionRecords.get(0).getPrice());
+							recordTime.add(transactionRecords.get(0).getRecordTime());
 						}
 					}
 					data.put("RecordPrice", recordPrice);
+					data.put("RecordTime", recordTime);
 				}
 			}
 			return data;
