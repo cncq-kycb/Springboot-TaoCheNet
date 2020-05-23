@@ -265,10 +265,14 @@ function bindInfo(){
 <h3>上架车辆</h3>
 <form action="#" method="post">
 <p>车辆标题<input type="text" id="sname" required=""/></p>
-<select><option>--选择品牌--</option></select>&ensp;<select><option>--选择类型--</option></select>&ensp;<select><option>--选择车系--</option></select>&ensp;<select><option>--选择颜色--</option></select>&ensp;<h5>&ensp;</h5><select><option>--上牌年份--</option></select>&ensp;<select><option>--里程区间--</option></select>&ensp;<select><option>--选择油耗--</option></select>&ensp;<select><option>--新旧程度--</option></select>
-<h5>&ensp;</h5><p>添加图片&ensp;&ensp;<button>上传图片</button></p>
-<p>估价&ensp;&ensp;<strong>10.0万</strong> &ensp;&ensp;<button>同意此估价</button></p>
-<h5>&ensp;</h5><p>若不同意，请在下方填写您的报价</p><input type="text" id="describe" required=""/>	
+品牌<input style="width:100px;" type="text" id="describe" required=""/>&ensp;&ensp;
+车系<input style="width:100px;" type="text" id="describe" required=""/>&ensp;&ensp;
+
+颜色<input style="width:100px;" type="text" id="describe" required=""/>&ensp;&ensp;&ensp;
+
+<br>上牌年份<input style="width:100px;" type="text" id="describe" required=""/>年&ensp;&ensp;&ensp;&ensp;
+行驶里程<input style="width:100px;" type="text" id="describe" required=""/>公里&ensp;&ensp;
+<br>您的报价<input style="width:100px;" type="text" id="describe" required=""/>	万元&ensp;&ensp;<button onclick="alert('经系统评定，该车参考价为10.00万元')">点击进行估价</button>
 				<center>
 				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">下一步</button>
 				</center></form>
