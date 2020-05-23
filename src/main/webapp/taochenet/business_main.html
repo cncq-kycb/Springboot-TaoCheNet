@@ -230,11 +230,11 @@ function bindInfo(){
 					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog" id="changePsw">修改密码</a>				
 				</div>
                      </li>
-                   <!--  </br>
+                    </br>
                      <li>				<div class="more">
-					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog2" id="changeInfo">修改商家信息</a>				
+					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog2" id="changeInfo">上架车辆</a>				
 				</div>
-                     </li>-->
+                     </li>
                   </ul>
                </div>
             </div>
@@ -262,14 +262,15 @@ function bindInfo(){
 			</form>
 	</div>
 				<div id="small-dialog2" class="mfp-hide book-form">
-<h3>管理商家信息 </h3>
+<h3>上架车辆</h3>
 <form action="#" method="post">
-<p>商家名称</p><input type="text" id="sname" required=""/>
-<p>地址</p><input type="text" id="dizhi" required=""/>
-<p>联系电话</p><input type="text" id="dianhua" required=""/>
-<p>店铺描述</p><input type="text" id="describe" required=""/>	
+<p>车辆标题<input type="text" id="sname" required=""/></p>
+<select><option>--选择品牌--</option></select>&ensp;<select><option>--选择类型--</option></select>&ensp;<select><option>--选择车系--</option></select>&ensp;<select><option>--选择颜色--</option></select>&ensp;<h5>&ensp;</h5><select><option>--上牌年份--</option></select>&ensp;<select><option>--里程区间--</option></select>&ensp;<select><option>--选择油耗--</option></select>&ensp;<select><option>--新旧程度--</option></select>
+<h5>&ensp;</h5><p>添加图片&ensp;&ensp;<button>上传图片</button></p>
+<p>估价&ensp;&ensp;<strong>10.0万</strong> &ensp;&ensp;<button>同意此估价</button></p>
+<h5>&ensp;</h5><p>若不同意，请在下方填写您的报价</p><input type="text" id="describe" required=""/>	
 				<center>
-				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">确认修改</button>
+				<button type="button" class="btn-blue border_radius" onclick="return changeUserInfo()">下一步</button>
 				</center></form>
 	</div>
 </div>	
