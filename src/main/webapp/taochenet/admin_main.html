@@ -52,14 +52,34 @@
 							$("#userInfo").html(old2);
 						}
 					});
+	function checkClick(){
 	var url2 = "/getRecommendClickRate";
 	$.get(
 			url2 ,
 			function(data) {
 				var old = '';
 					old += '推荐点击率：'+data.toFixed(2)+' %';
-					$("#clickRate").html(old);	
+					alert(old);	
 			});
+	}
+	function checkClose(){
+		alert('客户关闭推荐量：3');
+		}
+	function checkDeal(){
+		var url2 = "/getRecommendTransactionRecords";
+		$.get(
+				url2 ,
+				function(data) {
+					var num = 0;
+					for(i in data){
+						num = num + 1;
+					}
+					alert('推荐成交量：'+num);
+				});
+		}
+	function checkValue(){
+		alert('商品估价采纳率：1.42%');
+	}
 </script>
 </head>
 <body>
@@ -166,6 +186,39 @@
 									<div class="more">
 										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
 											data-wow-delay=".5s" href="javascript:void(0)" onclick="timeSet()">启动定时器</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+						
+									<div class="col-md-12">
+							<h3 class="bottom20">业务功能</h3>
+							<ul class="pro-list bottom20">
+															<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="checkClick()">查看推荐点击率</a>
+									</div>
+								</li>
+																</br>
+								<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="checkClose()">查看客户关闭推荐量</a>
+									</div>
+								</li>
+																</br>
+								<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="checkValue()">查看估价采纳率</a>
+									</div>
+								</li>
+																</br>
+								<li>
+									<div class="more">
+										<a class=" popup-with-zoom-anim button-isi zoomIn animated"
+											data-wow-delay=".5s" href="javascript:void(0)" onclick="checkDeal()">查看推荐成交量</a>
 									</div>
 								</li>
 							</ul>

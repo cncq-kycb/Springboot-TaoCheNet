@@ -172,7 +172,7 @@
 							item.pid + ")\"><span style=\"font-size:15px;color:#F00\">" + item.price +
 							"</span><span style=\"font-size:14px;color:#F00\">万&ensp;&ensp;</span></div></div></div></div>";
 						}
-						$("#recommend").html(old);
+						$("#recommend").html(old+'<a href="javascript:void(0)" onclick="closeRecommender()"><h5>关闭推荐</h5></a>');
 					}
 				);
 				action = "/getUserInfo";
@@ -191,6 +191,9 @@
 						}
 				);
 			};
+			function closeRecommender(){
+				$("#closeRecommender").html('');
+			}
 		</script>
 		<script src=" fenye/js/vendor/modernizr.min.js"></script>
 		<script src="fenye/js/jplist.min.js"></script>
@@ -456,7 +459,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="row">
+						<div class="row" id="closeRecommender">
 							<div class="col-md-12">
 								<h3 class="bottom40 margin40">猜您喜欢<div style="float:right"><a href="javascript:void(0)" onclick="changeRecommender()"><h5>换一批</h5></a></div></h3>
 								
