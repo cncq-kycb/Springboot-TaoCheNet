@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.DriveCount;
+import cn.edu.swjtu.demo.Pojo.InquireCount;
 import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
+import cn.edu.swjtu.demo.Pojo.ViewCount;
 import cn.edu.swjtu.demo.Service.BusinessService;
 
 @RestController
@@ -79,5 +82,26 @@ public class BusinessController {
 	@ResponseBody
 	public int sellCar(@RequestParam(required = true, value = "recordId") Long recordId) {
 		return businessService.sellCar(recordId);
+	}
+
+	// 根据车辆获取浏览量
+	@GetMapping(value = "/getViewCount")
+	@ResponseBody
+	public List<ViewCount> getViewCount(@RequestParam(required = true, value = "pid") String pid) {
+		return businessService.getViewCount(pid);
+	}
+
+	// 根据车辆获取询价记录
+	@GetMapping(value = "/getInquireCount")
+	@ResponseBody
+	public List<InquireCount> getInquireCount(@RequestParam(required = true, value = "pid") String pid) {
+		return businessService.getInquireCount(pid);
+	}
+
+	// 根据车辆获取申请试驾记录
+	@GetMapping(value = "/getDriveCount")
+	@ResponseBody
+	public List<DriveCount> getDriveCount(@RequestParam(required = true, value = "pid") String pid) {
+		return businessService.getDriveCount(pid);
 	}
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.swjtu.demo.Dao.CarBusinessMapper;
 import cn.edu.swjtu.demo.Dao.CarInfoMapper;
+import cn.edu.swjtu.demo.Dao.DriveCountMapper;
+import cn.edu.swjtu.demo.Dao.InquireCountMapper;
 import cn.edu.swjtu.demo.Dao.RecommendBusinessMapper;
 import cn.edu.swjtu.demo.Dao.TransactionRecordMapper;
 import cn.edu.swjtu.demo.Dao.TransactionViewMapper;
@@ -19,11 +21,16 @@ import cn.edu.swjtu.demo.Dao.UserInfoMapper;
 import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
 import cn.edu.swjtu.demo.Dao.UserSearchPostMapper;
 import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
+import cn.edu.swjtu.demo.Dao.ViewCountMapper;
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarBusinessExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
 import cn.edu.swjtu.demo.Pojo.CarInfoExample;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.DriveCount;
+import cn.edu.swjtu.demo.Pojo.DriveCountExample;
+import cn.edu.swjtu.demo.Pojo.InquireCount;
+import cn.edu.swjtu.demo.Pojo.InquireCountExample;
 import cn.edu.swjtu.demo.Pojo.RecommendBusiness;
 import cn.edu.swjtu.demo.Pojo.RecommendBusinessExample;
 import cn.edu.swjtu.demo.Pojo.TransactionRecord;
@@ -42,6 +49,8 @@ import cn.edu.swjtu.demo.Pojo.UserSearchPost;
 import cn.edu.swjtu.demo.Pojo.UserSearchPostExample;
 import cn.edu.swjtu.demo.Pojo.UserViewPost;
 import cn.edu.swjtu.demo.Pojo.UserViewPostExample;
+import cn.edu.swjtu.demo.Pojo.ViewCount;
+import cn.edu.swjtu.demo.Pojo.ViewCountExample;
 import cn.edu.swjtu.demo.Service.BusinessService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -70,6 +79,12 @@ public class BusinessServiceImpl implements BusinessService {
 	TransactionViewMapper transactionViewMapper;
 	@Autowired
 	TransactionRecordMapper transactionRecordMapper;
+	@Autowired
+	ViewCountMapper viewCountMapper;
+	@Autowired
+	InquireCountMapper inquireCountMapper;
+	@Autowired
+	DriveCountMapper driveCountMapper;
 
 	@Override
 	public List<UserInfo> getAllRecommendUsers(String cookieid) {
@@ -278,6 +293,42 @@ public class BusinessServiceImpl implements BusinessService {
 			System.out.println(e);
 		}
 		return 0;
+	}
+
+	@Override
+	public List<ViewCount> getViewCount(String pid) {
+		try {
+			ViewCountExample viewCountExample = new ViewCountExample();
+			viewCountExample.or().andPidEqualTo(new Long(pid));
+			return viewCountMapper.selectByExample(viewCountExample);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ArrayList<ViewCount>();
+	}
+
+	@Override
+	public List<InquireCount> getInquireCount(String pid) {
+		try {
+			InquireCountExample inquireCountExample = new InquireCountExample();
+			inquireCountExample.or().andPidEqualTo(new Long(pid));
+			return inquireCountMapper.selectByExample(inquireCountExample);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ArrayList<InquireCount>();
+	}
+
+	@Override
+	public List<DriveCount> getDriveCount(String pid) {
+		try {
+			DriveCountExample driveCountExample = new DriveCountExample();
+			driveCountExample.or().andPidEqualTo(new Long(pid));
+			return driveCountMapper.selectByExample(driveCountExample);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ArrayList<DriveCount>();
 	}
 
 }

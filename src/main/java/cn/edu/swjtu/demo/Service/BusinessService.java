@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarInfoWithBLOBs;
+import cn.edu.swjtu.demo.Pojo.DriveCount;
+import cn.edu.swjtu.demo.Pojo.InquireCount;
 import cn.edu.swjtu.demo.Pojo.TransactionView;
 import cn.edu.swjtu.demo.Pojo.UserInfo;
+import cn.edu.swjtu.demo.Pojo.ViewCount;
 
 @Service
 public interface BusinessService {
@@ -37,5 +40,14 @@ public interface BusinessService {
 
 	// 通过用户购买请求
 	int sellCar(Long recordId);
+
+	// 根据车辆获取浏览记录
+	List<ViewCount> getViewCount(String pid);
+
+	// 根据车辆获取询价记录
+	List<InquireCount> getInquireCount(String pid);
+
+	// 根据车辆获取申请试驾记录
+	List<DriveCount> getDriveCount(String pid);
 
 }
