@@ -52,28 +52,22 @@
          	   }
     }
 	$.get(
-			"/getAllRecommendUsers?pid="+pid,
+			"/getViewCount?pid="+pid,
 			function(data){
 				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>用户名</th><th>昵称</th><th>年龄</th><th>手机号码</th><th>所在地</th><th>历史行为</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>cookieid</th><th>所在地</th><th>浏览次数</th></tr></thead><tbody>';
 				for(i in list){
 					var item = list[i];
 					var cookieid = item.cookieid+"";
 					var type;
-					if(item.userTypeId=='1'){type='管理员用户组';}
-					if(item.userTypeId=='2'){type='商家用户组';}
-					if(item.userTypeId=='3'){type='买家用户组';}
+
 					old += '<tr class="tbl-item"><td class="td-block"><p class="desc">'
-					+ item.username
-					+'</p></td><td class="td-block"><p>'
-					+ item.name
-					+'</p></td><td class="td-block"><p class="like">'
-					+ item.age
-					+'</p></td><td class="td-block"><p>'
-					+ item.tel
+					+ item.cookieid
 					+'</p></td><td class="td-block"><p>'
 					+ item.location
-					+'</p></td><td class="td-block"><p><button type="button" class="border_radius btn-yellow text-uppercase" onclick=\'checkHistory("'+cookieid+'")\'>查看</button></p></td></tr>';
+					+'</p></td><td class="td-block"><p class="like">'
+					+ item.viewCount
+					+'</p></td></tr>';
 				}
 				old += '</tbody></table>';
 				$("#table").html(old);
@@ -204,7 +198,7 @@ function checkHistory(cookieid){
 									data-path=".desc" 
 									type="text" 
 									value="" 
-									placeholder="按用户名查找" 
+									placeholder="按cookieid查找" 
 									data-control-type="textbox" 
 									data-control-name="desc-filter" 
 									data-control-action="filter"

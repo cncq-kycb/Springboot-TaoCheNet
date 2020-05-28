@@ -303,6 +303,13 @@ function changeLike(){
 				</div>
                      </li>
                   </ul>
+                                    <h3 class="bottom20">其它功能</h3>
+                  <ul class="pro-list bottom20">
+                     <li>				<div class="more">
+					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="javascript:void(0);" onclick="clickRecommend()">关闭推荐</a>				
+				</div>
+                     </li>
+                     </ul>
                </div>
             </div>
          </aside>
@@ -480,6 +487,27 @@ function changeLike(){
 									}
 									);
 						};
+						
+						function clickRecommend(){
+							var str="/inverseInfoPermission"
+								$.ajax({
+									type : "post",
+									url : str,
+
+									contentType : "application/json;charset=UTF-8",
+									success : function(result) {
+										if(result==true){
+											alert('关闭推荐成功');
+										}
+										if(result==false){
+											alert('关闭推荐失败');
+										}
+									},
+									error : function(result) {
+										alert("err back");
+									}
+								});
+						}
 </script>
 </body>
 </html>
