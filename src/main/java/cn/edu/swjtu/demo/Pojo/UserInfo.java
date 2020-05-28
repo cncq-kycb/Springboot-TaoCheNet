@@ -1,104 +1,83 @@
 package cn.edu.swjtu.demo.Pojo;
 
-public class UserInfo {
-	private Long userId;
+public class UserInfo extends UserInfoKey {
+    private String password;
 
-	private String cookieid;
+    private String name;
 
-	private String username;
+    private Integer age;
 
-	private String password;
+    private String tel;
 
-	private String name;
+    private String location;
 
-	private Integer age;
+    private Long userTypeId;
 
-	private String tel;
+    private Long userPermissionId;
 
-	private String location;
+    private Integer infoPermission;
 
-	private Long userTypeId;
+    public String getPassword() {
+        return password;
+    }
 
-	private Long userPermissionId;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
 
-	public Long getUserId() {
-		return userId;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
-	public String getCookieid() {
-		return cookieid;
-	}
+    public Integer getAge() {
+        return age;
+    }
 
-	public void setCookieid(String cookieid) {
-		this.cookieid = cookieid == null ? null : cookieid.trim();
-	}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getTel() {
+        return tel;
+    }
 
-	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
-	}
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
-	}
+    public void setLocation(String location) {
+        this.location = location == null ? null : location.trim();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getUserTypeId() {
+        return userTypeId;
+    }
 
-	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
-	}
+    public void setUserTypeId(Long userTypeId) {
+        this.userTypeId = userTypeId;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public Long getUserPermissionId() {
+        return userPermissionId;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    public void setUserPermissionId(Long userPermissionId) {
+        this.userPermissionId = userPermissionId;
+    }
 
-	public String getTel() {
-		return tel;
-	}
+    public Integer getInfoPermission() {
+        return infoPermission;
+    }
 
-	public void setTel(String tel) {
-		this.tel = tel == null ? null : tel.trim();
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location == null ? null : location.trim();
-	}
-
-	public Long getUserTypeId() {
-		return userTypeId;
-	}
-
-	public void setUserTypeId(Long userTypeId) {
-		this.userTypeId = userTypeId;
-	}
-
-	public Long getUserPermissionId() {
-		return userPermissionId;
-	}
-
-	public void setUserPermissionId(Long userPermissionId) {
-		this.userPermissionId = userPermissionId;
-	}
-	
+    public void setInfoPermission(Integer infoPermission) {
+        this.infoPermission = infoPermission;
+    }
 }

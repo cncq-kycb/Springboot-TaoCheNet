@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swjtu.demo.Dao.UserInfoMapper">
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.UserInfo">
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <id column="cookieid" jdbcType="VARCHAR" property="cookieid" />
+    <id column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
@@ -12,6 +12,7 @@
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="user_type_id" jdbcType="BIGINT" property="userTypeId" />
     <result column="user_permission_id" jdbcType="BIGINT" property="userPermissionId" />
+    <result column="info_permission" jdbcType="INTEGER" property="infoPermission" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, cookieid, username, password, name, age, tel, location, user_type_id, user_permission_id
+    user_id, cookieid, username, password, name, age, tel, location, user_type_id, user_permission_id, 
+    info_permission
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.UserInfoExample" resultMap="BaseResultMap">
     select
@@ -88,6 +90,20 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="cn.edu.swjtu.demo.Pojo.UserInfoKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+      and cookieid = #{cookieid,jdbcType=VARCHAR}
+      and username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.swjtu.demo.Pojo.UserInfoKey">
+    delete from user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+      and cookieid = #{cookieid,jdbcType=VARCHAR}
+      and username = #{username,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="cn.edu.swjtu.demo.Pojo.UserInfoExample">
     delete from user_info
     <if test="_parameter != null">
@@ -98,11 +114,11 @@
     insert into user_info (user_id, cookieid, username, 
       password, name, age, 
       tel, location, user_type_id, 
-      user_permission_id)
+      user_permission_id, info_permission)
     values (#{userId,jdbcType=BIGINT}, #{cookieid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{tel,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{userTypeId,jdbcType=BIGINT}, 
-      #{userPermissionId,jdbcType=BIGINT})
+      #{userPermissionId,jdbcType=BIGINT}, #{infoPermission,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.UserInfo">
     insert into user_info
@@ -137,6 +153,9 @@
       <if test="userPermissionId != null">
         user_permission_id,
       </if>
+      <if test="infoPermission != null">
+        info_permission,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -168,6 +187,9 @@
       </if>
       <if test="userPermissionId != null">
         #{userPermissionId,jdbcType=BIGINT},
+      </if>
+      <if test="infoPermission != null">
+        #{infoPermission,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -210,6 +232,9 @@
       <if test="record.userPermissionId != null">
         user_permission_id = #{record.userPermissionId,jdbcType=BIGINT},
       </if>
+      <if test="record.infoPermission != null">
+        info_permission = #{record.infoPermission,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,9 +251,56 @@
       tel = #{record.tel,jdbcType=VARCHAR},
       location = #{record.location,jdbcType=VARCHAR},
       user_type_id = #{record.userTypeId,jdbcType=BIGINT},
-      user_permission_id = #{record.userPermissionId,jdbcType=BIGINT}
+      user_permission_id = #{record.userPermissionId,jdbcType=BIGINT},
+      info_permission = #{record.infoPermission,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.swjtu.demo.Pojo.UserInfo">
+    update user_info
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypeId != null">
+        user_type_id = #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="userPermissionId != null">
+        user_permission_id = #{userPermissionId,jdbcType=BIGINT},
+      </if>
+      <if test="infoPermission != null">
+        info_permission = #{infoPermission,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+      and cookieid = #{cookieid,jdbcType=VARCHAR}
+      and username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.swjtu.demo.Pojo.UserInfo">
+    update user_info
+    set password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      user_type_id = #{userTypeId,jdbcType=BIGINT},
+      user_permission_id = #{userPermissionId,jdbcType=BIGINT},
+      info_permission = #{infoPermission,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+      and cookieid = #{cookieid,jdbcType=VARCHAR}
+      and username = #{username,jdbcType=VARCHAR}
   </update>
 </mapper>
