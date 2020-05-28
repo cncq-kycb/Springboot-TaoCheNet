@@ -123,4 +123,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return new UserPreferView();
 	}
 
+	@Override
+	public boolean inverseInfoPermission(UserInfo userInfo) {
+		try {
+			if (userInfo.getInfoPermission().equals(1)) {
+				userInfo.setInfoPermission(0);
+			} else {
+				userInfo.setInfoPermission(1);
+			}
+			userInfoMapper.updateByPrimaryKeySelective(userInfo);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+
 }

@@ -21,4 +21,7 @@ public interface UserInfoService {
 	// 获取用户偏好
 	UserPreferView getUserPrefer(String cookieid);
 
+	// 反转信息共享设置
+	boolean inverseInfoPermission(UserInfo userInfo);
+
 }

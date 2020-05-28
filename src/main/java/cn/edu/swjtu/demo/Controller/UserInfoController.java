@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -88,6 +89,17 @@ public class UserInfoController {
 			System.err.println(e);
 			return 0;
 		}
+	}
+
+	// 设置个人信息是否允许共享给商家
+	@PostMapping(value = "/inverseInfoPermission")
+	@ResponseBody
+	public boolean inverseInfoPermission(HttpSession session) {
+		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		if (userInfo == null) {
+			return false;
+		}
+		return userInfoService.inverseInfoPermission(userInfo);
 	}
 
 	// 获取登录信息
