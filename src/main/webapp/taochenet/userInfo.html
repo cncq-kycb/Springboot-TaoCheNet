@@ -35,6 +35,9 @@ $.get(
 		else{
 			old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li><a href="index.html">首页</a></li><li><a href="favorite.html">收藏夹</a></li><li class="dropdown megamenu-fw active"><a href="userInfo.html">个人中心</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
 		$("#navbar-menu").html(old);
+		if(data.infoPermission=='0'){
+			$("#aaa").html('<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="javascript:void(0);" onclick="openRecommend()">打开推荐</a>');
+		}
 		var old2 = "";
 		old2 += '<h3 id="name">&ensp;'
 		+ user_info.name
@@ -305,7 +308,7 @@ function changeLike(){
                   </ul>
                                     <h3 class="bottom20">其它功能</h3>
                   <ul class="pro-list bottom20">
-                     <li>				<div class="more">
+                     <li>				<div class="more" id="aaa">
 					<a class=" popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="javascript:void(0);" onclick="clickRecommend()">关闭推荐</a>				
 				</div>
                      </li>
@@ -498,9 +501,32 @@ function changeLike(){
 									success : function(result) {
 										if(result==true){
 											alert('关闭推荐成功');
+											window.location.reload();
 										}
 										if(result==false){
 											alert('关闭推荐失败');
+										}
+									},
+									error : function(result) {
+										alert("err back");
+									}
+								});
+						}
+						
+						function openRecommend(){
+							var str="/inverseInfoPermission"
+								$.ajax({
+									type : "post",
+									url : str,
+
+									contentType : "application/json;charset=UTF-8",
+									success : function(result) {
+										if(result==true){
+											alert('打开推荐成功');
+											window.location.reload();
+										}
+										if(result==false){
+											alert('打开推荐失败');
 										}
 									},
 									error : function(result) {
