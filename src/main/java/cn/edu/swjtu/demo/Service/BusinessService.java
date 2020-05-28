@@ -42,7 +42,7 @@ public interface BusinessService {
 	int sellCar(Long recordId);
 
 	// 根据车辆获取浏览记录
-	List<ViewCount> getViewCount(String pid);
+	HashMap<String, Object> getViewCount(String pid);
 
 	// 根据车辆获取询价记录
 	List<InquireCount> getInquireCount(String pid);

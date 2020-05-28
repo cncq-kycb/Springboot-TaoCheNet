@@ -67,7 +67,7 @@ public class UserInfoController {
 			userInfo.setLocation(newLocation);
 		}
 		if (NewAge != null) {
-			userInfo.setAge(NewAge);
+			userInfo.setAge("" + NewAge);
 		}
 		UserPrefer userPrefer = new UserPrefer();
 		if (selectedBrand != null) {

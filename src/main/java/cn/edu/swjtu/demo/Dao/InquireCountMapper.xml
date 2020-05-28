@@ -3,8 +3,11 @@
 <mapper namespace="cn.edu.swjtu.demo.Dao.InquireCountMapper">
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.InquireCount">
     <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
-    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="info_permission" jdbcType="INTEGER" property="infoPermission" />
     <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="inquire_count" jdbcType="BIGINT" property="inquireCount" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cookieid, pid, location, inquire_count
+    cookieid, tel, age, info_permission, location, pid, inquire_count
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.InquireCountExample" resultMap="BaseResultMap">
     select
@@ -89,9 +92,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.InquireCount">
-    insert into inquire_count (cookieid, pid, location, 
+    insert into inquire_count (cookieid, tel, age, 
+      info_permission, location, pid, 
       inquire_count)
-    values (#{cookieid,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, 
+    values (#{cookieid,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{infoPermission,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
       #{inquireCount,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.InquireCount">
@@ -100,11 +105,20 @@
       <if test="cookieid != null">
         cookieid,
       </if>
-      <if test="pid != null">
-        pid,
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="infoPermission != null">
+        info_permission,
       </if>
       <if test="location != null">
         location,
+      </if>
+      <if test="pid != null">
+        pid,
       </if>
       <if test="inquireCount != null">
         inquire_count,
@@ -114,11 +128,20 @@
       <if test="cookieid != null">
         #{cookieid,jdbcType=VARCHAR},
       </if>
-      <if test="pid != null">
-        #{pid,jdbcType=BIGINT},
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="infoPermission != null">
+        #{infoPermission,jdbcType=INTEGER},
       </if>
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
       </if>
       <if test="inquireCount != null">
         #{inquireCount,jdbcType=BIGINT},
@@ -137,11 +160,20 @@
       <if test="record.cookieid != null">
         cookieid = #{record.cookieid,jdbcType=VARCHAR},
       </if>
-      <if test="record.pid != null">
-        pid = #{record.pid,jdbcType=BIGINT},
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.infoPermission != null">
+        info_permission = #{record.infoPermission,jdbcType=INTEGER},
       </if>
       <if test="record.location != null">
         location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=BIGINT},
       </if>
       <if test="record.inquireCount != null">
         inquire_count = #{record.inquireCount,jdbcType=BIGINT},
@@ -154,8 +186,11 @@
   <update id="updateByExample" parameterType="map">
     update inquire_count
     set cookieid = #{record.cookieid,jdbcType=VARCHAR},
-      pid = #{record.pid,jdbcType=BIGINT},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      info_permission = #{record.infoPermission,jdbcType=INTEGER},
       location = #{record.location,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
       inquire_count = #{record.inquireCount,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

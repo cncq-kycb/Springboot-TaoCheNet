@@ -3,8 +3,6 @@
 <mapper namespace="cn.edu.swjtu.demo.Dao.ViewCountMapper">
   <resultMap id="BaseResultMap" type="cn.edu.swjtu.demo.Pojo.ViewCount">
     <result column="cookieid" jdbcType="VARCHAR" property="cookieid" />
-    <result column="pid" jdbcType="BIGINT" property="pid" />
-    <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="view_count" jdbcType="BIGINT" property="viewCount" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cookieid, pid, location, view_count
+    cookieid, view_count
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.ViewCountExample" resultMap="BaseResultMap">
     select
@@ -89,22 +87,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.ViewCount">
-    insert into view_count (cookieid, pid, location, 
-      view_count)
-    values (#{cookieid,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, 
-      #{viewCount,jdbcType=BIGINT})
+    insert into view_count (cookieid, view_count)
+    values (#{cookieid,jdbcType=VARCHAR}, #{viewCount,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.ViewCount">
     insert into view_count
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cookieid != null">
         cookieid,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-      <if test="location != null">
-        location,
       </if>
       <if test="viewCount != null">
         view_count,
@@ -113,12 +103,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cookieid != null">
         #{cookieid,jdbcType=VARCHAR},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=BIGINT},
-      </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
       </if>
       <if test="viewCount != null">
         #{viewCount,jdbcType=BIGINT},
@@ -137,12 +121,6 @@
       <if test="record.cookieid != null">
         cookieid = #{record.cookieid,jdbcType=VARCHAR},
       </if>
-      <if test="record.pid != null">
-        pid = #{record.pid,jdbcType=BIGINT},
-      </if>
-      <if test="record.location != null">
-        location = #{record.location,jdbcType=VARCHAR},
-      </if>
       <if test="record.viewCount != null">
         view_count = #{record.viewCount,jdbcType=BIGINT},
       </if>
@@ -154,8 +132,6 @@
   <update id="updateByExample" parameterType="map">
     update view_count
     set cookieid = #{record.cookieid,jdbcType=VARCHAR},
-      pid = #{record.pid,jdbcType=BIGINT},
-      location = #{record.location,jdbcType=VARCHAR},
       view_count = #{record.viewCount,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

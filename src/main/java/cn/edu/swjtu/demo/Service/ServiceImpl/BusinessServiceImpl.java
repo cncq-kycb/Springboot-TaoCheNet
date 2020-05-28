@@ -22,6 +22,7 @@ import cn.edu.swjtu.demo.Dao.UserInquirePostMapper;
 import cn.edu.swjtu.demo.Dao.UserSearchPostMapper;
 import cn.edu.swjtu.demo.Dao.UserViewPostMapper;
 import cn.edu.swjtu.demo.Dao.ViewCountMapper;
+import cn.edu.swjtu.demo.Dao.ViewRecordMapper;
 import cn.edu.swjtu.demo.Pojo.CarBusiness;
 import cn.edu.swjtu.demo.Pojo.CarBusinessExample;
 import cn.edu.swjtu.demo.Pojo.CarInfo;
@@ -51,6 +52,8 @@ import cn.edu.swjtu.demo.Pojo.UserViewPost;
 import cn.edu.swjtu.demo.Pojo.UserViewPostExample;
 import cn.edu.swjtu.demo.Pojo.ViewCount;
 import cn.edu.swjtu.demo.Pojo.ViewCountExample;
+import cn.edu.swjtu.demo.Pojo.ViewRecord;
+import cn.edu.swjtu.demo.Pojo.ViewRecordExample;
 import cn.edu.swjtu.demo.Service.BusinessService;
 import cn.edu.swjtu.demo.Utils.Utils;
 
@@ -85,6 +88,8 @@ public class BusinessServiceImpl implements BusinessService {
 	InquireCountMapper inquireCountMapper;
 	@Autowired
 	DriveCountMapper driveCountMapper;
+	@Autowired
+	ViewRecordMapper viewRecordMapper;
 
 	@Override
 	public List<UserInfo> getAllRecommendUsers(String cookieid) {
@@ -153,6 +158,12 @@ public class BusinessServiceImpl implements BusinessService {
 					userInfoExample.or().andCookieidEqualTo(cookieid);
 					List<UserInfo> userInfos = userInfoMapper.selectByExample(userInfoExample);
 					if (userInfos.size() != 0) {
+						for (UserInfo userInfo : userInfos) {
+							if (userInfo.getInfoPermission().equals(0)) {
+								userInfo.setAge("用户未授权");
+								userInfo.setTel("用户未授权");
+							}
+						}
 						result.add(userInfos.get(0));
 					}
 				}
@@ -296,15 +307,31 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<ViewCount> getViewCount(String pid) {
+	public HashMap<String, Object> getViewCount(String pid) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		ViewCountExample viewCountExample = new ViewCountExample();
+		viewCountExample.or();
+		ViewRecordExample viewRecordExample = new ViewRecordExample();
+		viewRecordExample.or();
 		try {
-			ViewCountExample viewCountExample = new ViewCountExample();
-			viewCountExample.or().andPidEqualTo(new Long(pid));
-			return viewCountMapper.selectByExample(viewCountExample);
+			List<ViewCount> viewCounts = viewCountMapper.selectByExample(viewCountExample);
+			List<ViewRecord> viewRecords = viewRecordMapper.selectByExample(viewRecordExample);
+			int total = 0;
+			for (ViewCount viewCount : viewCounts) {
+				total += viewCount.getViewCount();
+			}
+			for (ViewRecord viewRecord : viewRecords) {
+				if (viewRecord.getInfoPermission().equals(0)) {
+					viewRecord.setAge("用户未授权");
+					viewRecord.setTel("用户未授权");
+				}
+			}
+			result.put("ViewRecord", viewRecords);
+			result.put("ViewCount", total);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return new ArrayList<ViewCount>();
+		return result;
 	}
 
 	@Override
@@ -312,7 +339,14 @@ public class BusinessServiceImpl implements BusinessService {
 		try {
 			InquireCountExample inquireCountExample = new InquireCountExample();
 			inquireCountExample.or().andPidEqualTo(new Long(pid));
-			return inquireCountMapper.selectByExample(inquireCountExample);
+			List<InquireCount> inquireCounts = inquireCountMapper.selectByExample(inquireCountExample);
+			for (InquireCount inquireCount : inquireCounts) {
+				if (inquireCount.getInfoPermission().equals(0)) {
+					inquireCount.setAge("用户未授权");
+					inquireCount.setTel("用户未授权");
+				}
+			}
+			return inquireCounts;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -324,7 +358,14 @@ public class BusinessServiceImpl implements BusinessService {
 		try {
 			DriveCountExample driveCountExample = new DriveCountExample();
 			driveCountExample.or().andPidEqualTo(new Long(pid));
-			return driveCountMapper.selectByExample(driveCountExample);
+			List<DriveCount> driveCounts = driveCountMapper.selectByExample(driveCountExample);
+			for (DriveCount driveCount : driveCounts) {
+				if (driveCount.getInfoPermission().equals(0)) {
+					driveCount.setAge("用户未授权");
+					driveCount.setTel("用户未授权");
+				}
+			}
+			return driveCounts;
 		} catch (Exception e) {
 			System.out.println(e);
 		}

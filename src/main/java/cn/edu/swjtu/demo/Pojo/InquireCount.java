@@ -1,43 +1,73 @@
 package cn.edu.swjtu.demo.Pojo;
 
 public class InquireCount {
-    private String cookieid;
+	private String cookieid;
 
-    private Long pid;
+	private String tel;
 
-    private String location;
+	private String age;
 
-    private Long inquireCount;
+	private Integer infoPermission;
 
-    public String getCookieid() {
-        return cookieid;
-    }
+	private String location;
 
-    public void setCookieid(String cookieid) {
-        this.cookieid = cookieid == null ? null : cookieid.trim();
-    }
+	private Long pid;
 
-    public Long getPid() {
-        return pid;
-    }
+	private Long inquireCount;
 
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
+	public String getCookieid() {
+		return cookieid;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setCookieid(String cookieid) {
+		this.cookieid = cookieid == null ? null : cookieid.trim();
+	}
 
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
-    }
+	public String getTel() {
+		return tel;
+	}
 
-    public Long getInquireCount() {
-        return inquireCount;
-    }
+	public void setTel(String tel) {
+		this.tel = tel == null ? null : tel.trim();
+	}
 
-    public void setInquireCount(Long inquireCount) {
-        this.inquireCount = inquireCount;
-    }
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public Integer getInfoPermission() {
+		return infoPermission;
+	}
+
+	public void setInfoPermission(Integer infoPermission) {
+		this.infoPermission = infoPermission;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location == null ? null : location.trim();
+	}
+
+	public Long getPid() {
+		return pid;
+	}
+
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
+
+	public Long getInquireCount() {
+		return inquireCount;
+	}
+
+	public void setInquireCount(Long inquireCount) {
+		this.inquireCount = inquireCount;
+	}
 }

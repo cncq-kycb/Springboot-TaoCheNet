@@ -174,63 +174,193 @@ public class InquireCountExample {
             return (Criteria) this;
         }
 
-        public Criteria andPidIsNull() {
-            addCriterion("pid is null");
+        public Criteria andTelIsNull() {
+            addCriterion("tel is null");
             return (Criteria) this;
         }
 
-        public Criteria andPidIsNotNull() {
-            addCriterion("pid is not null");
+        public Criteria andTelIsNotNull() {
+            addCriterion("tel is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPidEqualTo(Long value) {
-            addCriterion("pid =", value, "pid");
+        public Criteria andTelEqualTo(String value) {
+            addCriterion("tel =", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotEqualTo(Long value) {
-            addCriterion("pid <>", value, "pid");
+        public Criteria andTelNotEqualTo(String value) {
+            addCriterion("tel <>", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidGreaterThan(Long value) {
-            addCriterion("pid >", value, "pid");
+        public Criteria andTelGreaterThan(String value) {
+            addCriterion("tel >", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidGreaterThanOrEqualTo(Long value) {
-            addCriterion("pid >=", value, "pid");
+        public Criteria andTelGreaterThanOrEqualTo(String value) {
+            addCriterion("tel >=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidLessThan(Long value) {
-            addCriterion("pid <", value, "pid");
+        public Criteria andTelLessThan(String value) {
+            addCriterion("tel <", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidLessThanOrEqualTo(Long value) {
-            addCriterion("pid <=", value, "pid");
+        public Criteria andTelLessThanOrEqualTo(String value) {
+            addCriterion("tel <=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidIn(List<Long> values) {
-            addCriterion("pid in", values, "pid");
+        public Criteria andTelLike(String value) {
+            addCriterion("tel like", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotIn(List<Long> values) {
-            addCriterion("pid not in", values, "pid");
+        public Criteria andTelNotLike(String value) {
+            addCriterion("tel not like", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidBetween(Long value1, Long value2) {
-            addCriterion("pid between", value1, value2, "pid");
+        public Criteria andTelIn(List<String> values) {
+            addCriterion("tel in", values, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotBetween(Long value1, Long value2) {
-            addCriterion("pid not between", value1, value2, "pid");
+        public Criteria andTelNotIn(List<String> values) {
+            addCriterion("tel not in", values, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelBetween(String value1, String value2) {
+            addCriterion("tel between", value1, value2, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelNotBetween(String value1, String value2) {
+            addCriterion("tel not between", value1, value2, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeIsNull() {
+            addCriterion("age is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeIsNotNull() {
+            addCriterion("age is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeEqualTo(Integer value) {
+            addCriterion("age =", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeNotEqualTo(Integer value) {
+            addCriterion("age <>", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGreaterThan(Integer value) {
+            addCriterion("age >", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("age >=", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeLessThan(Integer value) {
+            addCriterion("age <", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeLessThanOrEqualTo(Integer value) {
+            addCriterion("age <=", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeIn(List<Integer> values) {
+            addCriterion("age in", values, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeNotIn(List<Integer> values) {
+            addCriterion("age not in", values, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeBetween(Integer value1, Integer value2) {
+            addCriterion("age between", value1, value2, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeNotBetween(Integer value1, Integer value2) {
+            addCriterion("age not between", value1, value2, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionIsNull() {
+            addCriterion("info_permission is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionIsNotNull() {
+            addCriterion("info_permission is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionEqualTo(Integer value) {
+            addCriterion("info_permission =", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionNotEqualTo(Integer value) {
+            addCriterion("info_permission <>", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionGreaterThan(Integer value) {
+            addCriterion("info_permission >", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("info_permission >=", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionLessThan(Integer value) {
+            addCriterion("info_permission <", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionLessThanOrEqualTo(Integer value) {
+            addCriterion("info_permission <=", value, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionIn(List<Integer> values) {
+            addCriterion("info_permission in", values, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionNotIn(List<Integer> values) {
+            addCriterion("info_permission not in", values, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionBetween(Integer value1, Integer value2) {
+            addCriterion("info_permission between", value1, value2, "infoPermission");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoPermissionNotBetween(Integer value1, Integer value2) {
+            addCriterion("info_permission not between", value1, value2, "infoPermission");
             return (Criteria) this;
         }
 
@@ -301,6 +431,66 @@ public class InquireCountExample {
 
         public Criteria andLocationNotBetween(String value1, String value2) {
             addCriterion("location not between", value1, value2, "location");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIsNull() {
+            addCriterion("pid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIsNotNull() {
+            addCriterion("pid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidEqualTo(Long value) {
+            addCriterion("pid =", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotEqualTo(Long value) {
+            addCriterion("pid <>", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidGreaterThan(Long value) {
+            addCriterion("pid >", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidGreaterThanOrEqualTo(Long value) {
+            addCriterion("pid >=", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLessThan(Long value) {
+            addCriterion("pid <", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLessThanOrEqualTo(Long value) {
+            addCriterion("pid <=", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIn(List<Long> values) {
+            addCriterion("pid in", values, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotIn(List<Long> values) {
+            addCriterion("pid not in", values, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidBetween(Long value1, Long value2) {
+            addCriterion("pid between", value1, value2, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotBetween(Long value1, Long value2) {
+            addCriterion("pid not between", value1, value2, "pid");
             return (Criteria) this;
         }
 

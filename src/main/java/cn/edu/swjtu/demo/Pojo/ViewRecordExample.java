@@ -1,16 +1,17 @@
 package cn.edu.swjtu.demo.Pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class DriveCountExample {
+public class ViewRecordExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DriveCountExample() {
+    public ViewRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -494,63 +495,63 @@ public class DriveCountExample {
             return (Criteria) this;
         }
 
-        public Criteria andViewCountIsNull() {
-            addCriterion("view_count is null");
+        public Criteria andTimeIsNull() {
+            addCriterion("time is null");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountIsNotNull() {
-            addCriterion("view_count is not null");
+        public Criteria andTimeIsNotNull() {
+            addCriterion("time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountEqualTo(Long value) {
-            addCriterion("view_count =", value, "viewCount");
+        public Criteria andTimeEqualTo(Date value) {
+            addCriterion("time =", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountNotEqualTo(Long value) {
-            addCriterion("view_count <>", value, "viewCount");
+        public Criteria andTimeNotEqualTo(Date value) {
+            addCriterion("time <>", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountGreaterThan(Long value) {
-            addCriterion("view_count >", value, "viewCount");
+        public Criteria andTimeGreaterThan(Date value) {
+            addCriterion("time >", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountGreaterThanOrEqualTo(Long value) {
-            addCriterion("view_count >=", value, "viewCount");
+        public Criteria andTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("time >=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountLessThan(Long value) {
-            addCriterion("view_count <", value, "viewCount");
+        public Criteria andTimeLessThan(Date value) {
+            addCriterion("time <", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountLessThanOrEqualTo(Long value) {
-            addCriterion("view_count <=", value, "viewCount");
+        public Criteria andTimeLessThanOrEqualTo(Date value) {
+            addCriterion("time <=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountIn(List<Long> values) {
-            addCriterion("view_count in", values, "viewCount");
+        public Criteria andTimeIn(List<Date> values) {
+            addCriterion("time in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountNotIn(List<Long> values) {
-            addCriterion("view_count not in", values, "viewCount");
+        public Criteria andTimeNotIn(List<Date> values) {
+            addCriterion("time not in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountBetween(Long value1, Long value2) {
-            addCriterion("view_count between", value1, value2, "viewCount");
+        public Criteria andTimeBetween(Date value1, Date value2) {
+            addCriterion("time between", value1, value2, "time");
             return (Criteria) this;
         }
 
-        public Criteria andViewCountNotBetween(Long value1, Long value2) {
-            addCriterion("view_count not between", value1, value2, "viewCount");
+        public Criteria andTimeNotBetween(Date value1, Date value2) {
+            addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
     }

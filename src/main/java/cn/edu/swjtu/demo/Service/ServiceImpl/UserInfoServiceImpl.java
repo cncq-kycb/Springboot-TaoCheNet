@@ -88,7 +88,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			record.setName(name);
 			record.setTel(tel);
 			record.setLocation(location);
-			record.setAge(age);
+			record.setAge("" + age);
 			record.setUserTypeId((long) 3);
 			record.setUserPermissionId((long) 1);
 			String cookieid = Utils.getRandomCookieid();

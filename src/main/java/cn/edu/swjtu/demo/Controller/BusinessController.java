@@ -87,7 +87,7 @@ public class BusinessController {
 	// 根据车辆获取浏览量
 	@GetMapping(value = "/getViewCount")
 	@ResponseBody
-	public List<ViewCount> getViewCount(@RequestParam(required = true, value = "pid") String pid) {
+	public HashMap<String, Object> getViewCount(@RequestParam(required = true, value = "pid") String pid) {
 		return businessService.getViewCount(pid);
 	}
 

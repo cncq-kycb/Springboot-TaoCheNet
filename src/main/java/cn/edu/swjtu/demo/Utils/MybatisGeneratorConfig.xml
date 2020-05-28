@@ -37,9 +37,7 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
-		<table tableName="user_info"></table>
-		<table tableName="drive_count"></table>
-		<table tableName="inquire_count"></table>
+		<table tableName="view_record"></table>
 		<table tableName="view_count"></table>
 	</context>
 </generatorConfiguration>
