@@ -55,7 +55,7 @@
 			"/getViewCount?pid="+pid,
 			function(data){
 				
-				var old ='<table class="demo-tbl"><thead><tr><th>cookieid</th><th>手机号码</th><th>年龄</th><th>所在地</th><th>浏览时间</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>cookieid(微聊账号ID)</th><th>所在地</th><th>浏览时间</th></tr></thead><tbody>';
 				
 				for(i in data.ViewRecord){
 					var item = data.ViewRecord[i];
@@ -64,10 +64,6 @@
 						
 					old += '<tr class="tbl-item"><td class="td-block"><p class="desc">'
 					+ item.cookieid
-					+'</p></td><td class="td-block"><p>'
-					+ item.tel
-					+'</p></td><td class="td-block"><p>'
-					+ item.age
 					+'</p></td><td class="td-block"><p>'
 					+ item.location
 					+'</p></td><td class="td-block"><p class="like">'
