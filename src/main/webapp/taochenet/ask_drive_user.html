@@ -54,19 +54,24 @@
 	$.get(
 			"/getDriveCount?pid="+pid,
 			function(data){
-				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>cookieid</th><th>所在地</th><th>申请试驾次数</th></tr></thead><tbody>';
-				for(i in list){
-					var item = list[i];
+			
+				var old ='<table class="demo-tbl"><thead><tr><th>cookieid(微聊账号ID)</th><th>手机号码</th><th>年龄</th><th>所在地</th><th>申请试驾时间</th></tr></thead><tbody>';
+				
+				for(i in data.ViewRecord){
+					var item = data.ViewRecord[i];
 					var cookieid = item.cookieid+"";
-					var type;
-
+					
+						
 					old += '<tr class="tbl-item"><td class="td-block"><p class="desc">'
 					+ item.cookieid
 					+'</p></td><td class="td-block"><p>'
+					+ item.tel
+					+'</p></td><td class="td-block"><p>'
+					+ item.age
+					+'</p></td><td class="td-block"><p>'
 					+ item.location
 					+'</p></td><td class="td-block"><p class="like">'
-					+ item.viewCount
+					+ item.time.substring(0,10)+' '+item.time.substring(11,19)
 					+'</p></td></tr>';
 				}
 				old += '</tbody></table>';
@@ -245,7 +250,7 @@ function checkHistory(cookieid){
 							<!-- pagination results -->
 							<div 
 								class="jplist-label" 
-								data-type="{start} - {end} ，共{all}人申请试驾本车"
+								data-type="{start} - {end} ，共{all}条申请试驾记录"
 								data-control-type="pagination-info" 
 								data-control-name="paging" 
 								data-control-action="paging">

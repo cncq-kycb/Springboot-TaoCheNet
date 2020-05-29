@@ -55,7 +55,7 @@
 			"/getAllRecommendUsers?pid="+pid,
 			function(data){
 				var list = data;
-				var old ='<table class="demo-tbl"><thead><tr><th>用户名</th><th>昵称</th><th>年龄</th><th>手机号码</th><th>所在地</th><th>历史行为</th></tr></thead><tbody>';
+				var old ='<table class="demo-tbl"><thead><tr><th>用户名</th><th>cookieid(微聊账号ID)</th><th>手机号码</th><th>年龄</th><th>所在地</th><th>历史行为</th></tr></thead><tbody>';
 				for(i in list){
 					var item = list[i];
 					var cookieid = item.cookieid+"";
@@ -66,11 +66,12 @@
 					old += '<tr class="tbl-item"><td class="td-block"><p class="desc">'
 					+ item.username
 					+'</p></td><td class="td-block"><p>'
-					+ item.name
-					+'</p></td><td class="td-block"><p class="like">'
-					+ item.age
+					+ item.cookieid
+
 					+'</p></td><td class="td-block"><p>'
 					+ item.tel
+					+'</p></td><td class="td-block"><p class="like">'
+					+ item.age
 					+'</p></td><td class="td-block"><p>'
 					+ item.location
 					+'</p></td><td class="td-block"><p><button type="button" class="border_radius btn-yellow text-uppercase" onclick=\'checkHistory("'+cookieid+'")\'>查看</button></p></td></tr>';
