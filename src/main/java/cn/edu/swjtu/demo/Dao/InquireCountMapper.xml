@@ -8,7 +8,7 @@
     <result column="info_permission" jdbcType="INTEGER" property="infoPermission" />
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="pid" jdbcType="BIGINT" property="pid" />
-    <result column="inquire_count" jdbcType="BIGINT" property="inquireCount" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cookieid, tel, age, info_permission, location, pid, inquire_count
+    cookieid, tel, age, info_permission, location, pid, time
   </sql>
   <select id="selectByExample" parameterType="cn.edu.swjtu.demo.Pojo.InquireCountExample" resultMap="BaseResultMap">
     select
@@ -94,10 +94,10 @@
   <insert id="insert" parameterType="cn.edu.swjtu.demo.Pojo.InquireCount">
     insert into inquire_count (cookieid, tel, age, 
       info_permission, location, pid, 
-      inquire_count)
+      time)
     values (#{cookieid,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{infoPermission,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
-      #{inquireCount,jdbcType=BIGINT})
+      #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.swjtu.demo.Pojo.InquireCount">
     insert into inquire_count
@@ -120,8 +120,8 @@
       <if test="pid != null">
         pid,
       </if>
-      <if test="inquireCount != null">
-        inquire_count,
+      <if test="time != null">
+        time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -143,8 +143,8 @@
       <if test="pid != null">
         #{pid,jdbcType=BIGINT},
       </if>
-      <if test="inquireCount != null">
-        #{inquireCount,jdbcType=BIGINT},
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -175,8 +175,8 @@
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=BIGINT},
       </if>
-      <if test="record.inquireCount != null">
-        inquire_count = #{record.inquireCount,jdbcType=BIGINT},
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -191,7 +191,7 @@
       info_permission = #{record.infoPermission,jdbcType=INTEGER},
       location = #{record.location,jdbcType=VARCHAR},
       pid = #{record.pid,jdbcType=BIGINT},
-      inquire_count = #{record.inquireCount,jdbcType=BIGINT}
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

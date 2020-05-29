@@ -45,9 +45,9 @@ public interface BusinessService {
 	HashMap<String, Object> getViewCount(String pid);
 
 	// 根据车辆获取询价记录
-	List<InquireCount> getInquireCount(String pid);
+	HashMap<String, Object> getInquireCount(String pid);
 
 	// 根据车辆获取申请试驾记录
-	List<DriveCount> getDriveCount(String pid);
+	HashMap<String, Object> getDriveCount(String pid);
 
 }

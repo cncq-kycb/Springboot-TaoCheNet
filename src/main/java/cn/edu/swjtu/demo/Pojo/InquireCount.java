@@ -1,5 +1,7 @@
 package cn.edu.swjtu.demo.Pojo;
 
+import java.util.Date;
+
 public class InquireCount {
 	private String cookieid;
 
@@ -13,7 +15,7 @@ public class InquireCount {
 
 	private Long pid;
 
-	private Long inquireCount;
+	private Date time;
 
 	public String getCookieid() {
 		return cookieid;
@@ -63,11 +65,11 @@ public class InquireCount {
 		this.pid = pid;
 	}
 
-	public Long getInquireCount() {
-		return inquireCount;
+	public Date getTime() {
+		return time;
 	}
 
-	public void setInquireCount(Long inquireCount) {
-		this.inquireCount = inquireCount;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }

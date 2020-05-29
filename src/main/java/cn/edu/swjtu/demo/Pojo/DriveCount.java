@@ -1,5 +1,7 @@
 package cn.edu.swjtu.demo.Pojo;
 
+import java.util.Date;
+
 public class DriveCount {
 	private String cookieid;
 
@@ -13,7 +15,7 @@ public class DriveCount {
 
 	private Long pid;
 
-	private Long viewCount;
+	private Date time;
 
 	public String getCookieid() {
 		return cookieid;
@@ -63,11 +65,11 @@ public class DriveCount {
 		this.pid = pid;
 	}
 
-	public Long getViewCount() {
-		return viewCount;
+	public Date getTime() {
+		return time;
 	}
 
-	public void setViewCount(Long viewCount) {
-		this.viewCount = viewCount;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }

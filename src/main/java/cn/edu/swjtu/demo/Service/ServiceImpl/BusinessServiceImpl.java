@@ -335,10 +335,11 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<InquireCount> getInquireCount(String pid) {
+	public HashMap<String, Object> getInquireCount(String pid) {
+		InquireCountExample inquireCountExample = new InquireCountExample();
+		inquireCountExample.or().andPidEqualTo(new Long(pid));
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		try {
-			InquireCountExample inquireCountExample = new InquireCountExample();
-			inquireCountExample.or().andPidEqualTo(new Long(pid));
 			List<InquireCount> inquireCounts = inquireCountMapper.selectByExample(inquireCountExample);
 			for (InquireCount inquireCount : inquireCounts) {
 				if (inquireCount.getInfoPermission().equals(0)) {
@@ -346,18 +347,19 @@ public class BusinessServiceImpl implements BusinessService {
 					inquireCount.setTel("用户未授权");
 				}
 			}
-			return inquireCounts;
+			result.put("ViewRecord", inquireCounts);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return new ArrayList<InquireCount>();
+		return result;
 	}
 
 	@Override
-	public List<DriveCount> getDriveCount(String pid) {
+	public HashMap<String, Object> getDriveCount(String pid) {
+		DriveCountExample driveCountExample = new DriveCountExample();
+		driveCountExample.or().andPidEqualTo(new Long(pid));
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		try {
-			DriveCountExample driveCountExample = new DriveCountExample();
-			driveCountExample.or().andPidEqualTo(new Long(pid));
 			List<DriveCount> driveCounts = driveCountMapper.selectByExample(driveCountExample);
 			for (DriveCount driveCount : driveCounts) {
 				if (driveCount.getInfoPermission().equals(0)) {
@@ -365,11 +367,11 @@ public class BusinessServiceImpl implements BusinessService {
 					driveCount.setTel("用户未授权");
 				}
 			}
-			return driveCounts;
+			result.put("ViewRecord", driveCounts);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return new ArrayList<DriveCount>();
+		return result;
 	}
 
 }

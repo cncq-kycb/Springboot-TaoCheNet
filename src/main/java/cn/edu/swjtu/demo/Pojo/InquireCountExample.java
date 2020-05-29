@@ -1,6 +1,7 @@
 package cn.edu.swjtu.demo.Pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class InquireCountExample {
@@ -494,63 +495,63 @@ public class InquireCountExample {
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountIsNull() {
-            addCriterion("inquire_count is null");
+        public Criteria andTimeIsNull() {
+            addCriterion("time is null");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountIsNotNull() {
-            addCriterion("inquire_count is not null");
+        public Criteria andTimeIsNotNull() {
+            addCriterion("time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountEqualTo(Long value) {
-            addCriterion("inquire_count =", value, "inquireCount");
+        public Criteria andTimeEqualTo(Date value) {
+            addCriterion("time =", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountNotEqualTo(Long value) {
-            addCriterion("inquire_count <>", value, "inquireCount");
+        public Criteria andTimeNotEqualTo(Date value) {
+            addCriterion("time <>", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountGreaterThan(Long value) {
-            addCriterion("inquire_count >", value, "inquireCount");
+        public Criteria andTimeGreaterThan(Date value) {
+            addCriterion("time >", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountGreaterThanOrEqualTo(Long value) {
-            addCriterion("inquire_count >=", value, "inquireCount");
+        public Criteria andTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("time >=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountLessThan(Long value) {
-            addCriterion("inquire_count <", value, "inquireCount");
+        public Criteria andTimeLessThan(Date value) {
+            addCriterion("time <", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountLessThanOrEqualTo(Long value) {
-            addCriterion("inquire_count <=", value, "inquireCount");
+        public Criteria andTimeLessThanOrEqualTo(Date value) {
+            addCriterion("time <=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountIn(List<Long> values) {
-            addCriterion("inquire_count in", values, "inquireCount");
+        public Criteria andTimeIn(List<Date> values) {
+            addCriterion("time in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountNotIn(List<Long> values) {
-            addCriterion("inquire_count not in", values, "inquireCount");
+        public Criteria andTimeNotIn(List<Date> values) {
+            addCriterion("time not in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountBetween(Long value1, Long value2) {
-            addCriterion("inquire_count between", value1, value2, "inquireCount");
+        public Criteria andTimeBetween(Date value1, Date value2) {
+            addCriterion("time between", value1, value2, "time");
             return (Criteria) this;
         }
 
-        public Criteria andInquireCountNotBetween(Long value1, Long value2) {
-            addCriterion("inquire_count not between", value1, value2, "inquireCount");
+        public Criteria andTimeNotBetween(Date value1, Date value2) {
+            addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
     }
